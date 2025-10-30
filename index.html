@@ -2,22 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
-/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <title>Palmier</title>
   <link rel="preload" href="Assets/palmier-logo.png" as="image">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Global top bar (hidden on Home) -->
+  <!-- Sticky topbar for all non-home screens -->
   <header id="topbar" class="topbar">
-    <button class="back-link" data-nav="home">
+    <button class="back-link" data-nav="home" aria-label="Back">
       <span class="chev">‹</span> <span data-i18n="back">Back</span>
     </button>
-
-    <div class="lang-toggle" role="button" aria-label="Toggle language" id="langToggle">
+    <div class="lang-toggle" id="langToggle">
       <div class="pill">
         <span class="label eng">ENG</span>
         <span class="label fra">FRA</span>
@@ -27,66 +23,61 @@
   </header>
 
   <main id="app">
-
     <!-- HOME -->
     <section id="view-home" class="view active view-home" aria-label="Home">
-      <div class="home-top">
-        <div class="lang-toggle home" role="button" aria-label="Toggle language" id="langToggleHome">
-          <div class="pill">
-            <span class="label eng">ENG</span>
-            <span class="label fra">FRA</span>
-            <div class="thumb"></div>
-          </div>
-        </div>
-
-        <img class="palmier-logo" src="Assets/palmier-logo.png" alt="Palmier">
-
-        <div class="socials">
-          <a class="circle-btn btn-3d" href="https://www.instagram.com/cafe.palmier?igsh=MWsxeDBrZHA3Ym5z" target="_blank" rel="noopener">
-            <img alt="Instagram" src="Assets/instagram.png">
-          </a>
-          <a class="circle-btn btn-3d" href="https://www.tiktok.com/@cafe.palmier" target="_blank" rel="noopener">
-            <img alt="TikTok" src="Assets/tik-tok.png">
-          </a>
-          <a class="circle-btn btn-3d" href="https://www.facebook.com/share/14JDLJfr2qp/?mibextid=wwXIfr" target="_blank" rel="noopener">
-            <img alt="Facebook" src="Assets/faceook.png">
-          </a>
+      <!-- Home has its own pill at top-right -->
+      <div class="lang-toggle home" id="langToggleHome">
+        <div class="pill">
+          <span class="label eng">ENG</span>
+          <span class="label fra">FRA</span>
+          <div class="thumb"></div>
         </div>
       </div>
 
-      <div class="grid">
-        <!-- Food -->
+      <img class="palmier-logo" src="Assets/palmier-logo.png" alt="Palmier">
+
+      <!-- Socials -->
+      <nav class="socials" aria-label="Social links">
+        <a class="circle-btn btn-3d" href="https://www.instagram.com/cafe.palmier?igsh=MWsxeDBrZHA3Ym5z" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="Assets/instagram.png" alt="">
+        </a>
+        <a class="circle-btn btn-3d" href="https://www.tiktok.com/@cafe.palmier" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="Assets/tik-tok.png" alt="">
+        </a>
+        <a class="circle-btn btn-3d" href="https://www.facebook.com/share/14JDLJfr2qp/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="Assets/faceook.png" alt="">
+        </a>
+      </nav>
+
+      <!-- 2x2 grid -->
+      <section class="grid" aria-label="Primary links">
         <button class="tile btn-3d" data-nav="food">
           <img src="Assets/food.png" alt="">
           <span data-i18n="food">FOOD</span>
         </button>
 
-        <!-- Tea -->
         <button class="tile btn-3d" data-nav="tea">
           <img src="Assets/tea.png" alt="">
           <span data-i18n="tea">TEA</span>
         </button>
 
-        <!-- Cocktails -->
         <button class="tile btn-3d" data-nav="cocktails">
           <img src="Assets/cocktail.png" alt="">
           <span data-i18n="cocktails">COCKTAILS</span>
         </button>
 
-        <!-- Coffee -->
         <button class="tile btn-3d" data-nav="coffee">
           <img src="Assets/coffee.png" alt="">
           <span data-i18n="coffee">COFFEE</span>
         </button>
-      </div>
+      </section>
 
-      <!-- Coffee Shelf -->
+      <!-- Wide CTAs -->
       <button class="wide-btn btn-3d" data-nav="beans">
         <img src="Assets/coffee-shelf.png" alt="">
         <span data-i18n="discoverShelf">Discover our Coffee Shelf</span>
       </button>
 
-      <!-- Review -->
       <a class="review-btn btn-3d" target="_blank" rel="noopener"
          href="https://www.google.com/search?sca_esv=f60ecab60e0aa489&sxsrf=AE3TifOqxmle3mCawmW8QMBLC3AjyoMUhg:1761669360921&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8q7DkqADv5wRTdBpYumF5gqCEfO6tp_bZRoBSIm_7g3w6n0sxuVia957VyiU3Lyx1bNyMTgKWSmBKbTs44Z0-tiwanV&q=Palmier+Reviews&sa=X&ved=2ahUKEwiYr-DjqceQAxXmFjQIHeLbDtkQ0bkNegQILhAD&biw=1457&bih=817&dpr=2">
         <span data-i18n="leaveReview">Leave us a review</span>
@@ -95,7 +86,7 @@
     </section>
 
     <!-- FOOD (PDF) -->
-    <section id="view-food" class="view view-food" aria-label="Food menu">
+    <section id="view-food" class="view view-food" aria-label="Food">
       <div class="pdf-wrap">
         <iframe id="foodPdf" title="Food PDF" loading="lazy"></iframe>
       </div>
@@ -107,7 +98,7 @@
     </section>
 
     <!-- TEA -->
-    <section id="view-tea" class="view view-image" aria-label="Tea menu">
+    <section id="view-tea" class="view view-image" aria-label="Tea">
       <img id="teaImage" alt="Tea menu">
     </section>
 
@@ -117,7 +108,7 @@
     </section>
 
     <!-- COFFEE -->
-    <section id="view-coffee" class="view view-image" aria-label="Coffee menu">
+    <section id="view-coffee" class="view view-image" aria-label="Coffee">
       <img id="coffeeImage" alt="Coffee menu">
     </section>
 
@@ -125,28 +116,28 @@
     <section id="view-beans" class="view view-beans" aria-label="Coffee shelf">
       <div class="beans-grid">
         <a class="bean btn-3d" href="https://anchoredcoffee.com/collections/all-coffee" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/anchored.png" alt="Anchored Coffee">
+          <img src="Assets/coffee-shelf/anchored.png" alt="Anchored">
         </a>
         <a class="bean btn-3d" href="https://september.coffee/en-us/collections/coffee" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/september.png" alt="September Coffee">
+          <img src="Assets/coffee-shelf/september.png" alt="September">
         </a>
 
         <a class="bean btn-3d" href="https://www.quietlycoffee.com/collections/our-coffee" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/quietrly.png" alt="Quietly Coffee">
+          <img src="Assets/coffee-shelf/quietrly.png" alt="Quietly">
         </a>
         <a class="bean btn-3d" href="https://www.moduscoffee.com/shop/" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/modus.png" alt="Modus Coffee">
+          <img src="Assets/coffee-shelf/modus.png" alt="Modus">
         </a>
 
         <a class="bean btn-3d" href="https://monogramcoffee.com/en-us?" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/monogram.png" alt="Monogram Coffee">
+          <img src="Assets/coffee-shelf/monogram.png" alt="Monogram">
         </a>
         <a class="bean btn-3d" href="https://thombargen.com/collections/frontpage" target="_blank" rel="noopener">
           <img src="Assets/coffee-shelf/thom-bargen.png" alt="Thom Bargen">
         </a>
 
         <a class="bean btn-3d" href="https://javaroasters.ca/collections/coffee" target="_blank" rel="noopener">
-          <img src="Assets/coffee-shelf/java.png" alt="Java Roasters">
+          <img src="Assets/coffee-shelf/java.png" alt="Java">
         </a>
         <a class="bean btn-3d" href="https://junglelivraisoncafe.com/collections/classics" target="_blank" rel="noopener">
           <img src="Assets/coffee-shelf/jungle.png" alt="Jungle">
@@ -167,9 +158,9 @@
         </a>
       </div>
     </section>
-
   </main>
 
   <script src="app.js"></script>
 </body>
 </html>
+
