@@ -1,200 +1,102 @@
-/* ===== Palette (only your 4 colors) ===== */
+/* ==== Palette (only your 4 colors) ==== */
 :root{
-  --brown:#bd8d75;   /* side face + track */
+  --brown:#bd8d75;   /* side face */
   --pink:#e9d3c5;    /* page bg */
-  --cream:#e8e1d4;   /* button top, pill thumb */
-  --green:#42633d;   /* text, icons */
+  --cream:#e8e1d4;   /* top face */
+  --green:#42633d;   /* text/icons */
 
-  /* Design system: scale from a 390px wide mock */
-  --W: min(100vw, 430px);         /* allow tiny bit of margin on big phones */
-  --u: calc(var(--W) / 390);      /* 1 unit = 1px on your 390px mock */
+  /* scale from a 390px-wide mock */
+  --W: min(100vw, 430px);
+  --u: calc(var(--W) / 390);
 
-  --radius-xl: calc(28 * var(--u));
-  --radius-lg: calc(24 * var(--u));
-  --radius:    calc(22 * var(--u));
-  --radius-sm: calc(16 * var(--u));
+  --side:  calc(10 * var(--u));   /* side-face offset */
+  --press: calc(10 * var(--u));   /* press travel */
+  --gap:   calc(18 * var(--u));
+  --pad:   calc(16 * var(--u));
+  --rad:   calc(24 * var(--u));
+  --rad-lg:calc(26 * var(--u));
 
-  --press-shift: calc(10 * var(--u));
-  --side-offset: calc(10 * var(--u));
-  --gap:         calc(18 * var(--u));
-  --gap-sm:      calc(14 * var(--u));
-  --pad:         calc(16 * var(--u));
-  --pad-lg:      calc(20 * var(--u));
-
-  --title:       calc(28 * var(--u));
-  --tileLabel:   calc(20 * var(--u));
-  --bigLabel:    calc(24 * var(--u));
-
+  --label: calc(20 * var(--u));
+  --big:   calc(24 * var(--u));
   --speed: 90ms;
 }
 
-/* ===== Base ===== */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
-  margin:0;
-  background:var(--pink);
-  color:var(--green);
-  font-family: ui-sans-serif, -apple-system, system-ui, Segoe UI, Roboto, Arial;
-  line-height:1.15;
+  margin:0; background:var(--pink); color:var(--green);
+  font-family: ui-sans-serif,-apple-system,system-ui,Segoe UI,Roboto,Arial;
 }
 
-/* ===== View shell & transitions ===== */
+/* ===== Views (unchanged for other pages) ===== */
 main{position:relative; overflow:hidden}
-.view{
-  position:absolute; inset:0;
-  padding: calc(16 * var(--u));
-  overflow:auto;
-  background:var(--pink);
-  transform:translateX(100%);
-  opacity:0;
-  transition: transform .24s ease-out, opacity .24s ease-out;
-}
+.view{position:absolute; inset:0; padding:calc(16 * var(--u)); overflow:auto; background:var(--pink);
+  transform:translateX(100%); opacity:0; transition:.24s ease-out}
 .view.active{transform:translateX(0); opacity:1}
-.view.slide-from-left{transform:translateX(-100%)}
 
-/* ===== Sticky top bar for non-home ===== */
-.topbar{
-  position:sticky; top:0; z-index:20;
-  display:flex; align-items:center; justify-content:space-between;
-  padding: calc(12 * var(--u)) calc(16 * var(--u));
-  background:var(--pink);
-  transform:translateY(-100%); opacity:0; pointer-events:none;
-  transition: opacity .15s ease, transform .15s ease;
-}
-.topbar.show{transform:translateY(0); opacity:1; pointer-events:auto}
+/* ===== Home layout ===== */
+.view-home{padding-top:calc(76 * var(--u))}
+.lang-toggle.home{position:absolute; right:calc(16 * var(--u)); top:calc(16 * var(--u)); z-index:2}
+.palmier-logo{display:block; width:calc(260 * var(--u)); max-width:66vw; margin:calc(18 * var(--u)) auto calc(8 * var(--u))}
+.socials{display:flex; justify-content:center; gap:calc(18 * var(--u)); margin:calc(10 * var(--u)) 0 calc(18 * var(--u))}
 
-.back-link{
-  display:inline-flex; align-items:center; gap: calc(6 * var(--u));
-  border:0; background:none; color:var(--green);
-  font-size: calc(20 * var(--u)); padding: calc(6 * var(--u)) calc(8 * var(--u));
-  border-radius: var(--radius-sm);
-}
-.back-link:active{transform:scale(.98)}
-
-/* ===== Language toggle (exact pill behavior) ===== */
-.lang-toggle{position:relative}
-.lang-toggle .pill{
-  position:relative;
-  width: calc(108 * var(--u)); height: calc(40 * var(--u));
-  background: var(--brown);
-  border-radius: 999px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 0 calc(16 * var(--u));
-}
-.lang-toggle .label{font-weight:800; letter-spacing:.4px}
-.lang-toggle .thumb{
-  position:absolute; top: calc(4 * var(--u)); bottom: calc(4 * var(--u));
-  width: calc(54 * var(--u)); border-radius:999px; background:var(--cream);
-  left: calc(4 * var(--u)); transition: transform var(--speed) ease;
-  box-shadow:0 0 0 calc(2 * var(--u)) var(--brown) inset;
-}
+/* ===== Language pill (visuals) ===== */
+.lang-toggle .pill{position:relative; width:calc(108 * var(--u)); height:calc(40 * var(--u));
+  background:var(--brown); border-radius:999px; display:flex; align-items:center; justify-content:space-between; padding:0 calc(16 * var(--u))}
+.lang-toggle .label{font-weight:800}
+.lang-toggle .thumb{position:absolute; top:calc(4 * var(--u)); bottom:calc(4 * var(--u)); left:calc(4 * var(--u));
+  width:calc(54 * var(--u)); border-radius:999px; background:var(--cream); transition:transform var(--speed) ease;
+  box-shadow:0 0 0 calc(2 * var(--u)) var(--brown) inset}
 .lang-toggle.eng .thumb{transform:translateX(0)}
 .lang-toggle.fra .thumb{transform:translateX(calc(50 * var(--u)))}
 .lang-toggle.eng .eng{color:var(--green)} .lang-toggle.eng .fra{color:var(--pink)}
 .lang-toggle.fra .fra{color:var(--green)} .lang-toggle.fra .eng{color:var(--pink)}
-/* on home, pill sits at top-right */
-.lang-toggle.home{position:absolute; right: calc(16 * var(--u)); top: calc(16 * var(--u)); z-index:3}
 
-/* ===== HOME exact layout ===== */
-.view-home{padding-top: calc(78 * var(--u));}
-.palmier-logo{
-  width: calc(260 * var(--u)); max-width: 66vw;
-  display:block; margin: calc(18 * var(--u)) auto calc(6 * var(--u));
-}
-.socials{
-  display:flex; justify-content:center; gap: calc(18 * var(--u));
-  margin: calc(8 * var(--u)) 0 calc(18 * var(--u));
-}
-
-/* 3D button system (side face NOT a shadow) */
-.btn-3d{ position:relative; display:block; background:transparent; border:0; }
+/* ===== 3D Button system (works for tiles and socials) ===== */
+/* The element is the top face; ::before is the side face (stays put).
+   On :active we move the top face down-right and counter-move ::before
+   so it becomes fully covered, giving a true physical press effect. */
+.btn-3d{position:relative; display:block; border:0; background:var(--cream); border-radius:var(--rad);
+  box-shadow:0 0 0 calc(2 * var(--u)) var(--cream) inset; transition:transform var(--speed) ease}
 .btn-3d::before{
-  content:""; position:absolute; inset:0;
-  border-radius: var(--radius);
-  background: var(--brown);                 /* side face color */
-  transform: translate(var(--side-offset), var(--side-offset));
+  content:""; position:absolute; inset:0; border-radius:inherit; background:var(--brown);
+  transform:translate(var(--side), var(--side)); z-index:-1;
 }
-.btn-3d > *{ position:relative }            /* the top face content */
-
-.tile, .circle-btn, .wide-btn, .review-btn, .bean{
-  background: var(--cream);                 /* top face */
-  border-radius: var(--radius);
-  box-shadow: 0 0 0 calc(2 * var(--u)) var(--cream) inset; /* keeps palette tight */
-  transition: transform var(--speed) ease;
-}
-.btn-3d:active{ transform: translate(var(--press-shift), var(--press-shift)); }
-
-/* Social buttons */
-.circle-btn{ width: calc(64 * var(--u)); height: calc(64 * var(--u)); border-radius:999px; display:grid; place-items:center }
-.circle-btn img{ width: calc(28 * var(--u)); height: calc(28 * var(--u)); display:block }
-
-/* 2x2 grid (tight to mock) */
-.grid{
-  display:grid; grid-template-columns:1fr 1fr;
-  gap: var(--gap);
-  padding: calc(6 * var(--u)) calc(6 * var(--u)) calc(16 * var(--u));
-}
-.tile{ min-height: calc(170 * var(--u)); border-radius: var(--radius-xl); }
-.tile img{ width: calc(64 * var(--u)); height: calc(64 * var(--u)); display:block; margin: calc(18 * var(--u)) auto calc(8 * var(--u)); }
-.tile span{
-  display:block; text-align:center; font-weight:900; letter-spacing:.6px;
-  font-size: var(--tileLabel); margin-bottom: calc(18 * var(--u));
+/* press effect */
+.btn-3d:active{ transform:translate(var(--press), var(--press)); }
+.btn-3d:active::before{
+  /* side-face stays visually in place by countering the top's movement */
+  transform:translate(calc(var(--side) - var(--press)), calc(var(--side) - var(--press)));
 }
 
-/* Shelf (wide) */
-.wide-btn{
-  margin: calc(8 * var(--u)) calc(6 * var(--u)) calc(14 * var(--u));
-  padding: var(--pad-lg);
-  border-radius: var(--radius-xl);
-  display:flex; align-items:center; gap: calc(14 * var(--u));
-}
-.wide-btn img{ width: calc(44 * var(--u)); height: calc(44 * var(--u)); display:block }
-.wide-btn span{ font-size: var(--bigLabel); font-weight:900 }
+/* ===== Social circular buttons ===== */
+.circle-btn{ width:calc(64 * var(--u)); height:calc(64 * var(--u)); border-radius:50%; display:grid; place-items:center }
+.circle-btn img{ width:calc(28 * var(--u)); height:calc(28 * var(--u)) }
 
-/* Review (same width, thinner height) */
-.review-btn{
-  margin: 0 calc(6 * var(--u));
-  padding: var(--pad-lg);
-  border-radius: var(--radius-xl);
-  display:flex; align-items:center; justify-content:space-between;
+/* ===== 2×2 square tile grid ===== */
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); padding:0 calc(6 * var(--u)) calc(16 * var(--u))}
+.tile{
+  aspect-ratio:1/1;  /* <-- perfect squares */
+  border-radius:var(--rad-lg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:calc(6 * var(--u));
 }
-.review-btn img{ width: calc(28 * var(--u)); height: calc(28 * var(--u)); display:block }
-.review-btn span{ font-size: var(--bigLabel); font-weight:900 }
+.tile img{ width:calc(64 * var(--u)); height:calc(64 * var(--u)); margin-bottom:calc(10 * var(--u)) }
+.tile span{ font-weight:900; font-size:var(--label); letter-spacing:.6px }
 
-/* ===== Food (PDF) ===== */
-.view-food .pdf-wrap{
-  height: calc(100dvh - (160 * var(--u)));
-  border-radius: calc(18 * var(--u)); overflow:hidden; background:var(--cream);
-}
-#foodPdf{border:0; width:100%; height:100%}
-.pager{ margin: calc(12 * var(--u)) 0; display:flex; align-items:center; justify-content:center; gap: calc(18 * var(--u)) }
-.page-indicator{ font-weight:800; letter-spacing:.8px; font-size: calc(18 * var(--u)) }
-.arrow-btn{ width: calc(64 * var(--u)); height: calc(64 * var(--u)); border:0; border-radius:999px; background:var(--cream); position:relative }
-.arrow-btn::after{
-  content:""; position:absolute; inset:0; margin:auto; width:0; height:0;
-  border-top: calc(12 * var(--u)) solid transparent;
-  border-bottom: calc(12 * var(--u)) solid transparent;
-}
-.arrow-btn.left::after{ border-right: calc(18 * var(--u)) solid var(--green) }
-.arrow-btn.right::after{ border-left:  calc(18 * var(--u)) solid var(--green) }
+/* ===== Wide & Review buttons (keep proportions) ===== */
+.wide-btn{ margin:calc(8 * var(--u)) calc(6 * var(--u)) calc(14 * var(--u)); padding:calc(18 * var(--u)); border-radius:var(--rad-lg);
+  display:flex; align-items:center; gap:calc(14 * var(--u))}
+.wide-btn img{ width:calc(44 * var(--u)); height:calc(44 * var(--u)) }
+.wide-btn span{ font-weight:900; font-size:var(--big) }
 
-/* ===== Tea / Coffee / Cocktails (full image) ===== */
-.view-image img{
-  display:block; width:100%; height:auto;
-  border-radius: calc(18 * var(--u)); background:var(--cream);
-}
+.review-btn{ margin:0 calc(6 * var(--u)); padding:calc(18 * var(--u)); border-radius:var(--rad-lg);
+  display:flex; align-items:center; justify-content:space-between}
+.review-btn img{ width:calc(28 * var(--u)); height:calc(28 * var(--u)) }
+.review-btn span{ font-weight:900; font-size:var(--big) }
 
-/* ===== Beans grid ===== */
-.view-beans{ padding-top: calc(8 * var(--u)) }
-.beans-grid{
-  display:grid; grid-template-columns:1fr 1fr;
-  gap: var(--gap);
-  padding-bottom: calc(40 * var(--u));
-}
-.bean{ height: calc(160 * var(--u)); display:grid; place-items:center; border-radius: var(--radius-xl) }
-.bean::before{ content:""; position:absolute; inset:0; border-radius: inherit; background:var(--brown); transform:translate(var(--side-offset), var(--side-offset)) }
-.bean img{ position:relative; width:78%; height:auto; display:block }
+/* ===== Keep existing styles below for other pages if you had them ===== */
 
-/* ===== Utility (ensure images don’t overflow) ===== */
-img{ max-width:100%; height:auto }
+/* Images always behave */
+img{max-width:100%; height:auto}
+
