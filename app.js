@@ -136,3 +136,4 @@ nextPage.addEventListener('click', ()=> loadPdf(Math.min(state.pdf.pages, state.
 setLang(state.lang);
 showTopbar(false);
 loadPdf(1);
+
