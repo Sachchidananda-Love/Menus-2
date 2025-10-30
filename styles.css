@@ -182,3 +182,7 @@ main{position:relative; overflow:hidden}
 /* Utility */
 img{max-width:100%; height:auto}
 
+/* --- Safety override: views visible by default --- */
+.view { transform: none !important; opacity: 1 !important; }
+.view:not(.active) { transform: translateX(100%) !important; opacity: 0 !important; }
+
