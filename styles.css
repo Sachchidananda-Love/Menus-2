@@ -99,4 +99,66 @@ main{position:relative; overflow:hidden}
 
 /* Images always behave */
 img{max-width:100%; height:auto}
+/* ---------- HOTFIX: ensure home tiles render as visible squares ---------- */
+
+/* Center the content column so desktop wide screens don’t stretch things */
+.view-home {
+  display: grid;
+  place-items: start center;
+}
+
+.view-home .home-top,
+.view-home .grid,
+.view-home .wide-btn,
+.view-home .review-btn {
+  width: min(430px, 100%);
+}
+
+/* Social row cannot collapse */
+.socials { min-height: 72px; }
+
+/* Grid: guarantee it exists and is visible */
+.grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: var(--gap) !important;
+  margin-top: 8px;
+}
+
+/* Each tile is a guaranteed square even if images don’t load */
+.tile {
+  aspect-ratio: 1 / 1 !important;
+  min-height: 150px;           /* extra guard on older browsers */
+  background: var(--cream) !important;     /* top face */
+  border-radius: var(--rad-lg);
+  position: relative;
+}
+
+/* Draw the side face even if earlier rules failed to apply */
+.tile::before,
+.circle-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--brown);
+  transform: translate(var(--side), var(--side));
+  z-index: -1;
+}
+
+/* Make sure icon + label are centered and visible */
+.tile img { display:block; width:64px; height:64px; margin: 14px auto 10px; }
+.tile span {
+  display:block; text-align:center;
+  font-weight: 900; font-size: var(--label);
+  color: var(--green);
+}
+
+/* Circle social buttons always round & visible */
+.circle-btn {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--cream);
+  position: relative;
+}
+.circle-btn img { width:28px; height:28px; }
 
