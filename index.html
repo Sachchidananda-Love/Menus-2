@@ -1,38 +1,132 @@
-<!-- … existing head and language switcher … -->
-<div class="container">
-  <!-- homePage wraps the existing home UI -->
-  <div id="homePage">
-    <!-- …social icons, grid buttons, shelf and review buttons… -->
-  </div><!-- end of homePage -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palmier</title>
+    <!-- Import the Metropolis font and link the stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Language toggle -->
+    <div id="langSwitcher" class="language-switcher eng-active">
+      <div id="langToggle" class="toggle"></div>
+      <span class="eng">ENG</span>
+      <span class="fra">FRA</span>
+    </div>
 
-  <!-- Food menu page (hidden by default) -->
-  <div id="foodPage" class="menu-page" style="display:none;">
-    <!-- Back button -->
-    <div class="back-wrapper">
-      <button id="backHome" class="back-button">
-        <span class="back-arrow"></span>
-        <span class="back-label">Back</span>
-      </button>
+    <div class="container">
+      <!-- Home page wrapper: everything visible on the home screen goes here -->
+      <div id="homePage">
+        <img src="Assets/palmier-logo.png" alt="Palmier" class="logo" />
+
+        <!-- Social media buttons (now anchors) -->
+        <div class="social-row">
+          <a href="https://www.instagram.com/cafe.palmier?igsh=MWsxeDBrZHA3Ym5z" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/instagram.png" alt="Instagram" />
+            </div>
+          </a>
+          <a href="https://www.tiktok.com/@cafe.palmier" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/tik-tok.png" alt="TikTok" />
+            </div>
+          </a>
+          <a href="https://www.facebook.com/share/14JDLJfr2qp/?mibextid=wwXIfr" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <div class="social-content">
+              <img src="Assets/faceook.png" alt="Facebook" />
+            </div>
+          </a>
+        </div>
+
+        <!-- Grid of menu tiles -->
+        <div class="tile-grid">
+          <div id="foodBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/food.png" alt="Food icon" />
+              <span class="label" data-key="food">Food</span>
+            </div>
+          </div>
+          <div id="teaBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/tea.png" alt="Tea icon" />
+              <span class="label" data-key="tea">Tea</span>
+            </div>
+          </div>
+          <div id="cocktailsBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/cocktail.png" alt="Cocktails icon" />
+              <span class="label" data-key="cocktails">Cocktails</span>
+            </div>
+          </div>
+          <div id="coffeeBtn" class="tile">
+            <div class="tile-content">
+              <img src="Assets/coffee.png" alt="Coffee icon" />
+              <span class="label" data-key="coffee">Coffee</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coffee shelf button -->
+        <div id="shelfBtn" class="large-button">
+          <div class="button-content">
+            <img src="Assets/coffee-shelf.png" alt="Coffee shelf icon" class="button-icon" />
+            <span class="label" data-key="shelf">Discover our Coffee Shelf</span>
+          </div>
+        </div>
+
+        <!-- Review button (anchor) -->
+        <a id="reviewBtn"
+           class="review-button"
+           href="https://www.google.com/search?sca_esv=f60ecab60e0aa489&sxsrf=AE3TifOqxmle3mCawmW8QMBLC3AjyoMUhg:1761669360921&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8q7DkqADv5wRTdBpYumF5gqCEfO6tp_bZRoBSIm_7g3w6n0sxuVia957VyiU3Lyx1bNyMTgKWSmBKbTs44Z0-tiwanV&q=Palmier+Reviews&sa=X&ved=2ahUKEwiYr-DjqceQAxXmFjQIHeLbDtkQ0bkNegQILhAD&biw=1457&bih=817&dpr=2"
+           target="_blank"
+           rel="noopener noreferrer">
+          <div class="button-content">
+            <span class="label" data-key="review">Leave us a review</span>
+            <img src="Assets/review.png" alt="Review icon" class="button-icon-right" />
+          </div>
+        </a>
+      </div><!-- end of homePage -->
+
+      <!-- Food menu page (hidden by default) -->
+      <div id="foodPage" class="menu-page" style="display:none;">
+        <!-- Back button -->
+        <div class="back-wrapper">
+          <button id="backHome" class="back-button">
+            <span class="back-arrow"></span>
+            <span class="back-label">Back</span>
+          </button>
+        </div>
+        <!-- PDF viewer with overlay and checkered strips -->
+        <div class="pdf-view">
+          <div class="checkered-strip top-strip"></div>
+          <div class="pdf-overlay">
+            <span class="welcome-fr">bienvenue au café Palmier</span>
+            <span class="merci">Merci</span>
+            <span class="merci-sub">de commander à la caisse</span>
+            <span class="thank-you">Thank you</span>
+            <span class="thank-sub">for ordering at the cash</span>
+          </div>
+          <!-- PDF object; data attribute will be set via JS -->
+          <object id="pdfViewer" type="application/pdf" data="" width="100%" height="100%"></object>
+          <div class="checkered-strip bottom-strip"></div>
+        </div>
+        <!-- Navigation bar -->
+        <div class="nav-bar">
+          <button id="prevPdf" class="nav-btn">
+            <span class="arrow-icon left"></span>
+          </button>
+          <span id="pageIndicator" class="page-indicator">1/2</span>
+          <button id="nextPdf" class="nav-btn">
+            <span class="arrow-icon right"></span>
+          </button>
+        </div>
+      </div><!-- end of foodPage -->
     </div>
-    <!-- PDF viewer with overlay and checkered strips -->
-    <div class="pdf-view">
-      <div class="checkered-strip top-strip"></div>
-      <div class="pdf-overlay">
-        <span class="welcome-fr">bienvenue au café Palmier</span>
-        <span class="merci">Merci</span>
-        <span class="merci-sub">de commander à la caisse</span>
-        <span class="thank-you">Thank you</span>
-        <span class="thank-sub">for ordering at the cash</span>
-      </div>
-      <object id="pdfViewer" type="application/pdf" data="" width="100%" height="100%"></object>
-      <div class="checkered-strip bottom-strip"></div>
-    </div>
-    <!-- Navigation bar -->
-    <div class="nav-bar">
-      <button id="prevPdf" class="nav-btn"><span class="arrow-icon left"></span></button>
-      <span id="pageIndicator" class="page-indicator">1/2</span>
-      <button id="nextPdf" class="nav-btn"><span class="arrow-icon right"></span></button>
-    </div>
-  </div><!-- end of foodPage -->
-</div>
-<!-- …script inclusion… -->
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
+
