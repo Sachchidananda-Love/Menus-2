@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palmier</title>
+    <!-- Link to the stylesheet and font.  -->
+    <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Language toggle.  -->
+    <div id="langSwitcher" class="language-switcher eng-active">
+      <div id="langToggle" class="toggle"></div>
+      <span class="eng">ENG</span>
+      <span class="fra">FRA</span>
+    </div>
+
+    <div class="container">
+      <!-- Brand logo.  -->
+      <img src="Assets/palmier-logo.png" alt="Palmier" class="logo" />
+
+      <!-- Social icons row.  -->
+      <div class="social-row">
+        <div class="social-btn">
+          <div class="social-content">
+            <img src="Assets/instagram.png" alt="Instagram" />
+          </div>
+        </div>
+        <div class="social-btn">
+          <div class="social-content">
+            <img src="Assets/tik-tok.png" alt="TikTok" />
+          </div>
+        </div>
+        <div class="social-btn">
+          <div class="social-content">
+            <img src="Assets/faceook.png" alt="Facebook" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid of menu buttons.  -->
+      <div class="tile-grid">
+        <div id="foodBtn" class="tile">
+          <div class="tile-content">
+            <img src="Assets/food.png" alt="Food icon" />
+            <span class="label" data-key="food">Food</span>
+          </div>
+        </div>
+        <div id="teaBtn" class="tile">
+          <div class="tile-content">
+            <img src="Assets/tea.png" alt="Tea icon" />
+            <span class="label" data-key="tea">Tea</span>
+          </div>
+        </div>
+        <div id="cocktailsBtn" class="tile">
+          <div class="tile-content">
+            <img src="Assets/cocktail.png" alt="Cocktails icon" />
+            <span class="label" data-key="cocktails">Cocktails</span>
+          </div>
+        </div>
+        <div id="coffeeBtn" class="tile">
+          <div class="tile-content">
+            <img src="Assets/coffee.png" alt="Coffee icon" />
+            <span class="label" data-key="coffee">Coffee</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wide button for coffee shelf.  -->
+      <div id="shelfBtn" class="large-button">
+        <div class="button-content">
+          <img src="Assets/coffee-shelf.png" alt="Coffee shelf icon" class="button-icon" />
+          <span class="label" data-key="shelf">Discover our Coffee Shelf</span>
+        </div>
+      </div>
+
+      <!-- Review button.  -->
+      <div id="reviewBtn" class="review-button">
+        <div class="button-content">
+          <span class="label" data-key="review">Leave us a review</span>
+          <img src="Assets/review.png" alt="Review icon" class="button-icon-right" />
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript for interactivity.  -->
+    <script src="script.js"></script>
+  </body>
+</html>
 
