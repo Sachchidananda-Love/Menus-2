@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap');
 
-/* Global colours */
 :root {
   --color-brown: #bd8d75;
   --color-pink:  #e9d3c5;
   --color-cream: #e8e1d4;
   --color-green: #42633d;
-  /* Offset used to reveal the dark edge; increase for a thicker edge */
   --shadow-offset: 12px;
 }
 
@@ -25,15 +23,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Language toggle */
+/* Language toggle: reverted to earlier compact style */
 .language-switcher {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  width: 130px;
-  height: 44px;
+  width: 110px;
+  height: 36px;
   background-color: var(--color-brown);
-  border-radius: 22px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,11 +43,11 @@ body {
   user-select: none;
 }
 .language-switcher .toggle {
-  width: calc(50% - 8px);
-  height: calc(100% - 8px);
+  width: calc(50% - 6px);
+  height: calc(100% - 6px);
   background-color: var(--color-cream);
-  border-radius: 16px;
-  margin: 4px;
+  border-radius: 14px;
+  margin: 3px;
   transition: transform 0.3s ease;
 }
 .language-switcher span {
@@ -64,7 +62,7 @@ body {
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle { transform: translateX(100%); }
 
-/* Main container */
+/* Container and logo */
 .container {
   max-width: 500px;
   margin: 0 auto;
@@ -91,7 +89,8 @@ body {
   height: 60px;
   background-color: var(--color-brown);
   border-radius: 50%;
-  overflow: hidden;
+  /* allow cream top to extend – no clipping */
+  overflow: visible;
 }
 .social-btn .social-content {
   position: absolute;
@@ -104,23 +103,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* offset up/left so brown edge shows bottom/right */
+  /* show brown edge bottom/right by default */
   transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
   transition: transform 0.08s ease-out;
 }
 .social-btn .social-content img {
   max-width: 50%;
   max-height: 50%;
-  width: auto;
-  height: auto;
   object-fit: contain;
 }
-/* Pressed state */
+/* pressed state */
 .social-btn:active .social-content {
   transform: translate(0, 0);
 }
 
-/* 2×2 tile grid */
+/* 2×2 menu tiles */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -132,7 +129,8 @@ body {
   background-color: var(--color-brown);
   border-radius: 30px;
   aspect-ratio: 1 / 1;
-  overflow: hidden;
+  /* let cream top extend over base */
+  overflow: visible;
 }
 .tile-content {
   position: absolute;
@@ -147,51 +145,48 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  /* offset up/left so brown edge shows bottom/right */
+  /* offset up/left by default */
   transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
   transition: transform 0.08s ease-out;
 }
 .tile-content img {
   max-width: 70%;
   max-height: 70%;
-  width: auto;
-  height: auto;
   object-fit: contain;
 }
 .tile-content .label {
   font-size: 1.5rem;
   font-weight: 700;
 }
-/* press effect */
+/* pressed effect */
 .tile:active .tile-content {
   transform: translate(0, 0);
 }
 
-/* Large and review buttons */
+/* Wide buttons (coffee shelf & review) */
 .large-button,
 .review-button {
   position: relative;
   background-color: var(--color-brown);
   border-radius: 25px;
   margin: 0 1rem;
-  overflow: hidden;
+  /* allow cream top to extend */
+  overflow: visible;
 }
 .large-button { height: 140px; margin-top: 2rem; }
 .review-button { height: 100px; margin-top: 1.5rem; }
 
-/* Coffee shelf button specifics */
+/* Layout specifics for coffee shelf button */
 .large-button .button-content {
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-/* allow wrapping and left alignment */
 .large-button .button-content .label {
   white-space: normal;
   line-height: 1.2;
   font-size: 1.4rem;
   flex: 1;
   text-align: left;
-  /* narrower max-width to force line breaks */
   max-width: calc(100% - 120px);
 }
 .review-button .button-content {
@@ -199,7 +194,7 @@ body {
   font-size: 1.4rem;
 }
 
-/* Shared base styles for wide buttons */
+/* shared base for long buttons */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -213,11 +208,11 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding: 0 1rem;
-  /* default offset up/left */
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out;
   font-size: 1.1rem;
   font-weight: 700;
+  /* start offset so brown edge shows */
+  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
+  transition: transform 0.08s ease-out;
 }
 .large-button .button-content .button-icon {
   width: 70px;
@@ -229,16 +224,15 @@ body {
   height: 40px;
   object-fit: contain;
 }
-/* pressed state */
+/* press effect */
 .large-button:active .button-content,
 .review-button:active .button-content {
   transform: translate(0, 0);
 }
 
-/* Slightly wider layout on larger screens while maintaining phone-like proportions */
+/* Optional: widen container slightly on larger screens */
 @media (min-width: 600px) {
   .container {
     max-width: 600px;
   }
 }
-
