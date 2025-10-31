@@ -1,11 +1,108 @@
-/* Social buttons */
+@import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap');
+
+/*
+ * Global colour palette and shadow offset.
+ * The only colours used throughout the design come from this palette.
+ */
+:root {
+  --color-brown: #bd8d75;  /* darker side face of buttons */
+  --color-pink:  #e9d3c5;  /* page background */
+  --color-cream: #e8e1d4;  /* top faces of buttons */
+  --color-green: #42633d;  /* text and icon colour */
+  /* how far the cream layer is offset to create the 3D side */
+  --shadow-offset: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-pink);
+  font-family: 'Metropolis', sans-serif;
+  color: var(--color-green);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Language toggle at the top-right. It consists of a dark capsule with
+ * two labels (ENG/FRA) and a light inner pill that slides to indicate
+ * the current language. The inner pill leaves a small border of the
+ * dark capsule visible around it.
+ */
+.language-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 110px;
+  height: 36px;
+  background-color: var(--color-brown);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  user-select: none;
+  z-index: 10;
+}
+.language-switcher .toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(50% - 6px);
+  height: calc(100% - 6px);
+  background-color: var(--color-cream);
+  border-radius: 14px;
+  margin: 3px;
+  transition: transform 0.3s ease;
+}
+.language-switcher span {
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+  color: var(--color-cream);
+}
+.language-switcher.eng-active .eng { color: var(--color-green); }
+.language-switcher.eng-active .fra { color: var(--color-cream); }
+.language-switcher.fra-active .eng { color: var(--color-cream); }
+.language-switcher.fra-active .fra { color: var(--color-green); }
+.language-switcher.fra-active .toggle { transform: translateX(100%); }
+
+/* Main layout container */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.logo {
+  display: block;
+  max-width: 80%;
+  width: 320px;
+  margin: 0 auto;
+}
+
+/* Social media buttons row */
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
 .social-btn {
   position: relative;
   width: 60px;
   height: 60px;
   background-color: var(--color-brown);
   border-radius: 50%;
-  overflow: visible; /* allow the cream layer to extend */
+  overflow: visible; /* allow the cream layer to extend beyond the base */
 }
 .social-btn .social-content {
   position: absolute;
@@ -18,7 +115,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Brown side rendered as a sharp shadow */
+  /* render a hard-edged brown side using box-shadow */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -27,17 +124,24 @@
   max-height: 50%;
   object-fit: contain;
 }
+/* Press effect: slide down/right and remove brown side */
 .social-btn:active .social-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
-/* Square tiles */
+/* Grid of four square tiles */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 1rem;
+}
 .tile {
   position: relative;
   background-color: var(--color-brown);
   border-radius: 30px;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   overflow: visible;
 }
 .tile-content {
@@ -53,7 +157,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  /* Brown side rendered as sharp shadow */
+  /* hard-edged brown side */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -66,12 +170,13 @@
   font-size: 1.5rem;
   font-weight: 700;
 }
+/* Press state for tiles */
 .tile:active .tile-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
-/* Wide buttons (shelf & review) */
+/* Rectangular buttons: coffee shelf and review */
 .large-button,
 .review-button {
   position: relative;
@@ -80,6 +185,27 @@
   margin: 0 1rem;
   overflow: visible;
 }
+/* Heights tuned for mobile */
+.large-button {
+  height: 140px;
+  margin-top: 2rem;
+}
+.review-button {
+  height: 100px;
+  margin-top: 1.5rem;
+}
+
+/* Layout specifics for each long button */
+.large-button .button-content {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.review-button .button-content {
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+
+/* Shared styles for button contents */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -95,12 +221,39 @@
   padding: 0 1rem;
   font-size: 1.1rem;
   font-weight: 700;
-  /* Brown side rendered as sharp shadow */
+  /* brown side using box-shadow */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
+.large-button .button-content .label {
+  white-space: normal;
+  line-height: 1.2;
+  font-size: 1.4rem;
+  flex: 1;
+  text-align: left;
+  /* restrict width to encourage wrapping on small screens */
+  max-width: calc(100% - 120px);
+}
+.large-button .button-content .button-icon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+.review-button .button-content .button-icon-right {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+/* Press effect for long buttons */
 .large-button:active .button-content,
 .review-button:active .button-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
+}
+
+/* Responsive tweak: widen container slightly on larger screens */
+@media (min-width: 600px) {
+  .container {
+    max-width: 600px;
+  }
 }
