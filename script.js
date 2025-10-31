@@ -1,6 +1,4 @@
-// script.js
 // Handles language toggling and dynamic text replacement.
-
 document.addEventListener('DOMContentLoaded', () => {
   const langSwitcher = document.getElementById('langSwitcher');
   const toggleEl = document.getElementById('langToggle');
@@ -16,9 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     review: { en: 'Leave us a review', fr: 'Laissez-nous un avis' }
   };
 
-  /**
-   * Update every label on the page to the selected language.
-   */
   function updateText() {
     document.querySelectorAll('.label').forEach(el => {
       const key = el.getAttribute('data-key');
@@ -28,10 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /**
-   * Toggle between English and French. Adjust the switcher styles
-   * and update all visible text accordingly.
-   */
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'fr' : 'en';
     if (currentLang === 'en') {
@@ -44,14 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
     updateText();
   }
 
-  // Attach event listener to the language switcher.
   langSwitcher.addEventListener('click', (event) => {
-    // Prevent selecting text on double tap.
     event.preventDefault();
     toggleLanguage();
   });
 
-  // Initialize default text.
   updateText();
-});
 
+  // Set up press effects for better mobile support.
+  function setupPressEffects() {
+    const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-button');
+    pressTargets.forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.classList.add('pressed');
+      });
+      el.addEventListener('touchend', () => {
+        el.classList.remove('pressed');
+      });
+      el.addEventListener('touchcancel', () => {
+        el.classList.remove('pressed');
+      });
+      el.addEventListener('mousedown', () => {
+        el.classList.add('pressed');
+      });
+      el.addEventListener('mouseup', () => {
+        el.classList.remove('pressed');
+      });
+      el.addEventListener('mouseleave', () => {
+        el.classList.remove('pressed');
+      });
+    });
+  }
+
+  setupPressEffects();
+});
