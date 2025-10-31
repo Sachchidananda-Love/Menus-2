@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap');
 
-/*
- * Global colour palette and shadow offset.
- */
 :root {
   --color-brown: #bd8d75;
   --color-pink:  #e9d3c5;
@@ -65,9 +62,7 @@ body {
 .language-switcher.eng-active .fra { color: var(--color-cream); }
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
-.language-switcher.fra-active .toggle {
-  transform: translateX(100%);
-}
+.language-switcher.fra-active .toggle { transform: translateX(100%); }
 
 /* Main container */
 .container {
@@ -84,7 +79,7 @@ body {
   margin: 0 auto;
 }
 
-/* Social buttons */
+/* Social media buttons */
 .social-row {
   display: flex;
   justify-content: center;
@@ -268,11 +263,28 @@ body {
   font-size: 1.4rem;
 }
 
-/* Press state: hide dark edges by using the page background colour */
+/* CSS :active fallback and JavaScript .pressed support */
+.social-btn:active .social-content,
+.tile:active .tile-content,
+.large-button:active .button-content,
+.review-button:active .button-content {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+}
+.social-btn.pressed .social-content,
+.tile.pressed .tile-content,
+.large-button.pressed .button-content,
+.review-button.pressed .button-content {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+}
+.social-btn.pressed,
+.tile.pressed,
+.large-button.pressed,
+.review-button.pressed,
 .social-btn:active,
 .tile:active,
 .large-button:active,
 .review-button:active {
   background-color: var(--color-pink);
 }
-
