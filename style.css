@@ -84,7 +84,7 @@ body {
 
 .logo {
   display: block;
-  /* Enlarge the Palmier logo on mobile for better prominence */
+  /* Enlarge the Palmier logo for better prominence */
   max-width: 90%;
   width: 380px;
   margin: 0 auto;
@@ -116,8 +116,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* render a hard-edged brown side using a smaller offset so it looks like an edge, not a drop shadow */
-  box-shadow: 6px 6px 0 0 var(--color-brown);
+  /* medium offset gives a button-like edge without looking like a drop shadow */
+  box-shadow: 8px 8px 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
 .social-btn .social-content img {
@@ -127,8 +127,7 @@ body {
 }
 /* Press effect: slide down/right and remove brown side */
 .social-btn:active .social-content {
-  /* move by the same small offset and remove the side */
-  transform: translate(6px, 6px);
+  transform: translate(8px, 8px); /* match the offset above */
   box-shadow: none;
 }
 
@@ -259,3 +258,4 @@ body {
     max-width: 600px;
   }
 }
+
