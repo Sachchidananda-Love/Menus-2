@@ -47,10 +47,13 @@ body {
 .language-switcher .toggle {
   position: absolute;
   top: 0;
-  width: 50%;
-  height: 100%;
+  /* The pill occupies half of the switcher minus margins and sits on the left by default.
+     Margin creates a small border around the pill. Use transform to slide between states. */
+  width: calc(50% - 6px);
+  height: calc(100% - 6px);
   background-color: var(--color-cream);
   border-radius: 14px;
+  margin: 3px;
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
@@ -65,6 +68,7 @@ body {
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle {
+  /* When French is active, slide the pill to the right by its full width */
   transform: translateX(100%);
 }
 
@@ -148,7 +152,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* reduced gap lifts the label slightly */
+  /* equal padding top and bottom lifts the content higher while keeping a bottom border */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* reduced gap raises the label closer to the icon */
   gap: 0.4rem;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
