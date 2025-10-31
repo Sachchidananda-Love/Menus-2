@@ -99,6 +99,7 @@ body {
   background-color: var(--color-brown);
   border-radius: 50%;
   overflow: visible;
+  cursor: pointer;
 }
 .social-btn .social-content {
   position: absolute;
@@ -137,6 +138,7 @@ body {
   border-radius: 30px;
   aspect-ratio: 1 / 1;
   overflow: visible;
+  cursor: pointer;
 }
 .tile-content {
   position: absolute;
@@ -180,6 +182,7 @@ body {
   border-radius: 25px;
   margin: 0 1rem;
   overflow: visible;
+  cursor: pointer;
 }
 .large-button {
   height: 160px;
@@ -252,9 +255,8 @@ body {
 
 /* Override default font size and spacing for the review button text to make it more prominent and centered */
 .review-button .button-content {
-  /* Increase font size and spacing for better centering within the review button */
   font-size: 1.8rem;
-  gap: 1.6rem;
+  gap: 2rem;
 }
 
 /* When in French, slightly reduce long-button font sizes to fit more text */
@@ -262,5 +264,14 @@ body {
   font-size: 1.4rem;
 }
 .language-switcher.fra-active ~ .container .review-button .button-content {
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
+
+/* Ensure the dark base does not show when buttons are pressed: set the parent background to cream during the active state */
+.social-btn:active,
+.tile:active,
+.large-button:active,
+.review-button:active {
+  background-color: var(--color-cream);
+}
+
