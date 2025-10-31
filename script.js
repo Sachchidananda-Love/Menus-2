@@ -3,13 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const langSwitcher = document.getElementById('langSwitcher');
   let currentLang = 'en';
 
+  // Translation table.
   const translations = {
-    food: { en: 'Food', fr: 'Nourriture' },
-    tea: { en: 'Tea', fr: 'Thé' },
-    cocktails: { en: 'Cocktails', fr: 'Cocktails' },
-    coffee: { en: 'Coffee', fr: 'Café' },
-    shelf: { en: 'Discover our Coffee Shelf', fr: 'Découvrez notre étagère à café' },
-    review: { en: 'Leave us a review', fr: 'Laissez-nous un avis' }
+    food:     { en: 'Food',         fr: 'Nourriture' },
+    tea:      { en: 'Tea',          fr: 'Thé' },
+    cocktails:{ en: 'Cocktails',    fr: 'Cocktails' },
+    coffee:   { en: 'Coffee',       fr: 'Café' },
+    shelf:    { en: 'Discover our Coffee Shelf', fr: 'Découvrez notre étagère à café' },
+    review:   { en: 'Leave us a review',       fr: 'Laissez-nous un avis' }
   };
 
   function updateText() {
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateText();
 
-  // Press effects (no removal on release)
+  // Press effects: keep pressed until navigation
   function setupPressEffects() {
     const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-button');
     pressTargets.forEach(el => {
