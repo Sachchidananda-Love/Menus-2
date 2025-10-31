@@ -150,7 +150,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* equal vertical padding lifts the label higher and aligns all four tiles */
+  /* equal vertical padding lifts the content higher and aligns all four tiles */
   padding-top: 1rem;
   padding-bottom: 1rem;
   gap: 0.4rem;
@@ -250,9 +250,11 @@ body {
   }
 }
 
-/* Make the review button text larger by default */
+/* Override default font size and spacing for the review button text to make it more prominent and centered */
 .review-button .button-content {
-  font-size: 1.6rem;
+  /* Increase font size and spacing for better centering within the review button */
+  font-size: 1.8rem;
+  gap: 1.6rem;
 }
 
 /* When in French, slightly reduce long-button font sizes to fit more text */
