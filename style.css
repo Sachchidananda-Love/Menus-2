@@ -54,13 +54,16 @@ body {
 .language-switcher .toggle {
   position: absolute;
   top: 0;
+  /* default state: the pill sits on the left side of the switcher */
   left: 0;
+  right: auto;
+  /* size of the pill: half the switcher minus the combined horizontal margin */
   width: calc(50% - 6px);
   height: calc(100% - 6px);
   background-color: var(--color-cream);
   border-radius: 14px;
   margin: 3px;
-  transition: transform 0.3s ease;
+  transition: left 0.3s ease, right 0.3s ease;
 }
 .language-switcher span {
   flex: 1;
@@ -72,7 +75,11 @@ body {
 .language-switcher.eng-active .fra { color: var(--color-cream); }
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
-.language-switcher.fra-active .toggle { transform: translateX(100%); }
+.language-switcher.fra-active .toggle {
+  /* When French is active, the pill sits on the right side of the switcher. */
+  left: auto;
+  right: 0;
+}
 
 /* Main layout container */
 .container {
@@ -258,4 +265,3 @@ body {
     max-width: 600px;
   }
 }
-
