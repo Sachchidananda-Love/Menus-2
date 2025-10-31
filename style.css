@@ -26,7 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Language toggle at top right */
+/* Language toggle */
 .language-switcher {
   position: fixed;
   top: 1rem;
@@ -47,8 +47,7 @@ body {
 .language-switcher .toggle {
   position: absolute;
   top: 0;
-  /* The pill occupies half of the switcher minus margins and sits on the left by default.
-     Margin creates a small border around the pill. Use transform to slide between states. */
+  /* half the width minus margins; margin makes a border around the pill */
   width: calc(50% - 6px);
   height: calc(100% - 6px);
   background-color: var(--color-cream);
@@ -68,7 +67,6 @@ body {
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle {
-  /* When French is active, slide the pill to the right by its full width */
   transform: translateX(100%);
 }
 
@@ -87,7 +85,7 @@ body {
   margin: 0 auto;
 }
 
-/* Social buttons row */
+/* Social buttons */
 .social-row {
   display: flex;
   justify-content: center;
@@ -126,7 +124,7 @@ body {
   box-shadow: none;
 }
 
-/* 2×2 grid of tiles */
+/* 2×2 grid tiles */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -152,10 +150,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* equal padding top and bottom lifts the content higher while keeping a bottom border */
+  /* equal vertical padding lifts the label higher and aligns all four tiles */
   padding-top: 1rem;
   padding-bottom: 1rem;
-  /* reduced gap raises the label closer to the icon */
   gap: 0.4rem;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
@@ -185,7 +182,6 @@ body {
   overflow: visible;
 }
 .large-button {
-  /* taller coffee shelf button */
   height: 160px;
   margin-top: 2rem;
 }
@@ -231,8 +227,9 @@ body {
   max-width: calc(100% - 120px);
 }
 .large-button .button-content .button-icon {
-  width: 80px;
-  height: 80px;
+  /* Coffee-shelf icon is now much larger */
+  width: 120px;
+  height: 120px;
   object-fit: contain;
 }
 .review-button .button-content .button-icon-right {
@@ -246,14 +243,22 @@ body {
   box-shadow: none;
 }
 
-/* Responsive tweak for larger screens */
+/* Responsive tweak */
 @media (min-width: 600px) {
   .container {
     max-width: 600px;
   }
 }
 
-/* Make the review button text larger */
+/* Make the review button text larger by default */
 .review-button .button-content {
   font-size: 1.6rem;
+}
+
+/* When in French, slightly reduce long-button font sizes to fit more text */
+.language-switcher.fra-active ~ .container .large-button .button-content .label {
+  font-size: 1.4rem;
+}
+.language-switcher.fra-active ~ .container .review-button .button-content {
+  font-size: 1.4rem;
 }
