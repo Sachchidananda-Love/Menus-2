@@ -47,14 +47,12 @@ body {
 .language-switcher .toggle {
   position: absolute;
   top: 0;
-  left: 0;
-  right: auto;
-  width: calc(50% - 6px);
-  height: calc(100% - 6px);
+  width: 50%;
+  height: 100%;
   background-color: var(--color-cream);
   border-radius: 14px;
-  margin: 3px;
-  transition: left 0.3s ease, right 0.3s ease;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
 }
 .language-switcher span {
   flex: 1;
@@ -67,8 +65,7 @@ body {
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle {
-  left: auto;
-  right: 0;
+  transform: translateX(100%);
 }
 
 /* Main container */
@@ -151,7 +148,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* smaller gap pulls label up slightly */
+  /* reduced gap lifts the label slightly */
   gap: 0.4rem;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
@@ -162,7 +159,6 @@ body {
   object-fit: contain;
 }
 .tile-content .label {
-  /* smaller font for grid buttons to improve spacing */
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.2;
@@ -182,7 +178,8 @@ body {
   overflow: visible;
 }
 .large-button {
-  height: 140px;
+  /* taller coffee shelf button */
+  height: 160px;
   margin-top: 2rem;
 }
 .review-button {
@@ -190,7 +187,7 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Layout specifics for long buttons */
+/* Layout specifics */
 .large-button .button-content {
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -199,7 +196,7 @@ body {
   justify-content: space-between;
 }
 
-/* Shared styles for long-button contents */
+/* Shared styles for long buttons */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -218,7 +215,6 @@ body {
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
-/* Text on coffee shelf button */
 .large-button .button-content .label {
   white-space: normal;
   line-height: 1.2;
@@ -227,13 +223,11 @@ body {
   text-align: left;
   max-width: calc(100% - 120px);
 }
-/* Icon on coffee shelf button */
 .large-button .button-content .button-icon {
   width: 80px;
   height: 80px;
   object-fit: contain;
 }
-/* Icon on review button */
 .review-button .button-content .button-icon-right {
   width: 50px;
   height: 50px;
@@ -245,14 +239,14 @@ body {
   box-shadow: none;
 }
 
-/* Widen container on larger screens */
+/* Responsive tweak for larger screens */
 @media (min-width: 600px) {
   .container {
     max-width: 600px;
   }
 }
 
-/* Override text size for the review button */
+/* Make the review button text larger */
 .review-button .button-content {
   font-size: 1.6rem;
 }
