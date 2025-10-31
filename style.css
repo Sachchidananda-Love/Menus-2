@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap');
 
+/*
+ * Global colour palette and shadow offset.
+ * The only colours used throughout the design come from this palette.
+ */
 :root {
-  --color-brown: #bd8d75;
-  --color-pink:  #e9d3c5;
-  --color-cream: #e8e1d4;
-  --color-green: #42633d;
+  --color-brown: #bd8d75;  /* darker side face of buttons */
+  --color-pink:  #e9d3c5;  /* page background */
+  --color-cream: #e8e1d4;  /* top faces of buttons */
+  --color-green: #42633d;  /* text and icon colour */
+  /* how far the cream layer is offset to create the 3D side */
   --shadow-offset: 12px;
 }
 
@@ -23,6 +28,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*
+ * Language toggle at the top-right. It consists of a dark capsule with
+ * two labels (ENG/FRA) and a light inner pill that slides to indicate
+ * the current language. The inner pill leaves a small border of the
+ * dark capsule visible around it.
+ */
 .language-switcher {
   position: fixed;
   top: 1rem;
@@ -63,6 +74,7 @@ body {
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle { transform: translateX(100%); }
 
+/* Main layout container */
 .container {
   max-width: 500px;
   margin: 0 auto;
@@ -72,11 +84,13 @@ body {
 
 .logo {
   display: block;
-  max-width: 80%;
-  width: 320px;
+  /* Enlarge the Palmier logo on mobile for better prominence */
+  max-width: 90%;
+  width: 380px;
   margin: 0 auto;
 }
 
+/* Social media buttons row */
 .social-row {
   display: flex;
   justify-content: center;
@@ -89,7 +103,7 @@ body {
   height: 60px;
   background-color: var(--color-brown);
   border-radius: 50%;
-  overflow: visible;
+  overflow: visible; /* allow the cream layer to extend beyond the base */
 }
 .social-btn .social-content {
   position: absolute;
@@ -102,7 +116,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
+  /* render a hard-edged brown side using a smaller offset so it looks like an edge, not a drop shadow */
+  box-shadow: 6px 6px 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
 .social-btn .social-content img {
@@ -110,11 +125,14 @@ body {
   max-height: 50%;
   object-fit: contain;
 }
+/* Press effect: slide down/right and remove brown side */
 .social-btn:active .social-content {
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  /* move by the same small offset and remove the side */
+  transform: translate(6px, 6px);
   box-shadow: none;
 }
 
+/* Grid of four square tiles */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -141,6 +159,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  /* hard-edged brown side */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -153,11 +172,13 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
 }
+/* Press state for tiles */
 .tile:active .tile-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
+/* Rectangular buttons: coffee shelf and review */
 .large-button,
 .review-button {
   position: relative;
@@ -166,9 +187,17 @@ body {
   margin: 0 1rem;
   overflow: visible;
 }
-.large-button { height: 140px; margin-top: 2rem; }
-.review-button { height: 100px; margin-top: 1.5rem; }
+/* Heights tuned for mobile */
+.large-button {
+  height: 140px;
+  margin-top: 2rem;
+}
+.review-button {
+  height: 100px;
+  margin-top: 1.5rem;
+}
 
+/* Layout specifics for each long button */
 .large-button .button-content {
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -178,6 +207,7 @@ body {
   font-size: 1.4rem;
 }
 
+/* Shared styles for button contents */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -193,6 +223,7 @@ body {
   padding: 0 1rem;
   font-size: 1.1rem;
   font-weight: 700;
+  /* brown side using box-shadow */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -202,6 +233,7 @@ body {
   font-size: 1.4rem;
   flex: 1;
   text-align: left;
+  /* restrict width to encourage wrapping on small screens */
   max-width: calc(100% - 120px);
 }
 .large-button .button-content .button-icon {
@@ -214,12 +246,14 @@ body {
   height: 40px;
   object-fit: contain;
 }
+/* Press effect for long buttons */
 .large-button:active .button-content,
 .review-button:active .button-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
+/* Responsive tweak: widen container slightly on larger screens */
 @media (min-width: 600px) {
   .container {
     max-width: 600px;
