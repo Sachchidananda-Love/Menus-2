@@ -1,96 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap');
-
-:root {
-  --color-brown: #bd8d75;
-  --color-pink:  #e9d3c5;
-  --color-cream: #e8e1d4;
-  --color-green: #42633d;
-  --shadow-offset: 12px;
-}
-
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--color-pink);
-  font-family: 'Metropolis', sans-serif;
-  color: var(--color-green);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Language toggle: reverted to earlier compact style */
-.language-switcher {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  width: 110px;
-  height: 36px;
-  background-color: var(--color-brown);
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  z-index: 10;
-  user-select: none;
-}
-.language-switcher .toggle {
-  width: calc(50% - 6px);
-  height: calc(100% - 6px);
-  background-color: var(--color-cream);
-  border-radius: 14px;
-  margin: 3px;
-  transition: transform 0.3s ease;
-}
-.language-switcher span {
-  flex: 1;
-  text-align: center;
-  z-index: 1;
-  color: var(--color-cream);
-}
-.language-switcher.eng-active .eng { color: var(--color-green); }
-.language-switcher.eng-active .fra { color: var(--color-cream); }
-.language-switcher.fra-active .eng { color: var(--color-cream); }
-.language-switcher.fra-active .fra { color: var(--color-green); }
-.language-switcher.fra-active .toggle { transform: translateX(100%); }
-
-/* Container and logo */
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding-top: 4rem;
-  padding-bottom: 2rem;
-}
-.logo {
-  display: block;
-  max-width: 80%;
-  width: 320px;
-  margin: 0 auto;
-}
-
 /* Social buttons */
-.social-row {
-  display: flex;
-  justify-content: center;
-  gap: 1.2rem;
-  margin-top: 2rem;
-}
 .social-btn {
   position: relative;
   width: 60px;
   height: 60px;
   background-color: var(--color-brown);
   border-radius: 50%;
-  /* allow cream top to extend – no clipping */
-  overflow: visible;
+  overflow: visible; /* allow the cream layer to extend */
 }
 .social-btn .social-content {
   position: absolute;
@@ -103,33 +18,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* show brown edge bottom/right by default */
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out;
+  /* Brown side rendered as a sharp shadow */
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
 .social-btn .social-content img {
   max-width: 50%;
   max-height: 50%;
   object-fit: contain;
 }
-/* pressed state */
 .social-btn:active .social-content {
-  transform: translate(0, 0);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
 }
 
-/* 2×2 menu tiles */
-.tile-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin: 2rem 1rem;
-}
+/* Square tiles */
 .tile {
   position: relative;
   background-color: var(--color-brown);
   border-radius: 30px;
-  aspect-ratio: 1 / 1;
-  /* let cream top extend over base */
+  aspect-ratio: 1/1;
   overflow: visible;
 }
 .tile-content {
@@ -145,9 +53,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  /* offset up/left by default */
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out;
+  /* Brown side rendered as sharp shadow */
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
 .tile-content img {
   max-width: 70%;
@@ -158,43 +66,20 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
 }
-/* pressed effect */
 .tile:active .tile-content {
-  transform: translate(0, 0);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
 }
 
-/* Wide buttons (coffee shelf & review) */
+/* Wide buttons (shelf & review) */
 .large-button,
 .review-button {
   position: relative;
   background-color: var(--color-brown);
   border-radius: 25px;
   margin: 0 1rem;
-  /* allow cream top to extend */
   overflow: visible;
 }
-.large-button { height: 140px; margin-top: 2rem; }
-.review-button { height: 100px; margin-top: 1.5rem; }
-
-/* Layout specifics for coffee shelf button */
-.large-button .button-content {
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-.large-button .button-content .label {
-  white-space: normal;
-  line-height: 1.2;
-  font-size: 1.4rem;
-  flex: 1;
-  text-align: left;
-  max-width: calc(100% - 120px);
-}
-.review-button .button-content {
-  justify-content: space-between;
-  font-size: 1.4rem;
-}
-
-/* shared base for long buttons */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -210,29 +95,12 @@ body {
   padding: 0 1rem;
   font-size: 1.1rem;
   font-weight: 700;
-  /* start offset so brown edge shows */
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out;
+  /* Brown side rendered as sharp shadow */
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
-.large-button .button-content .button-icon {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-}
-.review-button .button-content .button-icon-right {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-/* press effect */
 .large-button:active .button-content,
 .review-button:active .button-content {
-  transform: translate(0, 0);
-}
-
-/* Optional: widen container slightly on larger screens */
-@media (min-width: 600px) {
-  .container {
-    max-width: 600px;
-  }
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
 }
