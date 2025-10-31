@@ -1,12 +1,8 @@
-// script.js
 // Handles language toggling and dynamic text replacement.
-
 document.addEventListener('DOMContentLoaded', () => {
   const langSwitcher = document.getElementById('langSwitcher');
-  const toggleEl = document.getElementById('langToggle');
   let currentLang = 'en';
 
-  // Translation table mapping keys to their English/French equivalents.
   const translations = {
     food: { en: 'Food', fr: 'Nourriture' },
     tea: { en: 'Tea', fr: 'Thé' },
@@ -44,20 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateText();
 
-  // Set up press effects for better mobile support.
+  // Press effects (no removal on release)
   function setupPressEffects() {
     const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-button');
     pressTargets.forEach(el => {
-      // Touch events: add the 'pressed' class on touchstart and keep it until navigation.
-      el.addEventListener('touchstart', () => {
-        el.classList.add('pressed');
-      });
-      // Mouse events for desktop: add the 'pressed' class on mousedown and keep it.
-      el.addEventListener('mousedown', () => {
-        el.classList.add('pressed');
-      });
+      el.addEventListener('touchstart', () => el.classList.add('pressed'));
+      el.addEventListener('mousedown', () => el.classList.add('pressed'));
     });
   }
-
   setupPressEffects();
 });
