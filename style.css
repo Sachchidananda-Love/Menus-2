@@ -2,14 +2,12 @@
 
 /*
  * Global colour palette and shadow offset.
- * The only colours used throughout the design come from this palette.
  */
 :root {
-  --color-brown: #bd8d75;  /* darker side face of buttons */
-  --color-pink:  #e9d3c5;  /* page background */
-  --color-cream: #e8e1d4;  /* top faces of buttons */
-  --color-green: #42633d;  /* text and icon colour */
-  /* how far the cream layer is offset to create the 3D side */
+  --color-brown: #bd8d75;
+  --color-pink:  #e9d3c5;
+  --color-cream: #e8e1d4;
+  --color-green: #42633d;
   --shadow-offset: 12px;
 }
 
@@ -28,12 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*
- * Language toggle at the top-right. It consists of a dark capsule with
- * two labels (ENG/FRA) and a light inner pill that slides to indicate
- * the current language. The inner pill leaves a small border of the
- * dark capsule visible around it.
- */
+/* Language toggle at top right */
 .language-switcher {
   position: fixed;
   top: 1rem;
@@ -54,10 +47,8 @@ body {
 .language-switcher .toggle {
   position: absolute;
   top: 0;
-  /* default state: the pill sits on the left side of the switcher */
   left: 0;
   right: auto;
-  /* size of the pill: half the switcher minus the combined horizontal margin */
   width: calc(50% - 6px);
   height: calc(100% - 6px);
   background-color: var(--color-cream);
@@ -76,12 +67,11 @@ body {
 .language-switcher.fra-active .eng { color: var(--color-cream); }
 .language-switcher.fra-active .fra { color: var(--color-green); }
 .language-switcher.fra-active .toggle {
-  /* When French is active, the pill sits on the right side of the switcher. */
   left: auto;
   right: 0;
 }
 
-/* Main layout container */
+/* Main container */
 .container {
   max-width: 500px;
   margin: 0 auto;
@@ -91,13 +81,12 @@ body {
 
 .logo {
   display: block;
-  /* Enlarge the Palmier logo for better prominence */
   max-width: 90%;
   width: 380px;
   margin: 0 auto;
 }
 
-/* Social media buttons row */
+/* Social buttons row */
 .social-row {
   display: flex;
   justify-content: center;
@@ -110,7 +99,7 @@ body {
   height: 60px;
   background-color: var(--color-brown);
   border-radius: 50%;
-  overflow: visible; /* allow the cream layer to extend beyond the base */
+  overflow: visible;
 }
 .social-btn .social-content {
   position: absolute;
@@ -123,7 +112,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* medium offset gives a button-like edge without looking like a drop shadow */
   box-shadow: 8px 8px 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -132,13 +120,12 @@ body {
   max-height: 50%;
   object-fit: contain;
 }
-/* Press effect: slide down/right and remove brown side */
 .social-btn:active .social-content {
-  transform: translate(8px, 8px); /* match the offset above */
+  transform: translate(8px, 8px);
   box-shadow: none;
 }
 
-/* Grid of four square tiles */
+/* 2×2 grid of tiles */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -164,8 +151,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  /* hard-edged brown side */
+  /* smaller gap pulls label up slightly */
+  gap: 0.4rem;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
@@ -175,16 +162,17 @@ body {
   object-fit: contain;
 }
 .tile-content .label {
-  font-size: 1.5rem;
+  /* smaller font for grid buttons to improve spacing */
+  font-size: 1.3rem;
   font-weight: 700;
+  line-height: 1.2;
 }
-/* Press state for tiles */
 .tile:active .tile-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
-/* Rectangular buttons: coffee shelf and review */
+/* Large and review buttons */
 .large-button,
 .review-button {
   position: relative;
@@ -193,7 +181,6 @@ body {
   margin: 0 1rem;
   overflow: visible;
 }
-/* Heights tuned for mobile */
 .large-button {
   height: 140px;
   margin-top: 2rem;
@@ -203,17 +190,16 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Layout specifics for each long button */
+/* Layout specifics for long buttons */
 .large-button .button-content {
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 .review-button .button-content {
   justify-content: space-between;
-  font-size: 1.4rem;
 }
 
-/* Shared styles for button contents */
+/* Shared styles for long-button contents */
 .large-button .button-content,
 .review-button .button-content {
   position: absolute;
@@ -229,39 +215,44 @@ body {
   padding: 0 1rem;
   font-size: 1.1rem;
   font-weight: 700;
-  /* brown side using box-shadow */
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
+/* Text on coffee shelf button */
 .large-button .button-content .label {
   white-space: normal;
   line-height: 1.2;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   flex: 1;
   text-align: left;
-  /* restrict width to encourage wrapping on small screens */
   max-width: calc(100% - 120px);
 }
+/* Icon on coffee shelf button */
 .large-button .button-content .button-icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
 }
+/* Icon on review button */
 .review-button .button-content .button-icon-right {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
-/* Press effect for long buttons */
 .large-button:active .button-content,
 .review-button:active .button-content {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
 
-/* Responsive tweak: widen container slightly on larger screens */
+/* Widen container on larger screens */
 @media (min-width: 600px) {
   .container {
     max-width: 600px;
   }
+}
+
+/* Override text size for the review button */
+.review-button .button-content {
+  font-size: 1.6rem;
 }
