@@ -45,11 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const foodMenus = {
     en: `
-      <h2>Main Menu Items</h2>
       <h3>Breakfast Sandwich <span class="price">$12</span></h3>
       <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens.</p>
       <p><strong>Option:</strong> Add bacon or sausage! ($)</p>
-      <p class="notes">vegetarian · made without gluten · vegan</p>
 
       <h3>Smash Burger <span class="price">$14</span></h3>
       <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
@@ -63,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3>Deli Sandwich <span class="price">$16</span></h3>
       <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
 
-      <h3>Ueggie Sandwich <span class="price">$14</span></h3>
+      <h3>Veggie Sandwich <span class="price">$14</span></h3>
       <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
 
       <h3>Avocado Toast <span class="price">$17</span></h3>
@@ -76,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3>Yogurt &amp; Granola <span class="price">$14</span></h3>
       <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
 
-      <h3>VX Chia <span class="price">$14</span></h3>
+      <h3>Chia <span class="price">$14</span></h3>
       <p>strawberry and matcha chia pudding, black pepper strawberry coulis, fresh berries, and shredded coconut.</p>
 
       <h2>À La Carte (Add)</h2>
@@ -90,11 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
       </dl>
     `,
     fr: `
-      <h2>Menu Principal</h2>
-      <h3>Sandwich Petit-Déjeuner <span class="price">$12</span></h3>
+      <h3>Sandwich<br />Petit-Déjeuner <span class="price">$12</span></h3>
       <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses.</p>
       <p><strong>Option :</strong> Ajouter bacon ou saucisse! ($)</p>
-      <p class="notes">végétarien · sans gluten · végétalien</p>
 
       <h3>"Smash Burger" <span class="price">$14</span></h3>
       <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
@@ -108,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3>Sandwich Deli <span class="price">$16</span></h3>
       <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
 
-      <h3>Sandwich Uegé <span class="price">$14</span></h3>
+      <h3>Sandwich Végé <span class="price">$14</span></h3>
       <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
 
       <h3>"Toast" Avocat <span class="price">$17</span></h3>
@@ -121,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3>Yogourt &amp; Granola <span class="price">$14</span></h3>
       <p>yogourt, granola, fruits frais, compote de saison, banane brulée, sirop d'érable, et mélange de grains.</p>
 
-      <h3>Chia XV <span class="price">$14</span></h3>
+      <h3>Chia <span class="price">$14</span></h3>
       <p>pudding aux fraises et au chia matcha, coulis de fraises au poivre noir, baies fraîches et noix de coco râpée.</p>
 
       <h2>À La Carte (Ajouter)</h2>
