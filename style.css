@@ -129,6 +129,8 @@ body {
   object-fit: contain;
 }
 .social-btn:active .social-content { transform: translate(8px, 8px); box-shadow: none; }
+/* Ensure parent-level pressed state also presses inner social content */
+.social-btn.pressed .social-content { transform: translate(8px, 8px); box-shadow: none; }
 
 /* 2×2 tile grid */
 .tile-grid {
@@ -512,6 +514,9 @@ body {
 }
 .coffee-page .menu-image {
   margin: -1.6rem auto 1.2rem;
+}
+.cocktails-page .menu-image {
+  margin: -5rem auto 1.2rem;
 }
 .shelf-page {
   padding: 1rem 1rem 2rem;

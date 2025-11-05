@@ -197,17 +197,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodPage = document.getElementById('foodPage');
   const teaPage = document.getElementById('teaPage');
   const coffeePage = document.getElementById('coffeePage');
+  const cocktailsPage = document.getElementById('cocktailsPage');
   const shelfPage = document.getElementById('shelfPage');
 
   const foodBtn = document.getElementById('foodBtn');
   const teaBtn = document.getElementById('teaBtn');
   const coffeeBtn = document.getElementById('coffeeBtn');
+  const cocktailsBtn = document.getElementById('cocktailsBtn');
   const shelfBtn = document.getElementById('shelfBtn');
   const reviewBtn = document.getElementById('reviewBtn');
 
   const backFoodBtn = document.getElementById('backHome');
   const backTeaBtn = document.getElementById('backTea');
   const backCoffeeBtn = document.getElementById('backCoffee');
+  const backCocktailsBtn = document.getElementById('backCocktails');
   const backShelfBtn = document.getElementById('backShelf');
 
   function clearPressed() {
@@ -215,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function hideAllPages() {
-    [foodPage, teaPage, coffeePage, shelfPage].forEach(page => {
+    [foodPage, teaPage, coffeePage, cocktailsPage, shelfPage].forEach(page => {
       if (page) {
         page.classList.remove('show');
         page.style.display = 'none';
@@ -291,6 +294,25 @@ document.addEventListener('DOMContentLoaded', () => {
     clearPressed();
   }
 
+  function openCocktailsPage() {
+    clearPressed();
+    hideAllPages();
+    showPage(cocktailsPage);
+    homePage.style.display = 'none';
+    if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+  }
+
+  function closeCocktailsPage() {
+    if (!cocktailsPage) return;
+    cocktailsPage.classList.remove('show');
+    setTimeout(() => {
+      if (cocktailsPage) cocktailsPage.style.display = 'none';
+      homePage.style.display = 'block';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+    }, 400);
+    clearPressed();
+  }
+
   function openShelfPage() {
     clearPressed();
     hideAllPages();
@@ -318,6 +340,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (coffeeBtn) coffeeBtn.addEventListener('click', openCoffeePage);
   if (backCoffeeBtn) backCoffeeBtn.addEventListener('click', closeCoffeePage);
+
+  if (cocktailsBtn) cocktailsBtn.addEventListener('click', openCocktailsPage);
+  if (backCocktailsBtn) backCocktailsBtn.addEventListener('click', closeCocktailsPage);
 
   if (shelfBtn) shelfBtn.addEventListener('click', openShelfPage);
   if (backShelfBtn) backShelfBtn.addEventListener('click', closeShelfPage);
