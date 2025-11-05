@@ -255,6 +255,13 @@ body {
   box-shadow: none;
 }
 
+/* Ensure parent-level pressed state also presses inner content */
+.large-button.pressed .button-content,
+.large-button.review-card.pressed .button-content {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: none;
+}
+
 .large-button.pressed,
 .tile.pressed,
 .social-btn.pressed {

@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const teaBtn = document.getElementById('teaBtn');
   const coffeeBtn = document.getElementById('coffeeBtn');
   const shelfBtn = document.getElementById('shelfBtn');
+  const reviewBtn = document.getElementById('reviewBtn');
 
   const backFoodBtn = document.getElementById('backHome');
   const backTeaBtn = document.getElementById('backTea');
@@ -320,6 +321,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (shelfBtn) shelfBtn.addEventListener('click', openShelfPage);
   if (backShelfBtn) backShelfBtn.addEventListener('click', closeShelfPage);
+
+  const REVIEW_URL = 'https://www.google.com/search?sca_esv=f60ecab60e0aa489&sxsrf=AE3TifOqxmle3mCawmW8QMBLC3AjyoMUhg:1761669360921&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8q7DkqADv5wRTdBpYumF5gqCEfO6tp_bZRoBSIm_7g3w6n0sxuVia957VyiU3Lyx1bNyMTgKWSmBKbTs44Z0-tiwanV&q=Palmier+Reviews&sa=X&ved=2ahUKEwiYr-DjqceQAxXmFjQIHeLbDtkQ0bkNegQILhAD&biw=1457&bih=817&dpr=2';
+  function openReview() {
+    window.open(REVIEW_URL, '_blank', 'noopener,noreferrer');
+  }
+  if (reviewBtn) {
+    reviewBtn.addEventListener('click', openReview);
+    reviewBtn.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openReview();
+      }
+    });
+  }
 
   setLanguage('en');
 });
