@@ -532,7 +532,7 @@ body {
   display: block;
   margin: 1.5rem auto 2rem;
   border-radius: 25px;
-  touch-action: pinch-zoom;
+  touch-action: pan-y pinch-zoom;
 }
 .tea-page .menu-image {
   margin: -4rem auto 1.2rem;
@@ -541,7 +541,7 @@ body {
   margin: -5rem auto 1.2rem;
 }
 .coffee-page {
-  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
 }
 .cocktails-page .menu-image {
   margin: -5rem auto 1.2rem;
