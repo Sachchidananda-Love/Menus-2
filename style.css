@@ -538,10 +538,12 @@ body {
   margin: -4rem auto 1.2rem;
 }
 .coffee-page .menu-image {
-  margin: -5rem auto 1.2rem;
+  margin: -4rem auto calc(10rem + env(safe-area-inset-bottom, 0px));
+  width: calc(100% - 3.5rem);
+  max-width: 420px;
 }
 .coffee-page {
-  padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(8rem + env(safe-area-inset-bottom, 0px));
 }
 .cocktails-page .menu-image {
   margin: -5rem auto 1.2rem;
