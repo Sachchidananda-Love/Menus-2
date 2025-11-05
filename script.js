@@ -180,15 +180,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setupPressEffects() {
     const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-card, .back-button, .nav-btn, .shelf-card');
+
+    const addPressed = (el) => el.classList.add('pressed');
+    const removePressed = (el) => el.classList.remove('pressed');
+
     pressTargets.forEach(el => {
-      const addPressed = () => el.classList.add('pressed');
-      const removePressed = () => el.classList.remove('pressed');
-      el.addEventListener('touchstart', addPressed);
-      el.addEventListener('mousedown', addPressed);
-      el.addEventListener('touchend', removePressed);
-      el.addEventListener('touchcancel', removePressed);
-      el.addEventListener('mouseup', removePressed);
-      el.addEventListener('mouseleave', removePressed);
+      if (window.PointerEvent) {
+        el.addEventListener('pointerdown', (event) => {
+          if (event.pointerType === 'mouse' && event.button !== 0) return;
+          addPressed(el);
+        });
+        el.addEventListener('pointerup', () => removePressed(el));
+        el.addEventListener('pointercancel', () => removePressed(el));
+        el.addEventListener('pointerleave', () => removePressed(el));
+      } else {
+        el.addEventListener('touchstart', () => addPressed(el));
+        el.addEventListener('mousedown', (event) => {
+          if (event.button !== 0) return;
+          addPressed(el);
+        });
+        el.addEventListener('touchend', () => removePressed(el));
+        el.addEventListener('touchcancel', () => removePressed(el));
+        el.addEventListener('mouseup', () => removePressed(el));
+        el.addEventListener('mouseleave', () => removePressed(el));
+      }
     });
   }
   setupPressEffects();

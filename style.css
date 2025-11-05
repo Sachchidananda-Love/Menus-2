@@ -132,6 +132,15 @@ body {
 /* Ensure parent-level pressed state also presses inner social content */
 .social-btn.pressed .social-content { transform: translate(8px, 8px); box-shadow: none; }
 
+.social-btn,
+.tile,
+.large-button,
+.review-card,
+.back-button,
+.shelf-card {
+  touch-action: manipulation;
+}
+
 /* 2×2 tile grid */
 .tile-grid {
   display: grid;
