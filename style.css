@@ -534,16 +534,36 @@ body {
   border-radius: 25px;
   touch-action: pan-y pinch-zoom;
 }
+.menu-image-wrapper {
+  width: calc(100% - 2rem);
+  max-width: 460px;
+  margin: 1.5rem auto 2rem;
+  border-radius: 25px;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pinch-zoom;
+}
+.menu-image-wrapper .menu-image {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: inherit;
+  touch-action: inherit;
+}
 .tea-page .menu-image {
   margin: -4rem auto 1.2rem;
 }
-.coffee-page .menu-image {
-  margin: -4rem auto calc(10rem + env(safe-area-inset-bottom, 0px));
+.coffee-page .menu-image-wrapper {
+  margin: -4rem auto calc(14rem + env(safe-area-inset-bottom, 0px));
   width: calc(100% - 3.5rem);
   max-width: 420px;
 }
 .coffee-page {
-  padding-bottom: calc(8rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(12rem + env(safe-area-inset-bottom, 0px));
+}
+.coffee-page::after {
+  content: "";
+  display: block;
+  height: calc(8rem + env(safe-area-inset-bottom, 0px));
 }
 .cocktails-page .menu-image {
   margin: -5rem auto 1.2rem;
