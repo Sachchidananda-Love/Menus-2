@@ -540,6 +540,9 @@ body {
 .coffee-page .menu-image {
   margin: -5rem auto 1.2rem;
 }
+.coffee-page {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
 .cocktails-page .menu-image {
   margin: -5rem auto 1.2rem;
 }
