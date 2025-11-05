@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function setupPressEffects() {
-    const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-button, .back-button, .nav-btn, .shelf-card');
+    const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-card, .back-button, .nav-btn, .shelf-card');
     pressTargets.forEach(el => {
       const addPressed = () => el.classList.add('pressed');
       const removePressed = () => el.classList.remove('pressed');

@@ -21,7 +21,7 @@
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
+  white-space: normal;
   border: 0;
 }
 
@@ -179,8 +179,7 @@ body {
 }
 
 /* Large (coffee shelf) and review buttons */
-.large-button,
-.review-button {
+.large-button {
   position: relative;
   background-color: var(--color-brown);
   border-radius: 25px;
@@ -189,19 +188,15 @@ body {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
-.large-button {
   height: 160px;
   margin-top: 2rem;
 }
-.review-button {
-  height: 100px;
+.large-button.review-card {
+  height: 120px;
   margin-top: 1.5rem;
 }
 
-/* Shared styles for their content */
-.large-button .button-content,
-.review-button .button-content {
+.large-button .button-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -211,19 +206,20 @@ body {
   border-radius: 25px;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 1.2rem 1.6rem;
   font-weight: 700;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
 }
 .large-button .button-content {
   justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-}
-.review-button .button-content {
-  justify-content: space-between;
+  flex-wrap: nowrap;
   gap: 1rem;
+}
+.large-button.review-card .button-content {
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
 }
 .large-button .button-content .label {
   line-height: 1.2;
@@ -236,24 +232,29 @@ body {
   height: 120px;
   object-fit: contain;
 }
-.review-button .button-content .label {
+.large-button.review-card .button-content .label {
+  max-width: none;
+  text-align: left;
   white-space: nowrap;
-  font-size: 1.6rem;
-  flex: 1;
 }
-.review-button .button-content .button-icon-right {
-  width: 50px;
-  height: 50px;
+.large-button.review-card .button-content .button-icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
   object-fit: contain;
 }
-.large-button:active .button-content,
-.review-button:active .button-content,
-.large-button.pressed .button-content,
-.review-button.pressed .button-content {
+.large-button .button-content,
+.large-button.review-card .button-content {
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+}
+.large-button .button-content:active,
+.large-button.review-card .button-content:active,
+.large-button .button-content.pressed,
+.large-button.review-card .button-content.pressed {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
-.review-button.pressed,
+
 .large-button.pressed,
 .tile.pressed,
 .social-btn.pressed {
@@ -261,8 +262,8 @@ body {
 }
 
 /* When French is active, reduce long-button text sizes */
-.language-switcher.fra-active ~ .container .large-button .button-content .label { font-size: 1.4rem; }
-.language-switcher.fra-active ~ .container .review-button .button-content .label { font-size: 1.4rem; }
+.language-switcher.fra-active ~ .container  .large-button .button-content .label { font-size: 1.4rem; }
+.language-switcher.fra-active ~ .container .review-card .button-content .label { font-size: 1.4rem; }
 
 /* Menu page styling */
 .menu-page {
