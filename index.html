@@ -10,7 +10,7 @@
   </head>
   <body>
     <!-- Language toggle -->
-    <div id="langSwitcher" class="language-switcher eng-active">
+    <div id="langSwitcher" class="language-switcher eng-active" data-lang-switcher>
       <div id="langToggle" class="toggle"></div>
       <span class="eng">ENG</span>
       <span class="fra">FRA</span>
@@ -89,44 +89,130 @@
         </a>
       </div><!-- end of homePage -->
 
-      <!-- Food menu page (hidden by default) -->
-      <div id="foodPage" class="menu-page" style="display:none;">
-        <!-- Back button -->
+      <!-- Food menu page -->
+      <div id="foodPage" class="menu-page food-page" style="display:none;">
         <div class="back-wrapper">
           <button id="backHome" class="back-button">
-            <span class="back-arrow"></span>
-            <span class="back-label">Back</span>
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
           </button>
         </div>
-        <!-- PDF viewer with overlay and checkered strips -->
-        <div class="pdf-view">
-          <div class="checkered-strip top-strip"></div>
-          <div class="pdf-overlay">
-            <span class="welcome-fr">bienvenue au café Palmier</span>
-            <span class="merci">Merci</span>
-            <span class="merci-sub">de commander à la caisse</span>
-            <span class="thank-you">Thank you</span>
-            <span class="thank-sub">for ordering at the cash</span>
-          </div>
-          <!-- PDF object; data attribute will be set via JS -->
-          <object id="pdfViewer" type="application/pdf" data="" width="100%" height="100%"></object>
-          <div class="checkered-strip bottom-strip"></div>
-        </div>
-        <!-- Navigation bar -->
-        <div class="nav-bar">
-          <button id="prevPdf" class="nav-btn">
-            <span class="arrow-icon left"></span>
-          </button>
-          <span id="pageIndicator" class="page-indicator">1/2</span>
-          <button id="nextPdf" class="nav-btn">
-            <span class="arrow-icon right"></span>
-          </button>
+        <div class="food-content menu-card">
+          <div id="foodMenuEn" class="food-menu menu-text"></div>
+          <div id="foodMenuFr" class="food-menu menu-text" hidden></div>
         </div>
       </div><!-- end of foodPage -->
-    </div>
+
+      <!-- Tea menu page -->
+      <div id="teaPage" class="menu-page tea-page" style="display:none;">
+        <div class="back-wrapper">
+          <button id="backTea" class="back-button">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+        </div>
+        <div class="menu-lang-wrapper">
+          <div id="teaLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+            <div class="toggle"></div>
+            <span class="eng">ENG</span>
+            <span class="fra">FRA</span>
+          </div>
+        </div>
+        <img id="teaImage" class="menu-image" src="Assets/menus/tea-eng.png" alt="Tea menu (English)" />
+      </div><!-- end of teaPage -->
+
+      <!-- Coffee menu page -->
+      <div id="coffeePage" class="menu-page coffee-page" style="display:none;">
+        <div class="back-wrapper">
+          <button id="backCoffee" class="back-button">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+        </div>
+        <div class="menu-lang-wrapper">
+          <div id="coffeeLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+            <div class="toggle"></div>
+            <span class="eng">ENG</span>
+            <span class="fra">FRA</span>
+          </div>
+        </div>
+        <img id="coffeeImage" class="menu-image" src="Assets/menus/coffee-eng.png" alt="Coffee menu (English)" />
+      </div><!-- end of coffeePage -->
+
+      <!-- Coffee shelf page -->
+      <div id="shelfPage" class="menu-page shelf-page" style="display:none;">
+        <div class="back-wrapper">
+          <button id="backShelf" class="back-button">
+            <span class="back-arrow" aria-hidden="true"></span>
+            <span class="sr-only">Back</span>
+          </button>
+        </div>
+        <div class="shelf-grid">
+          <a class="shelf-card" href="https://anchoredcoffee.com/collections/all-coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/anchored.png" alt="Anchored Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://september.coffee/en-us/collections/coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/september.png" alt="September Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.quietlycoffee.com/collections/our-coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/quietrly.png" alt="Quietly Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.moduscoffee.com/shop/" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/modus.png" alt="Modus Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://monogramcoffee.com/en-us?" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/monogram.png" alt="Monogram Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://thombargen.com/collections/frontpage" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/thom-bargen.png" alt="Thom Bargen Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://javaroasters.ca/collections/coffee" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/java.png" alt="Java Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://junglelivraisoncafe.com/collections/classics" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/jungle.png" alt="Jungle Coffee" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://ethicaroasters.com/collections/shop-all" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/ethica.png" alt="Ethica Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://yamabikocoffeeroasters.com/collections/all" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/yamabiko.png" alt="Yamabiko Coffee Roasters" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://cafepista.com/en/collections/sacs" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/pista.png" alt="Café Pista" />
+            </div>
+          </a>
+          <a class="shelf-card" href="https://www.trafficcoffee.com/" target="_blank" rel="noopener noreferrer">
+            <div class="shelf-card-content">
+              <img src="Assets/coffee-shelf/traffic.png" alt="Traffic Coffee" />
+            </div>
+          </a>
+        </div>
+      </div><!-- end of shelfPage -->
+    </div><!-- end of container -->
 
     <!-- JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>
-
