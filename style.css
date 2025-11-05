@@ -516,7 +516,6 @@ body {
   width: 110px;
   margin: 0;
   background-color: var(--color-brown);
-  box-shadow: 4px 4px 0 0 rgba(189, 141, 117, 0.8);
 }
 .language-switcher.inline-switcher .toggle {
   transition: transform 0.3s ease;
