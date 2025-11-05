@@ -345,24 +345,31 @@ body {
   position: relative;
   background-color: var(--color-brown);
   border: none;
-  border-radius: 25px;
-  padding: 0.6rem 1rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  padding: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   overflow: visible;
-  font-size: 1.2rem;
   color: var(--color-green);
-  font-weight: 700;
+  /* Match social button spacing */
+  --shadow-offset: 8px;
 }
 .back-button .back-arrow {
-  width: 12px;
-  height: 12px;
-  margin-right: 0.6rem;
+  width: 16px;
+  height: 16px;
+  margin: 0;
   border-style: solid;
   border-width: 3px 3px 0 0;
   border-color: var(--color-green);
-  transform: rotate(-135deg);
+  display: block;
+  transform-origin: center;
+  /* Match top surface offset so arrow appears centered in unpressed state */
+  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset))) rotate(-135deg);
+  transition: transform 0.08s ease-out;
 }
 .back-button::before {
   content: "";
@@ -370,7 +377,7 @@ body {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: var(--color-cream);
-  border-radius: 25px;
+  border-radius: 50%;
   transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
@@ -379,6 +386,11 @@ body {
 .back-button.pressed::before {
   transform: translate(0, 0);
   box-shadow: none;
+}
+/* Move arrow with the top surface on press */
+.back-button:active .back-arrow,
+.back-button.pressed .back-arrow {
+  transform: translate(0, 0) rotate(-135deg);
 }
 
 /* PDF viewer with checkered strips */
