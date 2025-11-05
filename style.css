@@ -553,9 +553,9 @@ body {
   margin: -4rem auto 1.2rem;
 }
 .coffee-page .menu-image-wrapper {
-  margin: -4rem auto calc(9rem + env(safe-area-inset-bottom, 0px));
-  width: calc(100% - 1.6rem);
-  max-width: 480px;
+  margin: -4rem 0 calc(9rem + env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  max-width: none;
 }
 .coffee-page {
   padding-bottom: calc(9rem + env(safe-area-inset-bottom, 0px));
