@@ -553,17 +553,17 @@ body {
   margin: -4rem auto 1.2rem;
 }
 .coffee-page .menu-image-wrapper {
-  margin: -4rem auto calc(14rem + env(safe-area-inset-bottom, 0px));
-  width: calc(100% - 3.5rem);
-  max-width: 420px;
+  margin: -4rem auto calc(9rem + env(safe-area-inset-bottom, 0px));
+  width: calc(100% - 1.6rem);
+  max-width: 480px;
 }
 .coffee-page {
-  padding-bottom: calc(12rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(9rem + env(safe-area-inset-bottom, 0px));
 }
 .coffee-page::after {
   content: "";
   display: block;
-  height: calc(8rem + env(safe-area-inset-bottom, 0px));
+  height: calc(5rem + env(safe-area-inset-bottom, 0px));
 }
 .cocktails-page .menu-image {
   margin: -5rem auto 1.2rem;
