@@ -236,10 +236,18 @@ document.addEventListener('DOMContentLoaded', () => {
           registerPressed(el);
         });
         el.addEventListener('pointerup', (event) => {
-          const delay = event.pointerType === 'mouse' ? DEFAULT_PRESS_RELEASE_DELAY : TRANSITION_PRESS_RELEASE_DELAY;
+          const delay = event.pointerType === 'mouse'
+            ? DEFAULT_PRESS_RELEASE_DELAY
+            : TRANSITION_PRESS_RELEASE_DELAY;
           schedulePressedRelease(el, delay);
         });
-        el.addEventListener('pointercancel', () => forcePressedRelease(el));
+        el.addEventListener('pointercancel', (event) => {
+          if (event.pointerType === 'mouse') {
+            forcePressedRelease(el);
+          } else {
+            schedulePressedRelease(el, TRANSITION_PRESS_RELEASE_DELAY);
+          }
+        });
         el.addEventListener('pointerleave', (event) => {
           if (event.pointerType === 'mouse') {
             forcePressedRelease(el);
