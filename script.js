@@ -174,31 +174,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const pressReleaseTimers = new Map();
+  const DEFAULT_PRESS_RELEASE_DELAY = 240;
+  const TRANSITION_PRESS_RELEASE_DELAY = 700;
+  const PAGE_TRANSITION_DELAY = 180;
+
+  function registerPressed(el) {
+    if (!el) return;
+    clearTimeout(pressReleaseTimers.get(el));
+    el.classList.add('pressed');
+  }
+
+  function schedulePressedRelease(el, delay = DEFAULT_PRESS_RELEASE_DELAY) {
+    if (!el) return;
+    clearTimeout(pressReleaseTimers.get(el));
+    const timer = window.setTimeout(() => {
+      el.classList.remove('pressed');
+      pressReleaseTimers.delete(el);
+    }, delay);
+    pressReleaseTimers.set(el, timer);
+  }
+
+  function forcePressedRelease(el) {
+    if (!el) return;
+    clearTimeout(pressReleaseTimers.get(el));
+    pressReleaseTimers.delete(el);
+    el.classList.remove('pressed');
+  }
+
+  function holdPressedDuringTransition(el, delay = TRANSITION_PRESS_RELEASE_DELAY) {
+    if (!el) return;
+    schedulePressedRelease(el, delay);
+  }
+
+  function runAfterPressVisual(callback, delay = PAGE_TRANSITION_DELAY) {
+    window.setTimeout(callback, delay);
+  }
+
   function setupPressEffects() {
     const pressTargets = document.querySelectorAll('.social-btn, .tile, .large-button, .review-card, .back-button, .nav-btn, .shelf-card');
-
-    const addPressed = (el) => el.classList.add('pressed');
-    const removePressed = (el) => el.classList.remove('pressed');
 
     pressTargets.forEach(el => {
       if (window.PointerEvent) {
         el.addEventListener('pointerdown', (event) => {
           if (event.pointerType === 'mouse' && event.button !== 0) return;
-          addPressed(el);
+          registerPressed(el);
         });
-        el.addEventListener('pointerup', () => removePressed(el));
-        el.addEventListener('pointercancel', () => removePressed(el));
-        el.addEventListener('pointerleave', () => removePressed(el));
+        el.addEventListener('pointerup', () => schedulePressedRelease(el));
+        el.addEventListener('pointercancel', () => forcePressedRelease(el));
+        el.addEventListener('pointerleave', () => forcePressedRelease(el));
       } else {
-        el.addEventListener('touchstart', () => addPressed(el));
+        el.addEventListener('touchstart', () => registerPressed(el));
         el.addEventListener('mousedown', (event) => {
           if (event.button !== 0) return;
-          addPressed(el);
+          registerPressed(el);
         });
-        el.addEventListener('touchend', () => removePressed(el));
-        el.addEventListener('touchcancel', () => removePressed(el));
-        el.addEventListener('mouseup', () => removePressed(el));
-        el.addEventListener('mouseleave', () => removePressed(el));
+        el.addEventListener('touchend', () => schedulePressedRelease(el));
+        el.addEventListener('touchcancel', () => forcePressedRelease(el));
+        el.addEventListener('mouseup', () => schedulePressedRelease(el));
+        el.addEventListener('mouseleave', () => forcePressedRelease(el));
       }
     });
   }
@@ -225,6 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const backShelfBtn = document.getElementById('backShelf');
 
   function clearPressed() {
+    pressReleaseTimers.forEach(timer => clearTimeout(timer));
+    pressReleaseTimers.clear();
     document.querySelectorAll('.pressed').forEach(el => el.classList.remove('pressed'));
   }
 
@@ -243,104 +279,140 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => page.classList.add('show'));
   }
 
-  function openFoodPage() {
-    clearPressed();
-    hideAllPages();
-    setFoodMenu();
-    showPage(foodPage);
-    homePage.style.display = 'none';
-    if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+  function prepareTriggerForTransition(event) {
+    const trigger = event?.currentTarget;
+    if (trigger) {
+      if (!trigger.classList.contains('pressed')) {
+        registerPressed(trigger);
+      }
+      holdPressedDuringTransition(trigger);
+    }
+    return trigger;
   }
 
-  function closeFoodPage() {
-    if (!foodPage) return;
-    foodPage.classList.remove('show');
-    setTimeout(() => {
-      if (foodPage) foodPage.style.display = 'none';
-      homePage.style.display = 'block';
+  function openFoodPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      setFoodMenu();
+      showPage(foodPage);
+      homePage.style.display = 'none';
       if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-    }, 400);
-    clearPressed();
+    });
   }
 
-  function openTeaPage() {
-    clearPressed();
-    hideAllPages();
-    setTeaImage();
-    showPage(teaPage);
-    homePage.style.display = 'none';
-    if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
-    syncLanguageSwitchers();
+  function closeFoodPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!foodPage) return;
+      foodPage.classList.remove('show');
+      setTimeout(() => {
+        if (foodPage) foodPage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        clearPressed();
+      }, 400);
+    });
   }
 
-  function closeTeaPage() {
-    if (!teaPage) return;
-    teaPage.classList.remove('show');
-    setTimeout(() => {
-      if (teaPage) teaPage.style.display = 'none';
-      homePage.style.display = 'block';
+  function openTeaPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      setTeaImage();
+      showPage(teaPage);
+      homePage.style.display = 'none';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+      syncLanguageSwitchers();
+    });
+  }
+
+  function closeTeaPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!teaPage) return;
+      teaPage.classList.remove('show');
+      setTimeout(() => {
+        if (teaPage) teaPage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        clearPressed();
+      }, 400);
+    });
+  }
+
+  function openCoffeePage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      setCoffeeImage();
+      showPage(coffeePage);
+      homePage.style.display = 'none';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+      syncLanguageSwitchers();
+    });
+  }
+
+  function closeCoffeePage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!coffeePage) return;
+      coffeePage.classList.remove('show');
+      setTimeout(() => {
+        if (coffeePage) coffeePage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        clearPressed();
+      }, 400);
+    });
+  }
+
+  function openCocktailsPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      showPage(cocktailsPage);
+      homePage.style.display = 'none';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+    });
+  }
+
+  function closeCocktailsPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!cocktailsPage) return;
+      cocktailsPage.classList.remove('show');
+      setTimeout(() => {
+        if (cocktailsPage) cocktailsPage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        clearPressed();
+      }, 400);
+    });
+  }
+
+  function openShelfPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      hideAllPages();
+      showPage(shelfPage);
+      homePage.style.display = 'none';
       if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-    }, 400);
-    clearPressed();
+    });
   }
 
-  function openCoffeePage() {
-    clearPressed();
-    hideAllPages();
-    setCoffeeImage();
-    showPage(coffeePage);
-    homePage.style.display = 'none';
-    if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
-    syncLanguageSwitchers();
-  }
-
-  function closeCoffeePage() {
-    if (!coffeePage) return;
-    coffeePage.classList.remove('show');
-    setTimeout(() => {
-      if (coffeePage) coffeePage.style.display = 'none';
-      homePage.style.display = 'block';
-      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-    }, 400);
-    clearPressed();
-  }
-
-  function openCocktailsPage() {
-    clearPressed();
-    hideAllPages();
-    showPage(cocktailsPage);
-    homePage.style.display = 'none';
-    if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
-  }
-
-  function closeCocktailsPage() {
-    if (!cocktailsPage) return;
-    cocktailsPage.classList.remove('show');
-    setTimeout(() => {
-      if (cocktailsPage) cocktailsPage.style.display = 'none';
-      homePage.style.display = 'block';
-      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-    }, 400);
-    clearPressed();
-  }
-
-  function openShelfPage() {
-    clearPressed();
-    hideAllPages();
-    showPage(shelfPage);
-    homePage.style.display = 'none';
-    if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-  }
-
-  function closeShelfPage() {
-    if (!shelfPage) return;
-    shelfPage.classList.remove('show');
-    setTimeout(() => {
-      if (shelfPage) shelfPage.style.display = 'none';
-      homePage.style.display = 'block';
-      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
-    }, 400);
-    clearPressed();
+  function closeShelfPage(event) {
+    prepareTriggerForTransition(event);
+    runAfterPressVisual(() => {
+      if (!shelfPage) return;
+      shelfPage.classList.remove('show');
+      setTimeout(() => {
+        if (shelfPage) shelfPage.style.display = 'none';
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        clearPressed();
+      }, 400);
+    });
   }
 
   if (foodBtn) foodBtn.addEventListener('click', openFoodPage);
