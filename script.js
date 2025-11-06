@@ -175,9 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const pressReleaseTimers = new Map();
-  const DEFAULT_PRESS_RELEASE_DELAY = 240;
-  const TRANSITION_PRESS_RELEASE_DELAY = 700;
-  const PAGE_TRANSITION_DELAY = 180;
+  const DEFAULT_PRESS_RELEASE_DELAY = 220;
+  const TRANSITION_PRESS_RELEASE_DELAY = 600;
+  const PAGE_TRANSITION_DELAY = 110;
 
   function registerPressed(el) {
     if (!el) return;
@@ -208,7 +208,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function runAfterPressVisual(callback, delay = PAGE_TRANSITION_DELAY) {
-    window.setTimeout(callback, delay);
+    if (delay <= 0) {
+      callback();
+      return;
+    }
+
+    const start = performance.now();
+    function tick() {
+      const elapsed = performance.now() - start;
+      if (elapsed >= delay) {
+        callback();
+      } else {
+        window.requestAnimationFrame(tick);
+      }
+    }
+
+    window.requestAnimationFrame(tick);
   }
 
   function setupPressEffects() {
