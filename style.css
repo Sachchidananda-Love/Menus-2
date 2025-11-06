@@ -301,14 +301,13 @@ body {
 }
 .menu-page.show { transform: translateX(0); }
 
-.menu-card {
-  margin: 4.5rem 1.2rem 2rem;
-  padding: 1.5rem;
-  background: var(--color-cream);
-  border-radius: 25px;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
-  max-height: calc(100vh - 7rem);
-  overflow-y: auto;
+.food-content {
+  margin: 0.5rem 1.5rem 2.5rem;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+.food-content .menu-text {
+  max-width: 720px;
+  margin: 0 auto;
 }
 .menu-text {
   font-family: 'Metropolis', sans-serif;
@@ -321,6 +320,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 1.5rem 0 0.5rem;
+  color: var(--color-brown);
 }
 .menu-text h2:first-of-type { margin-top: 0; }
 .menu-text h3 {
@@ -329,6 +329,7 @@ body {
   letter-spacing: 0.06em;
   margin: 1.2rem 0 0.3rem;
   position: relative;
+  color: var(--color-brown);
 }
 .menu-text h3::after {
   content: "";
@@ -339,6 +340,7 @@ body {
 .menu-text .price {
   float: right;
   font-weight: 700;
+  color: var(--color-brown);
 }
 .menu-text .notes {
   font-style: italic;
