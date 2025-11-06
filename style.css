@@ -308,6 +308,7 @@ body {
 .food-content .menu-text {
   max-width: 720px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 .menu-text {
   font-family: 'Metropolis', sans-serif;
