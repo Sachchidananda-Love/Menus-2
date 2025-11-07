@@ -174,6 +174,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const TOUCH_HANDLER_DELAY = 400;
+  let lastTouchTime = 0;
+
+  function attachTapHandler(element, handler) {
+    if (!element || typeof handler !== 'function') return;
+
+    element.addEventListener('click', (event) => {
+      if (Date.now() - lastTouchTime < TOUCH_HANDLER_DELAY) return;
+      handler(event);
+    });
+
+    element.addEventListener('touchend', (event) => {
+      if (event.touches && event.touches.length > 0) return;
+      lastTouchTime = Date.now();
+      handler(event);
+      event.preventDefault();
+    }, { passive: false });
+  }
+
   const pressReleaseTimers = new Map();
   const activeTransitionTriggers = new Set();
   const DEFAULT_PRESS_RELEASE_DELAY = 220;
@@ -500,27 +519,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (foodBtn) foodBtn.addEventListener('click', openFoodPage);
-  if (backFoodBtn) backFoodBtn.addEventListener('click', closeFoodPage);
+  attachTapHandler(foodBtn, openFoodPage);
+  attachTapHandler(backFoodBtn, closeFoodPage);
 
-  if (teaBtn) teaBtn.addEventListener('click', openTeaPage);
-  if (backTeaBtn) backTeaBtn.addEventListener('click', closeTeaPage);
+  attachTapHandler(teaBtn, openTeaPage);
+  attachTapHandler(backTeaBtn, closeTeaPage);
 
-  if (coffeeBtn) coffeeBtn.addEventListener('click', openCoffeePage);
-  if (backCoffeeBtn) backCoffeeBtn.addEventListener('click', closeCoffeePage);
+  attachTapHandler(coffeeBtn, openCoffeePage);
+  attachTapHandler(backCoffeeBtn, closeCoffeePage);
 
-  if (cocktailsBtn) cocktailsBtn.addEventListener('click', openCocktailsPage);
-  if (backCocktailsBtn) backCocktailsBtn.addEventListener('click', closeCocktailsPage);
+  attachTapHandler(cocktailsBtn, openCocktailsPage);
+  attachTapHandler(backCocktailsBtn, closeCocktailsPage);
 
-  if (shelfBtn) shelfBtn.addEventListener('click', openShelfPage);
-  if (backShelfBtn) backShelfBtn.addEventListener('click', closeShelfPage);
+  attachTapHandler(shelfBtn, openShelfPage);
+  attachTapHandler(backShelfBtn, closeShelfPage);
 
   const REVIEW_URL = 'https://www.google.com/search?sca_esv=f60ecab60e0aa489&sxsrf=AE3TifOqxmle3mCawmW8QMBLC3AjyoMUhg:1761669360921&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8q7DkqADv5wRTdBpYumF5gqCEfO6tp_bZRoBSIm_7g3w6n0sxuVia957VyiU3Lyx1bNyMTgKWSmBKbTs44Z0-tiwanV&q=Palmier+Reviews&sa=X&ved=2ahUKEwiYr-DjqceQAxXmFjQIHeLbDtkQ0bkNegQILhAD&biw=1457&bih=817&dpr=2';
   function openReview() {
     window.open(REVIEW_URL, '_blank', 'noopener,noreferrer');
   }
   if (reviewBtn) {
-    reviewBtn.addEventListener('click', openReview);
+    attachTapHandler(reviewBtn, openReview);
     reviewBtn.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
