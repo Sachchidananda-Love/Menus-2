@@ -175,22 +175,67 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const TOUCH_HANDLER_DELAY = 400;
+  const TOUCH_MOVE_TOLERANCE = 12;
   let lastTouchTime = 0;
+
+  function getTouchById(touchList, id) {
+    if (!touchList) return null;
+    for (let i = 0; i < touchList.length; i += 1) {
+      if (touchList[i].identifier === id) {
+        return touchList[i];
+      }
+    }
+    return null;
+  }
 
   function attachTapHandler(element, handler) {
     if (!element || typeof handler !== 'function') return;
+
+    let touchState = null;
 
     element.addEventListener('click', (event) => {
       if (Date.now() - lastTouchTime < TOUCH_HANDLER_DELAY) return;
       handler(event);
     });
 
+    element.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
+      touchState = {
+        id: touch.identifier,
+        startX: touch.clientX,
+        startY: touch.clientY,
+        moved: false
+      };
+    }, { passive: true });
+
+    element.addEventListener('touchmove', (event) => {
+      if (!touchState) return;
+      const touch = getTouchById(event.touches, touchState.id);
+      if (!touch) return;
+      const deltaX = Math.abs(touch.clientX - touchState.startX);
+      const deltaY = Math.abs(touch.clientY - touchState.startY);
+      if (deltaX > TOUCH_MOVE_TOLERANCE || deltaY > TOUCH_MOVE_TOLERANCE) {
+        touchState.moved = true;
+      }
+    }, { passive: true });
+
     element.addEventListener('touchend', (event) => {
       if (event.touches && event.touches.length > 0) return;
+      if (!touchState) return;
+      const touch = getTouchById(event.changedTouches, touchState.id);
+      if (!touch) return;
+      const moved = touchState.moved;
+      touchState = null;
       lastTouchTime = Date.now();
+      if (moved) return;
       handler(event);
       event.preventDefault();
     }, { passive: false });
+
+    element.addEventListener('touchcancel', () => {
+      touchState = null;
+    });
   }
 
   const pressReleaseTimers = new Map();
