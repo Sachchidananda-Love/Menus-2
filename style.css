@@ -102,12 +102,24 @@ body {
   position: relative;
   width: 60px;
   height: 60px;
-  background-color: var(--color-brown);
+  background-color: transparent;
+  --shadow-offset: 8px;
   border-radius: 50%;
   overflow: visible;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+}
+.social-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--color-brown);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transition: background-color 0.2s ease-out;
+  pointer-events: none;
+  z-index: 0;
 }
 .social-btn .social-content {
   position: absolute;
@@ -120,8 +132,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 8px 8px 0 0 var(--color-brown);
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  box-shadow: none;
+  transition: transform 0.08s ease-out;
+  z-index: 1;
 }
 .social-btn .social-content img {
   max-width: 50%;
@@ -150,11 +163,22 @@ body {
 }
 .tile {
   position: relative;
-  background-color: var(--color-brown);
+  background-color: transparent;
   border-radius: 30px;
   aspect-ratio: 1 / 1;
   overflow: visible;
   cursor: pointer;
+}
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--color-brown);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transition: background-color 0.2s ease-out;
+  pointer-events: none;
+  z-index: 0;
 }
 .tile-content {
   position: absolute;
@@ -170,8 +194,9 @@ body {
   justify-content: center;
   padding: 1rem 0;
   gap: 0.4rem;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  box-shadow: none;
+  transition: transform 0.08s ease-out;
+  z-index: 1;
 }
 .tile-content img {
   max-width: 70%;
@@ -192,7 +217,7 @@ body {
 /* Large (coffee shelf) and review buttons */
 .large-button {
   position: relative;
-  background-color: var(--color-brown);
+  background-color: transparent;
   border-radius: 25px;
   margin: 0 1rem;
   overflow: visible;
@@ -201,6 +226,17 @@ body {
   color: inherit;
   height: 160px;
   margin-top: 2rem;
+}
+.large-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--color-brown);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transition: background-color 0.2s ease-out;
+  pointer-events: none;
+  z-index: 0;
 }
 .large-button.review-card {
   height: 120px;
@@ -219,8 +255,9 @@ body {
   align-items: center;
   padding: 1.2rem 1.6rem;
   font-weight: 700;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  box-shadow: none;
+  transition: transform 0.08s ease-out;
+  z-index: 1;
 }
 .large-button .button-content {
   justify-content: flex-start;
@@ -256,7 +293,7 @@ body {
 }
 .large-button .button-content,
 .large-button.review-card .button-content {
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  transition: transform 0.08s ease-out;
 }
 .large-button .button-content:active,
 .large-button.review-card .button-content:active,
@@ -273,9 +310,9 @@ body {
   box-shadow: none;
 }
 
-.large-button.pressed,
-.tile.pressed,
-.social-btn.pressed {
+.large-button.pressed::after,
+.tile.pressed::after,
+.social-btn.pressed::after {
   background-color: var(--color-pink);
 }
 
@@ -396,7 +433,7 @@ body {
   background: var(--color-cream);
   border-radius: 50%;
   transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  transition: transform 0.08s ease-out, box-shadow 0s linear 0.08s;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
 }
 .back-button:active::before,
@@ -472,7 +509,7 @@ body {
   background: var(--color-cream);
   border-radius: 50%;
   box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  transition: transform 0.08s ease-out, box-shadow 0s linear 0.08s;
 }
 .nav-btn:active::before,
 .nav-btn.pressed::before {
@@ -584,12 +621,23 @@ body {
 .shelf-card {
   display: block;
   position: relative;
-  background-color: var(--color-brown);
+  background-color: transparent;
   border-radius: 26px;
   aspect-ratio: 1 / 1;
   overflow: visible;
   text-decoration: none;
   color: inherit;
+}
+.shelf-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--color-brown);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transition: background-color 0.2s ease-out;
+  pointer-events: none;
+  z-index: 0;
 }
 .shelf-card-content {
   position: absolute;
@@ -600,8 +648,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.2rem;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  box-shadow: none;
+  transition: transform 0.08s ease-out;
+  z-index: 1;
 }
 .shelf-card-content img {
   max-width: 100%;
@@ -613,6 +662,6 @@ body {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
   box-shadow: none;
 }
-.shelf-card.pressed {
+.shelf-card.pressed::after {
   background-color: var(--color-pink);
 }

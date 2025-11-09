@@ -243,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const DEFAULT_PRESS_RELEASE_DELAY = 220;
   const TRANSITION_PRESS_RELEASE_DELAY = 600;
   const PAGE_TRANSITION_DELAY = 110;
+  const pointerStates = new Map();
 
   function registerPressed(el) {
     if (!el) return;
@@ -304,9 +305,34 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.PointerEvent) {
         el.addEventListener('pointerdown', (event) => {
           if (event.pointerType === 'mouse' && event.button !== 0) return;
+          if (event.pointerType !== 'mouse') {
+            pointerStates.set(event.pointerId, {
+              el,
+              startX: event.clientX,
+              startY: event.clientY,
+              moved: false
+            });
+          }
           registerPressed(el);
         });
+        el.addEventListener('pointermove', (event) => {
+          if (event.pointerType === 'mouse') return;
+          const state = pointerStates.get(event.pointerId);
+          if (!state) return;
+          const deltaX = Math.abs(event.clientX - state.startX);
+          const deltaY = Math.abs(event.clientY - state.startY);
+          if (deltaX > TOUCH_MOVE_TOLERANCE || deltaY > TOUCH_MOVE_TOLERANCE) {
+            state.moved = true;
+          }
+        });
         el.addEventListener('pointerup', (event) => {
+          const state = pointerStates.get(event.pointerId);
+          const moved = state?.moved;
+          pointerStates.delete(event.pointerId);
+          if (moved) {
+            schedulePressedRelease(el, TRANSITION_PRESS_RELEASE_DELAY);
+            return;
+          }
           if (event.pointerType !== 'mouse' && activeTransitionTriggers.has(el)) {
             return;
           }
@@ -314,38 +340,77 @@ document.addEventListener('DOMContentLoaded', () => {
           schedulePressedRelease(el, delay);
         });
         el.addEventListener('pointercancel', (event) => {
+          const state = pointerStates.get(event.pointerId);
+          const moved = state?.moved;
+          pointerStates.delete(event.pointerId);
           if (event.pointerType !== 'mouse' && activeTransitionTriggers.has(el)) {
             return;
           }
-          if (event.pointerType === 'mouse') {
-            forcePressedRelease(el);
+          if (moved || event.pointerType !== 'mouse') {
+            const delay = moved ? TRANSITION_PRESS_RELEASE_DELAY : DEFAULT_PRESS_RELEASE_DELAY;
+            schedulePressedRelease(el, delay);
           } else {
-            schedulePressedRelease(el, DEFAULT_PRESS_RELEASE_DELAY);
+            forcePressedRelease(el);
           }
         });
         el.addEventListener('pointerleave', (event) => {
+          const state = pointerStates.get(event.pointerId);
+          const moved = state?.moved;
+          pointerStates.delete(event.pointerId);
           if (event.pointerType !== 'mouse' && activeTransitionTriggers.has(el)) {
             return;
           }
           if (event.pointerType === 'mouse') {
             forcePressedRelease(el);
           } else {
-            schedulePressedRelease(el, DEFAULT_PRESS_RELEASE_DELAY);
+            schedulePressedRelease(el);
           }
         });
       } else {
-        el.addEventListener('touchstart', () => registerPressed(el));
+        let legacyTouchState = null;
+        el.addEventListener('touchstart', (event) => {
+          const touch = event.changedTouches?.[0];
+          if (!touch) return;
+          legacyTouchState = {
+            startX: touch.clientX,
+            startY: touch.clientY,
+            moved: false
+          };
+          registerPressed(el);
+        });
+        el.addEventListener('touchmove', (event) => {
+          if (!legacyTouchState) return;
+          const touch = event.changedTouches?.[0];
+          if (!touch) return;
+          const deltaX = Math.abs(touch.clientX - legacyTouchState.startX);
+          const deltaY = Math.abs(touch.clientY - legacyTouchState.startY);
+          if (deltaX > TOUCH_MOVE_TOLERANCE || deltaY > TOUCH_MOVE_TOLERANCE) {
+            legacyTouchState.moved = true;
+          }
+        });
         el.addEventListener('mousedown', (event) => {
           if (event.button !== 0) return;
           registerPressed(el);
         });
         el.addEventListener('touchend', () => {
+          const moved = legacyTouchState?.moved;
+          legacyTouchState = null;
+          if (moved) {
+            schedulePressedRelease(el, TRANSITION_PRESS_RELEASE_DELAY);
+            return;
+          }
           if (activeTransitionTriggers.has(el)) return;
           schedulePressedRelease(el);
         });
         el.addEventListener('touchcancel', () => {
+          const moved = legacyTouchState?.moved;
+          legacyTouchState = null;
           if (activeTransitionTriggers.has(el)) return;
-          forcePressedRelease(el);
+          if (moved) {
+            schedulePressedRelease(el, TRANSITION_PRESS_RELEASE_DELAY);
+          } else {
+            forcePressedRelease(el);
+          }
         });
         el.addEventListener('mouseup', () => {
           if (activeTransitionTriggers.has(el)) return;
