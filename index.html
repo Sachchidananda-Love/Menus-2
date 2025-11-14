@@ -91,11 +91,25 @@
 
       <!-- Food menu page -->
       <div id="foodPage" class="menu-page food-page" style="display:none;">
-        <div class="back-wrapper">
-          <button id="backHome" class="back-button">
+        <div class="page-header food-header">
+          <button id="backHome" class="back-button compact">
             <span class="back-arrow" aria-hidden="true"></span>
             <span class="sr-only">Back</span>
           </button>
+          <div class="section-dropdown">
+            <button id="foodSectionToggle" type="button" class="section-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              <span id="foodSectionLabel">Toast</span>
+              <span class="chevron" aria-hidden="true"></span>
+            </button>
+            <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
+          </div>
+          <div class="food-header-lang">
+            <div id="foodLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
         </div>
         <div class="food-content">
           <div id="foodMenuEn" class="food-menu menu-text"></div>
@@ -105,17 +119,17 @@
 
       <!-- Tea menu page -->
       <div id="teaPage" class="menu-page tea-page" style="display:none;">
-        <div class="back-wrapper">
-          <button id="backTea" class="back-button">
+        <div class="page-header">
+          <button id="backTea" class="back-button compact">
             <span class="back-arrow" aria-hidden="true"></span>
             <span class="sr-only">Back</span>
           </button>
-        </div>
-        <div class="menu-lang-wrapper">
-          <div id="teaLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
-            <div class="toggle"></div>
-            <span class="eng">ENG</span>
-            <span class="fra">FRA</span>
+          <div class="page-header-lang">
+            <div id="teaLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
           </div>
         </div>
         <img id="teaImage" class="menu-image" src="Assets/menus/tea-eng.png" alt="Tea menu (English)" />
@@ -123,17 +137,17 @@
 
       <!-- Coffee menu page -->
       <div id="coffeePage" class="menu-page coffee-page" style="display:none;">
-        <div class="back-wrapper">
-          <button id="backCoffee" class="back-button">
+        <div class="page-header">
+          <button id="backCoffee" class="back-button compact">
             <span class="back-arrow" aria-hidden="true"></span>
             <span class="sr-only">Back</span>
           </button>
-        </div>
-        <div class="menu-lang-wrapper">
-          <div id="coffeeLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
-            <div class="toggle"></div>
-            <span class="eng">ENG</span>
-            <span class="fra">FRA</span>
+          <div class="page-header-lang">
+            <div id="coffeeLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
           </div>
         </div>
         <div class="menu-image-wrapper">
@@ -143,8 +157,8 @@
 
       <!-- Cocktails menu page -->
       <div id="cocktailsPage" class="menu-page cocktails-page" style="display:none;">
-        <div class="back-wrapper">
-          <button id="backCocktails" class="back-button">
+        <div class="page-header">
+          <button id="backCocktails" class="back-button compact">
             <span class="back-arrow" aria-hidden="true"></span>
             <span class="sr-only">Back</span>
           </button>
@@ -154,11 +168,18 @@
 
       <!-- Coffee shelf page -->
       <div id="shelfPage" class="menu-page shelf-page" style="display:none;">
-        <div class="back-wrapper">
-          <button id="backShelf" class="back-button">
+        <div class="page-header">
+          <button id="backShelf" class="back-button compact">
             <span class="back-arrow" aria-hidden="true"></span>
             <span class="sr-only">Back</span>
           </button>
+          <div class="page-header-lang">
+            <div id="shelfLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+              <div class="toggle"></div>
+              <span class="eng">ENG</span>
+              <span class="fra">FRA</span>
+            </div>
+          </div>
         </div>
         <div class="shelf-grid">
           <a class="shelf-card" href="https://anchoredcoffee.com/collections/all-coffee" target="_blank" rel="noopener noreferrer">

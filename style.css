@@ -40,16 +40,16 @@ body {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  width: 110px;
-  height: 36px;
+  width: 92px;
+  height: 32px;
   background-color: var(--color-brown);
-  border-radius: 18px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   user-select: none;
   z-index: 10;
 }
@@ -60,7 +60,7 @@ body {
   width: calc(50% - 4px);
   height: calc(100% - 8px);
   background-color: var(--color-cream);
-  border-radius: 14px;
+  border-radius: 12px;
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
@@ -338,6 +338,123 @@ body {
 }
 .menu-page.show { transform: translateX(0); }
 
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem 0.5rem;
+  background: var(--color-pink);
+}
+.food-header {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  padding-bottom: 1rem;
+}
+.shelf-page .page-header {
+  padding-bottom: 1rem;
+}
+.food-header-lang,
+.page-header-lang {
+  margin-left: auto;
+}
+.page-header .language-switcher {
+  position: static;
+  width: 92px;
+  height: 32px;
+  font-size: 0.75rem;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.page-header .language-switcher .toggle {
+  border-radius: 12px;
+}
+.back-button.compact {
+  width: 42px;
+  height: 42px;
+}
+.food-header .section-dropdown {
+  position: relative;
+  flex: 1;
+  max-width: 220px;
+}
+.food-header .section-dropdown-toggle {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-cream);
+  color: var(--color-green);
+  font-family: 'Metropolis', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.55rem 2.5rem 0.55rem 1.2rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  position: relative;
+}
+.food-header .section-dropdown-toggle .chevron {
+  position: absolute;
+  right: 1rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--color-green);
+  transition: transform 0.2s ease;
+}
+.food-header .section-dropdown.open .section-dropdown-toggle .chevron {
+  transform: rotate(180deg);
+}
+.food-header .section-dropdown-list {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  width: 100%;
+  background: var(--color-cream);
+  border-radius: 20px;
+  padding: 0.5rem 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  z-index: 15;
+  opacity: 0;
+  transform: translateY(-10px) scaleY(0.85);
+  transform-origin: top center;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.22s ease;
+}
+.food-header .section-dropdown-list button {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1.2rem;
+  text-align: left;
+  font-family: 'Metropolis', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-green);
+  cursor: pointer;
+}
+.food-header .section-dropdown.open .section-dropdown-list {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.food-header .section-dropdown.closing .section-dropdown-list {
+  opacity: 0;
+  transform: translateY(-12px) scaleY(0.8);
+  pointer-events: none;
+}
+.food-header .section-dropdown-list button.active {
+  color: var(--color-brown);
+}
+
 .food-content {
   margin: 0.5rem 1.5rem 2.5rem;
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
@@ -375,6 +492,33 @@ body {
   clear: both;
 }
 .menu-text p { margin: 0.2rem 0 0.6rem; }
+.menu-text .menu-section {
+  margin-bottom: 2.6rem;
+}
+.menu-text .menu-section-break {
+  display: block;
+  border-top: 1px dashed rgba(66, 99, 61, 0.2);
+  margin: 2.5rem 0;
+}
+.menu-text dl.menu-addons {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  margin: 0.8rem 0 1.6rem;
+}
+.menu-text dl.menu-addons dt {
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.menu-text dl.menu-addons dd {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-brown);
+  text-align: right;
+  min-width: 3.5rem;
+}
 .menu-text .price {
   float: right;
   font-weight: 700;
@@ -394,10 +538,9 @@ body {
 }
 
 /* Back button */
-.back-wrapper { padding: 1rem; }
 .back-button {
   position: relative;
-  background-color: var(--color-brown);
+  background-color: transparent;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -409,42 +552,54 @@ body {
   cursor: pointer;
   overflow: visible;
   color: var(--color-green);
-  /* Match social button spacing */
   --shadow-offset: 8px;
-}
-.back-button .back-arrow {
-  width: 14px;
-  height: 14px;
-  margin: 0;
-  border-style: solid;
-  border-width: 3px 3px 0 0;
-  border-color: var(--color-green);
-  display: block;
-  transform-origin: center;
-  /* Match top surface offset so arrow appears centered in unpressed state */
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset))) rotate(-135deg);
-  transition: transform 0.08s ease-out;
 }
 .back-button::before {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--color-cream);
+  inset: 0;
   border-radius: 50%;
-  transform: translate(calc(-1 * var(--shadow-offset)), calc(-1 * var(--shadow-offset)));
-  transition: transform 0.08s ease-out, box-shadow 0s linear 0.08s;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-brown);
+  background-color: var(--color-brown);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transition: background-color 0.2s ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+.back-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--color-cream);
+  transform: translate(0, 0);
+  transition: transform 0.08s ease-out;
+  z-index: 1;
+}
+.back-button .back-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-style: solid;
+  border-width: 3px 3px 0 0;
+  border-color: var(--color-green);
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(-135deg);
+  transition: transform 0.08s ease-out;
+  z-index: 2;
+}
+.back-button:active::after,
+.back-button.pressed::after {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
 }
 .back-button:active::before,
 .back-button.pressed::before {
-  transform: translate(0, 0);
-  box-shadow: none;
+  background-color: var(--color-pink);
 }
-/* Move arrow with the top surface on press */
 .back-button:active .back-arrow,
 .back-button.pressed .back-arrow {
-  transform: translate(0, 0) rotate(-135deg);
+  transform: translate(calc(-50% + var(--shadow-offset)), calc(-50% + var(--shadow-offset))) rotate(-135deg);
 }
 
 /* PDF viewer with checkered strips */
@@ -537,23 +692,6 @@ body {
   font-weight: 700;
   color: var(--color-green);
 }
-.menu-lang-wrapper {
-  padding: 0 1rem 0;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-.tea-page .menu-lang-wrapper,
-.coffee-page .menu-lang-wrapper {
-  position: absolute;
-  top: 0.6rem;
-  right: 1rem;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  z-index: 11;
-}
 .language-switcher.inline-switcher {
   position: relative;
   top: auto;
@@ -590,12 +728,12 @@ body {
   touch-action: inherit;
 }
 .tea-page .menu-image {
-  margin: -4rem auto 1.2rem;
+  margin: -3.5rem auto 1.2rem;
 }
 .coffee-page .menu-image-wrapper {
-  margin: -4rem 0 calc(9rem + env(safe-area-inset-bottom, 0px));
-  width: 100%;
-  max-width: none;
+  margin: -3.5rem auto calc(9rem + env(safe-area-inset-bottom, 0px));
+  width: calc(100% - 2rem);
+  max-width: 460px;
 }
 .coffee-page {
   padding-bottom: calc(9rem + env(safe-area-inset-bottom, 0px));
@@ -606,17 +744,17 @@ body {
   height: calc(5rem + env(safe-area-inset-bottom, 0px));
 }
 .cocktails-page .menu-image {
-  margin: -5rem auto 1.2rem;
+  margin: -3.5rem auto 1.2rem;
 }
 .shelf-page {
-  padding: 1rem 1rem 2rem;
+  padding: 0 0 2rem;
   overflow-y: auto;
 }
 .shelf-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
-  margin-top: 0.5rem;
+  margin: 2rem 1rem 0;
 }
 .shelf-card {
   display: block;

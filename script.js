@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const FOOD_SECTIONS = [
+    { key: 'toast',         labels: { en: 'Toast',                fr: 'Toast' } },
+    { key: 'french_toast',  labels: { en: 'French Toast & More',  fr: 'Pain Doré & Plus' } },
+    { key: 'bowls',         labels: { en: 'Bowls',                fr: 'Bols' } },
+    { key: 'soup',          labels: { en: 'Seasonal Soup',        fr: 'Soupe de saison' } },
+    { key: 'sandwich',      labels: { en: 'Sandwich',             fr: 'Sandwich' } },
+    { key: 'a_la_carte',    labels: { en: 'À la carte',           fr: 'À la carte' } }
+  ];
+
   const teaImage = document.getElementById('teaImage');
   const coffeeImage = document.getElementById('coffeeImage');
   const foodMenuEn = document.getElementById('foodMenuEn');
@@ -45,92 +54,333 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const foodMenus = {
     en: `
-      <h3>Breakfast Sandwich <span class="price">$12</span></h3>
-      <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens.</p>
-      <p><strong>Option:</strong> Add bacon or sausage! ($)</p>
+      <section id="food-toast-en" class="menu-section" data-section-key="toast">
+        <h2 class="sr-only">Toast</h2>
+        <h3>"MUSHROOMS"<br />ON TOAST <span class="price">$22</span></h3>
+        <p>country bread, whipped herby cream cheese, sautéed Le Coprin mushrooms, micro greens, shaved parmesan, poached egg.</p>
 
-      <h3>Smash Burger <span class="price">$14</span></h3>
-      <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
+        <h3>SALMON GRAVLAX <span class="price">$22</span></h3>
+        <p>country bread, herby cream cheese, beet mash, micro-greens, salmon gravlax, pickled cucumber, pickled onion, dill.</p>
 
-      <h3>Classic French Toast <span class="price">$17</span></h3>
-      <p>french toast with cinnamon sugar, seasonal compote, fresh berries and maple syrup.</p>
+        <h3>AVOCADO <span class="price">$17</span></h3>
+        <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil. Add bacon and/or an egg! ($)</p>
+      </section>
 
-      <h3>Staff Meal <span class="price">$22</span></h3>
-      <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
+      <section id="food-french-en" class="menu-section" data-section-key="french_toast">
+        <h2 class="sr-only">French Toast &amp; More</h2>
+        <h3>CRÈME BRULÉE <span class="price">$16</span></h3>
+        <p>french toast with vanilla bean crème anglaise, brûléed sugar and berries.</p>
 
-      <h3>Deli Sandwich <span class="price">$16</span></h3>
-      <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
+        <h3>CHEZ EDGAR <span class="price">$21</span></h3>
+        <p>french toast with brown butter apple compote, Balderson cheddar, crispy pork belly, one sunny egg, blueberries and maple syrup.</p>
 
-      <h3>Veggie Sandwich <span class="price">$14</span></h3>
-      <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
+        <h3>PANCAKE STACK <span class="price">$14</span></h3>
+        <p>three large Henrietta buttermilk pancakes with fresh berries, butter and maple syrup.</p>
+        <p><strong>$1.50</strong> side of maple syrup.</p>
+      </section>
 
-      <h3>Avocado Toast <span class="price">$17</span></h3>
-      <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil.</p>
-      <p><strong>Option:</strong> Add bacon and/or an egg! ($).</p>
+      <section id="food-bowls-en" class="menu-section" data-section-key="bowls">
+        <h2 class="sr-only">Bowls</h2>
+        <h3>THE STAFF MEAL <span class="price">$22</span></h3>
+        <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
 
-      <h3>Palmier Poke Bowl <span class="price">$22</span></h3>
-      <p>sticky rice, tuna, avocado, seasonal salad, spicy mayo. available vegan with chickpea salad.</p>
+        <h3>PALMIER POKE BOWL <span class="price">$22</span></h3>
+        <p>brown rice, tuna, avocado, seasonal salad, spicy mayo, seedy sprinkle. <em>*available vegan with chickpea salad.</em></p>
 
-      <h3>Yogurt &amp; Granola <span class="price">$14</span></h3>
-      <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
+        <h3>SHAKSHUKA <span class="price">$18</span></h3>
+        <p>spicy tomato and red pepper sauce, poached eggs, parmesan cheese, greens, country bread toasted with butter.</p>
 
-      <h3>Chia <span class="price">$14</span></h3>
-      <p>strawberry and matcha chia pudding, black pepper strawberry coulis, fresh berries, and shredded coconut.</p>
+        <h3>BROWN RICE PORRIDGE <span class="price">$14</span></h3>
+        <p>brown rice and coconut milk porridge, almond butter, jam, toasted almonds, bruléed banana, cacao nibs, berries, seedy sprinkle.</p>
 
-      <h2>À La Carte (Add)</h2>
-      <dl>
-        <dt>Salad</dt><dd>$10.00 or $6.00</dd>
-        <dt>Bacon</dt><dd>$4.00 or $3.00</dd>
-        <dt>House Made Turkey Sausage</dt><dd>$6.00 or $4.00</dd>
-        <dt>Bread</dt><dd>$2.50</dd>
-        <dt>Gluten Free Bread</dt><dd>$1.50</dd>
-        <dt>Egg</dt><dd>$2.50 or $1.50</dd>
-      </dl>
+        <h3>YOGURT &amp; GRANOLA <span class="price">$14</span></h3>
+        <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
+
+        <h3>BROWN RICE CONGEE <span class="price">$18</span></h3>
+        <p>brown rice miso congee, shiitake mushrooms, poached egg, chili crisp, sesame oil, nori, cured egg yolk, pork belly.</p>
+      </section>
+
+      <section id="food-soup-en" class="menu-section" data-section-key="soup">
+        <h2 class="sr-only">Seasonal Soup</h2>
+        <h3>Seasonal Soup <span class="price">$10</span></h3>
+        <p>Ask about our seasonal soup.</p>
+      </section>
+
+      <section id="food-sandwich-en" class="menu-section" data-section-key="sandwich">
+        <h2 class="sr-only">Sandwich</h2>
+        <h3>THE BREAKFAST<br />SANDWICH <span class="price">$12</span></h3>
+        <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens. Add bacon or sausage! ($)</p>
+
+        <h3>DELI SANDWICH <span class="price">$16</span></h3>
+        <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
+
+        <h3>VEGGIE SANDWICH <span class="price">$14</span></h3>
+        <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
+
+        <h3>SMASH BURGER <span class="price">$14</span></h3>
+        <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
+        <p>Brunch it! <strong>+$6</strong> add a sunny egg, bacon and maple syrup to make it your next brunch go-to.</p>
+      </section>
+
+      <section id="food-alacarte-en" class="menu-section" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <p><strong>Add to any meal</strong></p>
+        <dl class="menu-addons">
+          <dt>Egg</dt><dd>$1.50</dd>
+          <dt>Salad</dt><dd>$6.00</dd>
+          <dt>Bacon</dt><dd>$3.00</dd>
+          <dt>House made turkey sausage</dt><dd>$4.00</dd>
+          <dt>Bread</dt><dd>$2.50</dd>
+          <dt>Gluten free bread</dt><dd>$1.50</dd>
+        </dl>
+        <dl class="menu-addons">
+          <dt>Salad</dt><dd>$10.00</dd>
+          <dt>Bacon</dt><dd>$4.00</dd>
+          <dt>House made turkey sausage</dt><dd>$6.00</dd>
+          <dt>Bread</dt><dd>$2.50</dd>
+          <dt>Egg</dt><dd>$2.50</dd>
+          <dt>Pancake (1)</dt><dd>$4.00</dd>
+        </dl>
+      </section>
     `,
     fr: `
-      <h3>Sandwich<br />Petit-Déjeuner <span class="price">$12</span></h3>
-      <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses.</p>
-      <p><strong>Option :</strong> Ajouter bacon ou saucisse! ($)</p>
+      <section id="food-toast-fr" class="menu-section" data-section-key="toast">
+        <h2 class="sr-only">Toast</h2>
+        <h3>"TOAST" AUX CHAMPIGNONS <span class="price">$22</span></h3>
+        <p>pain de campagne, fromage à la crème aux fines herbes, champignons Le Coprin sautés au beurre, micro-pousses, parmesan râpé, oeuf poché.</p>
 
-      <h3>"Smash Burger" <span class="price">$14</span></h3>
-      <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
+        <h3>GRAVLAX DE SAUMON <span class="price">$22</span></h3>
+        <p>pain de campagne, fromage à la crème aux herbes, purée de betterave, micro-pousses, saumon gravlax, concombre mariné, oignon mariné, aneth.</p>
 
-      <h3>Classique Pain Doré <span class="price">$17</span></h3>
-      <p>pain doré avec sucre à la cannelle, compote de saison, baies fraîches, et sirop d'érable.</p>
+        <h3>AVOCAT <span class="price">$17</span></h3>
+        <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic. Ajouter bacon et/ou un oeuf! ($)</p>
+      </section>
 
-      <h3>Le "Staff Meal" <span class="price">$22</span></h3>
-      <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
+      <section id="food-french-fr" class="menu-section" data-section-key="french_toast">
+        <h2 class="sr-only">Pain Doré &amp; Plus</h2>
+        <h3>CRÈME BRULÉE <span class="price">$16</span></h3>
+        <p>pain doré avec crème anglaise à la vanille, sucre brûlé et baies.</p>
 
-      <h3>Sandwich Deli <span class="price">$16</span></h3>
-      <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
+        <h3>CHEZ EDGAR <span class="price">$21</span></h3>
+        <p>pain doré avec compote de pommes au beurre noisette, cheddar Balderson, poitrine de porc croustillante, oeuf miroir, bleuets et sirop d'érable.</p>
 
-      <h3>Sandwich Végé <span class="price">$14</span></h3>
-      <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
+        <h3>PANCAKES EN PILE <span class="price">$14</span></h3>
+        <p>trois grands pancakes au babeurre Henrietta, servis avec petits fruits frais, beurre et sirop d'érable.</p>
+        <p><strong>$1.50</strong> accompagnement de sirop d'érable.</p>
+      </section>
 
-      <h3>"Toast" Avocat <span class="price">$17</span></h3>
-      <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic.</p>
-      <p><strong>Option :</strong> Ajouter bacon et/ou un oeuf! ($).</p>
+      <section id="food-bowls-fr" class="menu-section" data-section-key="bowls">
+        <h2 class="sr-only">Bols</h2>
+        <h3>LE "STAFF MEAL" <span class="price">$22</span></h3>
+        <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
 
-      <h3>Bol Poke Palmier <span class="price">$22</span></h3>
-      <p>riz sushi, thon, avocat, salade saisonnière, mayo épicé. *option végétalienne avec salade de pois chiches.</p>
+        <h3>BOL POKE PALMIER <span class="price">$22</span></h3>
+        <p>riz brun, thon, avocat, salade saisonnière, mayo épicé, mélange de grains. <em>Option végétalienne avec salade de pois chiches.</em></p>
 
-      <h3>Yogourt &amp; Granola <span class="price">$14</span></h3>
-      <p>yogourt, granola, fruits frais, compote de saison, banane brulée, sirop d'érable, et mélange de grains.</p>
+        <h3>SHAKSHUKA <span class="price">$18</span></h3>
+        <p>sauce piquante aux tomates et poivrons rouges, oeufs pochés, fromage parmesan, micro-pousses, pain de campagne au beurre.</p>
 
-      <h3>Chia <span class="price">$14</span></h3>
-      <p>pudding aux fraises et au chia matcha, coulis de fraises au poivre noir, baies fraîches et noix de coco râpée.</p>
+        <h3>GRUAU AU RIZ BRUN <span class="price">$14</span></h3>
+        <p>gruau au riz brun et lait de noix de coco, beurre d'amandes, confiture, amandes grillées, banane brûlée, cacao, baies, mélange de grains.</p>
 
-      <h2>À La Carte (Ajouter)</h2>
-      <dl>
-        <dt>Salade</dt><dd>$10.00 ou $6.00</dd>
-        <dt>Bacon</dt><dd>$4.00 ou $3.00</dd>
-        <dt>Saucisse de dinde faite maison</dt><dd>$6.00 ou $4.00</dd>
-        <dt>Pain</dt><dd>$2.50</dd>
-        <dt>Pain sans gluten</dt><dd>$1.50</dd>
-        <dt>Oeuf</dt><dd>$2.50 ou $1.50</dd>
-      </dl>
+        <h3>YOGOURT &amp; GRANOLA <span class="price">$14</span></h3>
+        <p>yogourt, granola, fruits frais, compote de saison, banane brûlée, sirop d'érable, mélange de grains.</p>
+
+        <h3>CONGEE DE RIZ BRUN <span class="price">$18</span></h3>
+        <p>congee miso au riz brun, champignons shiitake, oeuf poché, chili croustillant, huile de sésame, nori, jaune d'oeuf salé, poitrine de porc.</p>
+      </section>
+
+      <section id="food-soup-fr" class="menu-section" data-section-key="soup">
+        <h2 class="sr-only">Soupe de saison</h2>
+        <h3>Soupe de saison <span class="price">$10</span></h3>
+        <p>Demandez-nous quelle est notre soupe de saison.</p>
+      </section>
+
+      <section id="food-sandwich-fr" class="menu-section" data-section-key="sandwich">
+        <h2 class="sr-only">Sandwich</h2>
+        <h3>SANDWICH<br />PETIT DÉJEUNER <span class="price">$12</span></h3>
+        <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses. Ajouter bacon ou saucisse! ($)</p>
+
+        <h3>SANDWICH DELI <span class="price">$16</span></h3>
+        <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
+
+        <h3>SANDWICH VÉGÉ <span class="price">$14</span></h3>
+        <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
+
+        <h3>"SMASH BURGER" <span class="price">$14</span></h3>
+        <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
+        <p>Version brunch! <strong>+$6</strong> ajoutez un oeuf miroir, du bacon et du sirop d'érable pour en faire votre nouveau classique du brunch.</p>
+      </section>
+
+      <section id="food-alacarte-fr" class="menu-section" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <p><strong>Ajouter à un repas</strong></p>
+        <dl class="menu-addons">
+          <dt>Oeuf</dt><dd>$1.50</dd>
+          <dt>Salade</dt><dd>$6.00</dd>
+          <dt>Bacon</dt><dd>$3.00</dd>
+          <dt>Saucisse de dinde maison</dt><dd>$4.00</dd>
+          <dt>Pain</dt><dd>$2.50</dd>
+          <dt>Pain sans gluten</dt><dd>$1.50</dd>
+        </dl>
+        <dl class="menu-addons">
+          <dt>Salade</dt><dd>$10.00</dd>
+          <dt>Bacon</dt><dd>$4.00</dd>
+          <dt>Saucisse de dinde maison</dt><dd>$6.00</dd>
+          <dt>Pain</dt><dd>$2.50</dd>
+          <dt>Oeuf</dt><dd>$2.50</dd>
+          <dt>Pancake (1)</dt><dd>$4.00</dd>
+        </dl>
+      </section>
     `
   };
+
+  function getFoodSectionLabel(key, lang = currentLang) {
+    const section = FOOD_SECTIONS.find(item => item.key === key);
+    if (!section) return '';
+    return section.labels[lang] || section.labels.en || '';
+  }
+
+  function renderFoodSectionList() {
+    if (!foodSectionList) return;
+    foodSectionList.innerHTML = '';
+    FOOD_SECTIONS.forEach(section => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.sectionKey = section.key;
+      button.textContent = getFoodSectionLabel(section.key);
+      button.classList.toggle('active', section.key === currentFoodSectionKey);
+      button.addEventListener('click', () => {
+        scrollToFoodSection(section.key);
+        setFoodSectionDropdown(false);
+      });
+      foodSectionList.appendChild(button);
+    });
+    updateFoodSectionLabel();
+    setFoodSectionDropdown(false);
+  }
+
+  function updateFoodSectionLabel() {
+    if (foodSectionLabel) {
+      foodSectionLabel.textContent = getFoodSectionLabel(currentFoodSectionKey);
+    }
+    if (foodSectionList) {
+      foodSectionList.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sectionKey === currentFoodSectionKey);
+      });
+    }
+  }
+
+  function setFoodSectionDropdown(open) {
+    const dropdown = foodSectionToggle?.closest('.section-dropdown');
+    if (open) {
+      foodSectionDropdownOpen = true;
+      if (foodSectionToggle) {
+        foodSectionToggle.setAttribute('aria-expanded', 'true');
+      }
+      if (foodSectionList) {
+        foodSectionList.setAttribute('aria-hidden', 'false');
+        foodSectionList.querySelectorAll('button').forEach(btn => {
+          btn.tabIndex = 0;
+        });
+      }
+      if (dropdown) {
+        dropdown.classList.remove('closing');
+        dropdown.classList.add('open');
+      }
+      return;
+    }
+
+    if (foodSectionToggle) {
+      foodSectionToggle.setAttribute('aria-expanded', 'false');
+    }
+    if (foodSectionList) {
+      foodSectionList.querySelectorAll('button').forEach(btn => {
+        btn.tabIndex = -1;
+      });
+    }
+    foodSectionDropdownOpen = false;
+
+    if (!dropdown) {
+      finalizeDropdownClose();
+      return;
+    }
+
+    dropdown.classList.add('closing');
+    if (dropdown.classList.contains('open')) {
+      requestAnimationFrame(() => dropdown.classList.remove('open'));
+    }
+    window.setTimeout(finalizeDropdownClose, 200);
+  }
+
+  function finalizeDropdownClose() {
+    const dropdown = foodSectionToggle?.closest('.section-dropdown');
+    if (dropdown) {
+      dropdown.classList.remove('closing');
+      dropdown.classList.remove('open');
+    }
+    if (foodSectionList) {
+      foodSectionList.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function toggleFoodSectionDropdown() {
+    setFoodSectionDropdown(!foodSectionDropdownOpen);
+  }
+
+  function getActiveFoodSectionElement(key) {
+    const container = currentLang === 'en' ? foodMenuEn : foodMenuFr;
+    if (!container || container.hidden) return null;
+    return container.querySelector(`[data-section-key="${key}"]`);
+  }
+
+  function scrollToFoodSection(key) {
+    const sectionEl = getActiveFoodSectionElement(key);
+    if (!sectionEl || !foodPage) return;
+    currentFoodSectionKey = key;
+    updateFoodSectionLabel();
+    const headerHeight = foodHeader ? foodHeader.offsetHeight : 0;
+    const pageRect = foodPage.getBoundingClientRect();
+    const targetRect = sectionEl.getBoundingClientRect();
+    const offset = targetRect.top - pageRect.top + foodPage.scrollTop - headerHeight - 12;
+    foodPage.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+
+  function setupFoodSectionObserver() {
+    if (foodSectionObserver) {
+      foodSectionObserver.disconnect();
+      foodSectionObserver = null;
+    }
+    if (!foodPage) return;
+    const sections = foodPage.querySelectorAll('.menu-section');
+    if (!sections.length) return;
+    foodSectionObserver = new IntersectionObserver(handleFoodSectionIntersection, {
+      root: foodPage,
+      threshold: 0.4,
+      rootMargin: '-20% 0px -40% 0px'
+    });
+    sections.forEach(section => foodSectionObserver.observe(section));
+  }
+
+  function handleFoodSectionIntersection(entries) {
+    const activeContainer = currentLang === 'en' ? foodMenuEn : foodMenuFr;
+    if (!activeContainer || activeContainer.hidden) return;
+    let bestEntry = null;
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      if (!activeContainer.contains(entry.target)) return;
+      if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+        bestEntry = entry;
+      }
+    });
+    if (bestEntry) {
+      const key = bestEntry.target.getAttribute('data-section-key');
+      if (key && key !== currentFoodSectionKey) {
+        currentFoodSectionKey = key;
+        updateFoodSectionLabel();
+      }
+    }
+  }
 
   function setTeaImage() {
     if (!teaImage) return;
@@ -152,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     foodMenuFr.innerHTML = foodMenus.fr;
     foodMenuEn.hidden = currentLang !== 'en';
     foodMenuFr.hidden = currentLang !== 'fr';
+    setupFoodSectionObserver();
   }
 
   function setLanguage(lang) {
@@ -161,6 +412,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTeaImage();
     setCoffeeImage();
     setFoodMenu();
+    renderFoodSectionList();
+    updateFoodSectionLabel();
   }
 
   function toggleLanguage() {
@@ -438,6 +691,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const cocktailsBtn = document.getElementById('cocktailsBtn');
   const shelfBtn = document.getElementById('shelfBtn');
   const reviewBtn = document.getElementById('reviewBtn');
+  const foodSectionToggle = document.getElementById('foodSectionToggle');
+  const foodSectionLabel = document.getElementById('foodSectionLabel');
+  const foodSectionList = document.getElementById('foodSectionList');
+  const foodHeader = document.querySelector('#foodPage .food-header');
+
+  let currentFoodSectionKey = 'toast';
+  let foodSectionDropdownOpen = false;
+  let foodSectionObserver = null;
 
   const backFoodBtn = document.getElementById('backHome');
   const backTeaBtn = document.getElementById('backTea');
@@ -486,7 +747,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setFoodMenu();
       showPage(foodPage);
       homePage.style.display = 'none';
-      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
+      currentFoodSectionKey = 'toast';
+      updateFoodSectionLabel();
+      setFoodSectionDropdown(false);
+      if (foodPage) {
+        foodPage.scrollTop = 0;
+      }
       releaseTransitionTrigger(trigger);
     });
   }
@@ -503,6 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (foodPage) foodPage.style.display = 'none';
         homePage.style.display = 'block';
         if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+        setFoodSectionDropdown(false);
         releaseTransitionTrigger(trigger, DEFAULT_PRESS_RELEASE_DELAY);
         clearPressed();
       }, 400);
@@ -606,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hideAllPages();
       showPage(shelfPage);
       homePage.style.display = 'none';
-      if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+      if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
       releaseTransitionTrigger(trigger);
     });
   }
@@ -643,6 +911,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   attachTapHandler(shelfBtn, openShelfPage);
   attachTapHandler(backShelfBtn, closeShelfPage);
+
+  if (foodSectionToggle) {
+    foodSectionToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      toggleFoodSectionDropdown();
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!foodSectionDropdownOpen) return;
+    const target = event.target;
+    if (foodSectionToggle?.contains(target) || foodSectionList?.contains(target)) {
+      return;
+    }
+    setFoodSectionDropdown(false);
+  });
+
+  if (foodPage) {
+    foodPage.addEventListener('scroll', () => {
+      if (foodSectionDropdownOpen) {
+        setFoodSectionDropdown(false);
+      }
+    });
+  }
 
   const REVIEW_URL = 'https://www.google.com/search?sca_esv=f60ecab60e0aa489&sxsrf=AE3TifOqxmle3mCawmW8QMBLC3AjyoMUhg:1761669360921&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E8q7DkqADv5wRTdBpYumF5gqCEfO6tp_bZRoBSIm_7g3w6n0sxuVia957VyiU3Lyx1bNyMTgKWSmBKbTs44Z0-tiwanV&q=Palmier+Reviews&sa=X&ved=2ahUKEwiYr-DjqceQAxXmFjQIHeLbDtkQ0bkNegQILhAD&biw=1457&bih=817&dpr=2';
   function openReview() {
