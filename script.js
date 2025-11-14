@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <dt>Bread</dt><dd>$2.50</dd>
           <dt>Gluten free bread</dt><dd>$1.50</dd>
         </dl>
-        <dl class="menu-addons">
+        <dl class="menu-addons" data-section-anchor="a_la_carte">
           <dt>Salad</dt><dd>$10.00</dd>
           <dt>Bacon</dt><dd>$4.00</dd>
           <dt>House made turkey sausage</dt><dd>$6.00</dd>
@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <dt>Egg</dt><dd>$2.50</dd>
           <dt>Pancake (1)</dt><dd>$4.00</dd>
         </dl>
+        <div class="section-spacer" aria-hidden="true"></div>
       </section>
     `,
     fr: `
@@ -223,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <dt>Pain</dt><dd>$2.50</dd>
           <dt>Pain sans gluten</dt><dd>$1.50</dd>
         </dl>
-        <dl class="menu-addons">
+        <dl class="menu-addons" data-section-anchor="a_la_carte">
           <dt>Salade</dt><dd>$10.00</dd>
           <dt>Bacon</dt><dd>$4.00</dd>
           <dt>Saucisse de dinde maison</dt><dd>$6.00</dd>
@@ -231,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <dt>Oeuf</dt><dd>$2.50</dd>
           <dt>Pancake (1)</dt><dd>$4.00</dd>
         </dl>
+        <div class="section-spacer" aria-hidden="true"></div>
       </section>
     `
   };
@@ -346,39 +348,25 @@ document.addEventListener('DOMContentLoaded', () => {
     foodPage.scrollTo({ top: offset, behavior: 'smooth' });
   }
 
-  function setupFoodSectionObserver() {
-    if (foodSectionObserver) {
-      foodSectionObserver.disconnect();
-      foodSectionObserver = null;
-    }
-    if (!foodPage) return;
-    const sections = foodPage.querySelectorAll('.menu-section');
+  function updateFoodSectionFromScroll() {
+    const container = currentLang === 'en' ? foodMenuEn : foodMenuFr;
+    if (!container || container.hidden) return;
+    const sections = container.querySelectorAll('.menu-section');
     if (!sections.length) return;
-    foodSectionObserver = new IntersectionObserver(handleFoodSectionIntersection, {
-      root: foodPage,
-      threshold: 0.4,
-      rootMargin: '-20% 0px -40% 0px'
-    });
-    sections.forEach(section => foodSectionObserver.observe(section));
-  }
+    const headerBottom = foodHeader ? foodHeader.getBoundingClientRect().bottom : 0;
+    const threshold = headerBottom + 48;
+    let nextKey = sections[0].getAttribute('data-section-key');
 
-  function handleFoodSectionIntersection(entries) {
-    const activeContainer = currentLang === 'en' ? foodMenuEn : foodMenuFr;
-    if (!activeContainer || activeContainer.hidden) return;
-    let bestEntry = null;
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      if (!activeContainer.contains(entry.target)) return;
-      if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
-        bestEntry = entry;
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= threshold) {
+        nextKey = section.getAttribute('data-section-key');
       }
     });
-    if (bestEntry) {
-      const key = bestEntry.target.getAttribute('data-section-key');
-      if (key && key !== currentFoodSectionKey) {
-        currentFoodSectionKey = key;
-        updateFoodSectionLabel();
-      }
+
+    if (nextKey && nextKey !== currentFoodSectionKey) {
+      currentFoodSectionKey = nextKey;
+      updateFoodSectionLabel();
     }
   }
 
@@ -402,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
     foodMenuFr.innerHTML = foodMenus.fr;
     foodMenuEn.hidden = currentLang !== 'en';
     foodMenuFr.hidden = currentLang !== 'fr';
-    setupFoodSectionObserver();
+    updateFoodSectionFromScroll();
   }
 
   function setLanguage(lang) {
@@ -414,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setFoodMenu();
     renderFoodSectionList();
     updateFoodSectionLabel();
+    updateFoodSectionFromScroll();
   }
 
   function toggleLanguage() {
@@ -698,7 +687,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentFoodSectionKey = 'toast';
   let foodSectionDropdownOpen = false;
-  let foodSectionObserver = null;
 
   const backFoodBtn = document.getElementById('backHome');
   const backTeaBtn = document.getElementById('backTea');
@@ -754,6 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (foodPage) {
         foodPage.scrollTop = 0;
       }
+      updateFoodSectionFromScroll();
       releaseTransitionTrigger(trigger);
     });
   }
@@ -933,6 +922,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (foodSectionDropdownOpen) {
         setFoodSectionDropdown(false);
       }
+      updateFoodSectionFromScroll();
     });
   }
 

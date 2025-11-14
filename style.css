@@ -374,6 +374,12 @@ body {
   width: 42px;
   height: 42px;
 }
+.food-header .back-button.compact {
+  width: 38px;
+  height: 38px;
+  --shadow-offset: 6px;
+  margin-bottom: 2px;
+}
 .food-header .section-dropdown {
   position: relative;
   flex: 1;
@@ -493,7 +499,10 @@ body {
 }
 .menu-text p { margin: 0.2rem 0 0.6rem; }
 .menu-text .menu-section {
-  margin-bottom: 2.6rem;
+  margin-bottom: 3.4rem;
+}
+.menu-text .section-spacer {
+  height: 4rem;
 }
 .menu-text .menu-section-break {
   display: block;
