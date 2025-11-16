@@ -28,32 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const FOOD_SECTIONS = [
-    { key: 'toast',         labels: { en: 'Toast',                fr: 'Toast' } },
-    { key: 'french_toast',  labels: { en: 'French Toast & More',  fr: 'Pain Doré & Plus' } },
-    { key: 'bowls',         labels: { en: 'Bowls',                fr: 'Bols' } },
-    { key: 'soup',          labels: { en: 'Seasonal Soup',        fr: 'Soupe de saison' } },
-    { key: 'sandwich',      labels: { en: 'Sandwich',             fr: 'Sandwich' } },
-    { key: 'a_la_carte',    labels: { en: 'À la carte',           fr: 'À la carte' } }
-  ];
-
-  const teaImage = document.getElementById('teaImage');
-  const coffeeImage = document.getElementById('coffeeImage');
-  const foodMenuEn = document.getElementById('foodMenuEn');
-  const foodMenuFr = document.getElementById('foodMenuFr');
-
-  const teaImages = {
-    en: 'Assets/menus/tea-eng.png',
-    fr: 'Assets/menus/tea-fra.png'
-  };
-
-  const coffeeImages = {
-    en: 'Assets/menus/coffee-eng.png',
-    fr: 'Assets/menus/coffee-fra.png'
-  };
-
-  const foodMenus = {
-    en: `
+  const FOOD_MENU_VARIANTS = {
+    full: {
+      sections: [
+        { key: 'toast',        labels: { en: 'Toast',               fr: 'Toast' } },
+        { key: 'french_toast', labels: { en: 'French Toast & More', fr: 'Pain Doré & Plus' } },
+        { key: 'bowls',        labels: { en: 'Bowls',               fr: 'Bols' } },
+        { key: 'soup',         labels: { en: 'Seasonal Soup',       fr: 'Soupe de saison' } },
+        { key: 'sandwich',     labels: { en: 'Sandwich',            fr: 'Sandwich' } },
+        { key: 'a_la_carte',   labels: { en: 'À la carte',          fr: 'À la carte' } }
+      ],
+      menus: {
+        en: `
       <section id="food-toast-en" class="menu-section" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
         <h3>"MUSHROOMS"<br />ON TOAST <span class="price">$22</span></h3>
@@ -108,28 +94,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-sandwich-en" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>THE BREAKFAST<br />SANDWICH <span class="price">$12</span></h3>
-        <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens. Add bacon or sausage! ($)</p>
+        <h3>CHICKEN SALAD SANDWICH <span class="price">$17</span></h3>
+        <p>black pepper brioche bun, roast chicken salad, house pickled celery, apple, pickled mustard seeds, micro-greens.</p>
 
-        <h3>DELI SANDWICH <span class="price">$16</span></h3>
-        <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
+        <h3>SMOKED TURKEY SANDWICH <span class="price">$16</span></h3>
+        <p>ciabatta, smoked turkey, crispy onions, dijonnaise, dill pickles, Balderson cheddar, house sweet and spicy mustard.</p>
 
-        <h3>VEGGIE SANDWICH <span class="price">$14</span></h3>
+        <h3>VEGGIE SANDWICH <span class="price">$15</span></h3>
         <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
-
-        <h3>SMASH BURGER <span class="price">$14</span></h3>
-        <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
-        <p>Brunch it! <strong>+$6</strong> add a sunny egg, bacon and maple syrup to make it your next brunch go-to.</p>
       </section>
 
       <section id="food-alacarte-en" class="menu-section" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <p><strong>Add to any meal</strong></p>
         <dl class="menu-addons">
-          <dt>Egg</dt><dd>$1.50</dd>
-          <dt>Salad</dt><dd>$6.00</dd>
-          <dt>Bacon</dt><dd>$3.00</dd>
-          <dt>House made turkey sausage</dt><dd>$4.00</dd>
+          <dt>Salad</dt><dd>$10.00</dd>
+          <dt>Bacon</dt><dd>$4.00</dd>
+          <dt>House made turkey sausage</dt><dd>$6.00</dd>
           <dt>Bread</dt><dd>$2.50</dd>
           <dt>Gluten free bread</dt><dd>$1.50</dd>
         </dl>
@@ -144,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
     `,
-    fr: `
+        fr: `
       <section id="food-toast-fr" class="menu-section" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
         <h3>"TOAST" AUX CHAMPIGNONS <span class="price">$22</span></h3>
@@ -199,25 +179,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-sandwich-fr" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>SANDWICH<br />PETIT DÉJEUNER <span class="price">$12</span></h3>
-        <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses. Ajouter bacon ou saucisse! ($)</p>
+        <h3>SANDWICH AU POULET <span class="price">$17</span></h3>
+        <p>pain brioche au poivre, salade de poulet rôti, céleri mariné maison, pomme, graines de moutarde marinées, micro-pousses.</p>
 
-        <h3>SANDWICH DELI <span class="price">$16</span></h3>
-        <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
+        <h3>SANDWICH À LA DINDE FUMÉE <span class="price">$16</span></h3>
+        <p>ciabatta, dinde fumée, oignons croustillants, dijonnaise, cornichons à l'aneth, cheddar Balderson, moutarde sucrée-épicée.</p>
 
-        <h3>SANDWICH VÉGÉ <span class="price">$14</span></h3>
+        <h3>SANDWICH VÉGÉ <span class="price">$15</span></h3>
         <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
-
-        <h3>"SMASH BURGER" <span class="price">$14</span></h3>
-        <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
-        <p>Version brunch! <strong>+$6</strong> ajoutez un oeuf miroir, du bacon et du sirop d'érable pour en faire votre nouveau classique du brunch.</p>
       </section>
 
       <section id="food-alacarte-fr" class="menu-section" data-section-key="a_la_carte">
         <h2 class="sr-only">À la carte</h2>
-        <p><strong>Ajouter à un repas</strong></p>
         <dl class="menu-addons">
-          <dt>Oeuf</dt><dd>$1.50</dd>
           <dt>Salade</dt><dd>$6.00</dd>
           <dt>Bacon</dt><dd>$3.00</dd>
           <dt>Saucisse de dinde maison</dt><dd>$4.00</dd>
@@ -235,18 +209,180 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
     `
+      }
+    },
+    reduced: {
+      sections: [
+        { key: 'all_day', labels: { en: 'Menu', fr: 'Menu' } },
+        { key: 'a_la_carte', labels: { en: 'À la carte', fr: 'À la carte' } }
+      ],
+      menus: {
+        en: `
+      <section id="food-classics-en" class="menu-section" data-section-key="all_day">
+        <h2 class="sr-only">All-Day Menu</h2>
+        <h3>Breakfast Sandwich <span class="price">$12</span></h3>
+        <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens.</p>
+        <p><strong>Option:</strong> Add bacon or sausage! ($)</p>
+
+        <h3>Smash Burger <span class="price">$14</span></h3>
+        <p>brioche bun, butter, two smash patties, onion, house burger sauce, house garlic dill pickles, cheddar cheese.</p>
+
+        <h3>Classic French Toast <span class="price">$17</span></h3>
+        <p>french toast with cinnamon sugar, seasonal compote, fresh berries and maple syrup.</p>
+
+        <h3>Staff Meal <span class="price">$22</span></h3>
+        <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
+
+        <h3>Deli Sandwich <span class="price">$16</span></h3>
+        <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens.</p>
+
+        <h3>Veggie Sandwich <span class="price">$14</span></h3>
+        <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
+
+        <h3>Avocado Toast <span class="price">$17</span></h3>
+        <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil.</p>
+        <p><strong>Option:</strong> Add bacon and/or an egg! ($).</p>
+
+        <h3>Palmier Poke Bowl <span class="price">$22</span></h3>
+        <p>sticky rice, tuna, avocado, seasonal salad, spicy mayo. available vegan with chickpea salad.</p>
+
+        <h3>Yogurt &amp; Granola <span class="price">$14</span></h3>
+        <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
+
+        <h3>Chia <span class="price">$14</span></h3>
+        <p>strawberry and matcha chia pudding, black pepper strawberry coulis, fresh berries, and shredded coconut.</p>
+      </section>
+
+      <section id="food-alacarte-classics-en" class="menu-section" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <h3>À La Carte (Add)</h3>
+        <dl class="menu-addons">
+          <dt>Salad</dt><dd>$10.00 or $6.00</dd>
+          <dt>Bacon</dt><dd>$4.00 or $3.00</dd>
+          <dt>House Made Turkey Sausage</dt><dd>$6.00 or $4.00</dd>
+          <dt>Bread</dt><dd>$2.50</dd>
+          <dt>Gluten Free Bread</dt><dd>$1.50</dd>
+          <dt>Egg</dt><dd>$2.50 or $1.50</dd>
+        </dl>
+        <div class="section-spacer" aria-hidden="true"></div>
+      </section>
+    `,
+        fr: `
+      <section id="food-classics-fr" class="menu-section" data-section-key="all_day">
+        <h2 class="sr-only">Menu toute la journée</h2>
+        <h3>Sandwich<br />Petit-Déjeuner <span class="price">$12</span></h3>
+        <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses.</p>
+        <p><strong>Option :</strong> Ajouter bacon ou saucisse! ($)</p>
+
+        <h3>"Smash Burger" <span class="price">$14</span></h3>
+        <p>pain brioché, beurre, deux boulettes smash, oignon, sauce maison, cornichons maison à l'ail et à l'aneth, cheddar.</p>
+
+        <h3>Classique Pain Doré <span class="price">$17</span></h3>
+        <p>pain doré avec sucre à la cannelle, compote de saison, baies fraîches, et sirop d'érable.</p>
+
+        <h3>Le "Staff Meal" <span class="price">$22</span></h3>
+        <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
+
+        <h3>Sandwich Deli <span class="price">$16</span></h3>
+        <p>ciabatta, dinde fumée, salami, jambon capocollo, fromage provolone, mayo à l'ail végétalienne, moutarde dijon, piments forts, micro-pousses.</p>
+
+        <h3>Sandwich Végé <span class="price">$14</span></h3>
+        <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
+
+        <h3>"Toast" Avocat <span class="price">$17</span></h3>
+        <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic.</p>
+        <p><strong>Option :</strong> Ajouter bacon et/ou un oeuf! ($).</p>
+
+        <h3>Bol Poke Palmier <span class="price">$22</span></h3>
+        <p>riz sushi, thon, avocat, salade saisonnière, mayo épicé. *option végétalienne avec salade de pois chiches.</p>
+
+        <h3>Yogourt &amp; Granola <span class="price">$14</span></h3>
+        <p>yogourt, granola, fruits frais, compote de saison, banane brulée, sirop d'érable, et mélange de grains.</p>
+
+        <h3>Chia <span class="price">$14</span></h3>
+        <p>pudding aux fraises et au chia matcha, coulis de fraises au poivre noir, baies fraîches et noix de coco râpée.</p>
+      </section>
+
+      <section id="food-alacarte-classics-fr" class="menu-section" data-section-key="a_la_carte">
+        <h2 class="sr-only">À la carte</h2>
+        <h3>À La Carte (Ajouter)</h3>
+        <dl class="menu-addons">
+          <dt>Salade</dt><dd>$10.00 ou $6.00</dd>
+          <dt>Bacon</dt><dd>$4.00 ou $3.00</dd>
+          <dt>Saucisse de dinde faite maison</dt><dd>$6.00 ou $4.00</dd>
+          <dt>Pain</dt><dd>$2.50</dd>
+          <dt>Pain sans gluten</dt><dd>$1.50</dd>
+          <dt>Oeuf</dt><dd>$2.50 ou $1.50</dd>
+        </dl>
+        <div class="section-spacer" aria-hidden="true"></div>
+      </section>
+    `
+      }
+    }
+  };
+
+  // Toggle this to 'full' when ready to show the updated food menu.
+  const ACTIVE_FOOD_MENU_VARIANT = 'reduced';
+
+  function getActiveFoodMenuVariant() {
+    return FOOD_MENU_VARIANTS[ACTIVE_FOOD_MENU_VARIANT] || FOOD_MENU_VARIANTS.full;
+  }
+
+  function getActiveFoodSections() {
+    const sections = getActiveFoodMenuVariant().sections;
+    return Array.isArray(sections) ? sections : [];
+  }
+
+  function getActiveFoodMenuTemplates() {
+    return getActiveFoodMenuVariant().menus || {};
+  }
+
+  function getDefaultFoodSectionKey() {
+    const sections = getActiveFoodSections();
+    return sections.length ? sections[0].key : null;
+  }
+
+  const teaImage = document.getElementById('teaImage');
+  const coffeeImage = document.getElementById('coffeeImage');
+  const foodMenuEn = document.getElementById('foodMenuEn');
+  const foodMenuFr = document.getElementById('foodMenuFr');
+  let currentFoodSectionKey = getDefaultFoodSectionKey();
+
+  const teaImages = {
+    en: 'Assets/menus/tea-eng.png',
+    fr: 'Assets/menus/tea-fra.png'
+  };
+
+  const coffeeImages = {
+    en: 'Assets/menus/coffee-eng.png',
+    fr: 'Assets/menus/coffee-fra.png'
   };
 
   function getFoodSectionLabel(key, lang = currentLang) {
-    const section = FOOD_SECTIONS.find(item => item.key === key);
+    if (!key) return '';
+    const section = getActiveFoodSections().find(item => item.key === key);
     if (!section) return '';
-    return section.labels[lang] || section.labels.en || '';
+    return section.labels?.[lang] || section.labels?.en || '';
+  }
+
+  function ensureValidFoodSectionKey() {
+    const sections = getActiveFoodSections();
+    if (!sections.length) {
+      currentFoodSectionKey = null;
+      return;
+    }
+    const hasKey = sections.some(section => section.key === currentFoodSectionKey);
+    if (!hasKey) {
+      currentFoodSectionKey = sections[0].key;
+    }
   }
 
   function renderFoodSectionList() {
     if (!foodSectionList) return;
+    ensureValidFoodSectionKey();
     foodSectionList.innerHTML = '';
-    FOOD_SECTIONS.forEach(section => {
+    const sections = getActiveFoodSections();
+    sections.forEach(section => {
       const button = document.createElement('button');
       button.type = 'button';
       button.dataset.sectionKey = section.key;
@@ -263,8 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateFoodSectionLabel() {
+    ensureValidFoodSectionKey();
     if (foodSectionLabel) {
-      foodSectionLabel.textContent = getFoodSectionLabel(currentFoodSectionKey);
+      foodSectionLabel.textContent = getFoodSectionLabel(currentFoodSectionKey) || '';
     }
     if (foodSectionList) {
       foodSectionList.querySelectorAll('button').forEach(btn => {
@@ -386,10 +523,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setFoodMenu() {
     if (!foodMenuEn || !foodMenuFr) return;
-    foodMenuEn.innerHTML = foodMenus.en;
-    foodMenuFr.innerHTML = foodMenus.fr;
+    const templates = getActiveFoodMenuTemplates();
+    foodMenuEn.innerHTML = templates.en || '';
+    foodMenuFr.innerHTML = templates.fr || '';
     foodMenuEn.hidden = currentLang !== 'en';
     foodMenuFr.hidden = currentLang !== 'fr';
+    ensureValidFoodSectionKey();
     updateFoodSectionFromScroll();
   }
 
@@ -685,7 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodSectionList = document.getElementById('foodSectionList');
   const foodHeader = document.querySelector('#foodPage .food-header');
 
-  let currentFoodSectionKey = 'toast';
   let foodSectionDropdownOpen = false;
 
   const backFoodBtn = document.getElementById('backHome');
@@ -736,7 +874,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showPage(foodPage);
       homePage.style.display = 'none';
       if (mainLangSwitcher) mainLangSwitcher.style.display = 'none';
-      currentFoodSectionKey = 'toast';
+      currentFoodSectionKey = getDefaultFoodSectionKey();
+      ensureValidFoodSectionKey();
       updateFoodSectionLabel();
       setFoodSectionDropdown(false);
       if (foodPage) {
