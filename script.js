@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Toggle this to 'full' when ready to show the updated food menu.
-  const ACTIVE_FOOD_MENU_VARIANT = 'reduced';
+  const ACTIVE_FOOD_MENU_VARIANT = 'full';
 
   function getActiveFoodMenuVariant() {
     return FOOD_MENU_VARIANTS[ACTIVE_FOOD_MENU_VARIANT] || FOOD_MENU_VARIANTS.full;
