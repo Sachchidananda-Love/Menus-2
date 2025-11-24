@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
         en: `
       <section id="food-toast-en" class="menu-section" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <h3>"MUSHROOMS"<br />ON TOAST <span class="price">$22</span></h3>
+        <h3>MUSHROOMS ON TOAST <span class="price">$22</span></h3>
         <p>country bread, whipped herby cream cheese, sautéed Le Coprin mushrooms, micro greens, shaved parmesan, poached egg.</p>
 
         <h3>SALMON GRAVLAX <span class="price">$22</span></h3>
-        <p>country bread, herby cream cheese, beet mash, micro-greens, salmon gravlax, pickled cucumber, pickled onion, dill.</p>
+        <p>country bread, herby cream cheese, beet mash, micro-greens, salmon gravlax, pickled cucumber, pickled onion, dill</p>
 
         <h3>AVOCADO <span class="price">$17</span></h3>
         <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil. Add bacon and/or an egg! ($)</p>
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <section id="food-french-en" class="menu-section" data-section-key="french_toast">
         <h2 class="sr-only">French Toast &amp; More</h2>
         <h3>CRÈME BRULÉE <span class="price">$16</span></h3>
-        <p>french toast with vanilla bean crème anglaise, brûléed sugar and berries.</p>
+        <p>french toast with vanilla bean crème anglaise, brûléed sugar and berries</p>
 
         <h3>CHEZ EDGAR <span class="price">$21</span></h3>
         <p>french toast with brown butter apple compote, Balderson cheddar, crispy pork belly, one sunny egg, blueberries and maple syrup.</p>
@@ -71,19 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
 
         <h3>PALMIER POKE BOWL <span class="price">$22</span></h3>
-        <p>brown rice, tuna, avocado, seasonal salad, spicy mayo, seedy sprinkle. <em>*available vegan with chickpea salad.</em></p>
+        <p>brown rice, tuna, avocado, seasonal salad, spicy mayo, seedy sprinkle. <em>*Available vegan with chickpea salad.</em></p>
 
         <h3>SHAKSHUKA <span class="price">$18</span></h3>
         <p>spicy tomato and red pepper sauce, poached eggs, parmesan cheese, greens, country bread toasted with butter.</p>
 
         <h3>BROWN RICE PORRIDGE <span class="price">$14</span></h3>
-        <p>brown rice and coconut milk porridge, almond butter, jam, toasted almonds, bruléed banana, cacao nibs, berries, seedy sprinkle.</p>
+        <p>brown rice and coconut milk porridge, almond butter, jam, toasted almonds, brûléed banana, cacao nibs, berries, seedy sprinkle</p>
 
         <h3>YOGURT &amp; GRANOLA <span class="price">$14</span></h3>
-        <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
+        <p>yogurt, granola, fresh fruit, seasonal compote, brûléed banana, maple syrup and a seedy sprinkle</p>
 
         <h3>BROWN RICE CONGEE <span class="price">$18</span></h3>
-        <p>brown rice miso congee, shiitake mushrooms, poached egg, chili crisp, sesame oil, nori, cured egg yolk, pork belly.</p>
+        <p>brown rice miso congee, shiitake mushrooms, poached egg, chili crisp, sesame oil, nori, cured egg yolk, pork belly</p>
       </section>
 
       <section id="food-soup-en" class="menu-section" data-section-key="soup">
@@ -94,32 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-sandwich-en" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>CHICKEN SALAD SANDWICH <span class="price">$17</span></h3>
-        <p>black pepper brioche bun, roast chicken salad, house pickled celery, apple, pickled mustard seeds, micro-greens.</p>
+        <h3>BREAKFAST SANDWICH <span class="price">$12</span></h3>
+        <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens</p>
+        <p>Add bacon or sausage!($)</p>
 
-        <h3>SMOKED TURKEY SANDWICH <span class="price">$16</span></h3>
-        <p>ciabatta, smoked turkey, crispy onions, dijonnaise, dill pickles, Balderson cheddar, house sweet and spicy mustard.</p>
+        <h3>DELI SANDWICH <span class="price">$16</span></h3>
+        <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens</p>
 
-        <h3>VEGGIE SANDWICH <span class="price">$15</span></h3>
-        <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens.</p>
+        <h3>VEGGIE SANDWICH <span class="price">$14</span></h3>
+        <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens</p>
       </section>
 
       <section id="food-alacarte-en" class="menu-section" data-section-key="a_la_carte">
-        <h2 class="sr-only">À la carte</h2>
+        <h2>À la carte</h2>
         <dl class="menu-addons">
-          <dt>Salad</dt><dd>$10.00</dd>
-          <dt>Bacon</dt><dd>$4.00</dd>
-          <dt>House made turkey sausage</dt><dd>$6.00</dd>
-          <dt>Bread</dt><dd>$2.50</dd>
-          <dt>Gluten free bread</dt><dd>$1.50</dd>
+          <dt>SALAD</dt><dd>$10.00</dd>
+          <dt>BACON</dt><dd>$4.00</dd>
+          <dt>HOUSE MADE TURKEY SAUSAGE</dt><dd>$6.00</dd>
+          <dt>BREAD</dt><dd>$2.50</dd>
+          <dt>EGG</dt><dd>$2.50</dd>
+          <dt>PANCAKE (1)</dt><dd>$4.00</dd>
         </dl>
+        <h3>Add to Any meal</h3>
         <dl class="menu-addons" data-section-anchor="a_la_carte">
-          <dt>Salad</dt><dd>$10.00</dd>
-          <dt>Bacon</dt><dd>$4.00</dd>
-          <dt>House made turkey sausage</dt><dd>$6.00</dd>
+          <dt>Salad</dt><dd>$6.00</dd>
+          <dt>Bacon</dt><dd>$3.00</dd>
+          <dt>House Made Turkey Sausage</dt><dd>$4.00</dd>
           <dt>Bread</dt><dd>$2.50</dd>
-          <dt>Egg</dt><dd>$2.50</dd>
-          <dt>Pancake (1)</dt><dd>$4.00</dd>
+          <dt>Gluten Free Bread</dt><dd>$1.50</dd>
+          <dt>Egg</dt><dd>$1.50</dd>
         </dl>
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
@@ -179,8 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <section id="food-sandwich-fr" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>SANDWICH AU POULET <span class="price">$17</span></h3>
-        <p>pain brioche au poivre, salade de poulet rôti, céleri mariné maison, pomme, graines de moutarde marinées, micro-pousses.</p>
+        <h3>SANDWICH PETIT DÉJEUNER <span class="price">$12</span></h3>
+        <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses</p>
+        <p>Ajouter bacon ou saucisse!($)</p>
 
         <h3>SANDWICH À LA DINDE FUMÉE <span class="price">$16</span></h3>
         <p>ciabatta, dinde fumée, oignons croustillants, dijonnaise, cornichons à l'aneth, cheddar Balderson, moutarde sucrée-épicée.</p>
@@ -190,21 +194,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </section>
 
       <section id="food-alacarte-fr" class="menu-section" data-section-key="a_la_carte">
-        <h2 class="sr-only">À la carte</h2>
+        <h2>À la carte</h2>
         <dl class="menu-addons">
-          <dt>Salade</dt><dd>$6.00</dd>
-          <dt>Bacon</dt><dd>$3.00</dd>
-          <dt>Saucisse de dinde maison</dt><dd>$4.00</dd>
-          <dt>Pain</dt><dd>$2.50</dd>
-          <dt>Pain sans gluten</dt><dd>$1.50</dd>
+          <dt>SALADE</dt><dd>$10.00</dd>
+          <dt>BACON</dt><dd>$4.00</dd>
+          <dt>SAUCISSE DE DINDE FAITE MAISON</dt><dd>$6.00</dd>
+          <dt>PAIN</dt><dd>$2.50</dd>
+          <dt>OEUF</dt><dd>$2.50</dd>
+          <dt>PANCAKE (1)</dt><dd>$4.00</dd>
         </dl>
+        <h3>Ajouter à un repas</h3>
         <dl class="menu-addons" data-section-anchor="a_la_carte">
-          <dt>Salade</dt><dd>$10.00</dd>
-          <dt>Bacon</dt><dd>$4.00</dd>
-          <dt>Saucisse de dinde maison</dt><dd>$6.00</dd>
-          <dt>Pain</dt><dd>$2.50</dd>
-          <dt>Oeuf</dt><dd>$2.50</dd>
-          <dt>Pancake (1)</dt><dd>$4.00</dd>
+          <dt>SALADE / SALAD</dt><dd>$6.00</dd>
+          <dt>BACON</dt><dd>$3.00</dd>
+          <dt>SAUCISSE DE DINDE FAITE MAISON / HOUSE MADE TURKEY SAUSAGE</dt><dd>$4.00</dd>
+          <dt>PAIN / BREAD</dt><dd>$2.50</dd>
+          <dt>PAIN SANS GLUTEN / GLUTEN FREE BREAD</dt><dd>$1.50</dd>
+          <dt>OEUF / EGG</dt><dd>$1.50</dd>
         </dl>
         <div class="section-spacer" aria-hidden="true"></div>
       </section>
@@ -244,10 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Option:</strong> Add bacon and/or an egg! ($).</p>
 
         <h3>Palmier Poke Bowl <span class="price">$22</span></h3>
-        <p>sticky rice, tuna, avocado, seasonal salad, spicy mayo. available vegan with chickpea salad.</p>
+        <p>brown rice, tuna, avocado, seasonal salad, spicy mayo. Available vegan with chickpea salad.</p>
 
         <h3>Yogurt &amp; Granola <span class="price">$14</span></h3>
-        <p>yogurt, granola, fresh fruit, seasonal compote, bruléed banana, maple syrup and a seedy sprinkle.</p>
+        <p>yogurt, granola, fresh fruit, seasonal compote, brûléed banana, maple syrup and a seedy sprinkle</p>
 
         <h3>Chia <span class="price">$14</span></h3>
         <p>strawberry and matcha chia pudding, black pepper strawberry coulis, fresh berries, and shredded coconut.</p>
@@ -297,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>riz sushi, thon, avocat, salade saisonnière, mayo épicé. *option végétalienne avec salade de pois chiches.</p>
 
         <h3>Yogourt &amp; Granola <span class="price">$14</span></h3>
-        <p>yogourt, granola, fruits frais, compote de saison, banane brulée, sirop d'érable, et mélange de grains.</p>
+        <p>yogourt, granola, fruits frais, compote de saison, banane brûlée, sirop d'érable, et mélange de grains</p>
 
         <h3>Chia <span class="price">$14</span></h3>
         <p>pudding aux fraises et au chia matcha, coulis de fraises au poivre noir, baies fraîches et noix de coco râpée.</p>
@@ -322,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Toggle this to 'full' when ready to show the updated food menu.
-  const ACTIVE_FOOD_MENU_VARIANT = 'reduced';
+  const ACTIVE_FOOD_MENU_VARIANT = 'full';
 
   function getActiveFoodMenuVariant() {
     return FOOD_MENU_VARIANTS[ACTIVE_FOOD_MENU_VARIANT] || FOOD_MENU_VARIANTS.full;
