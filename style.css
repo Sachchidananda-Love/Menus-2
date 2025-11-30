@@ -349,8 +349,17 @@ body {
   background: var(--color-pink);
 }
 .food-header {
+  flex-direction: column;
+  align-items: stretch;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
   padding-bottom: 1rem;
+}
+.food-header-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 .shelf-page .page-header {
   padding-bottom: 1rem;
@@ -451,6 +460,83 @@ body {
   pointer-events: auto;
   visibility: visible;
 }
+.food-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: nowrap;
+  padding: 0 0.25rem;
+  color: var(--color-green);
+  font-weight: 600;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.legend-pill {
+  min-width: 28px;
+  height: 20px;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--color-cream);
+  line-height: 1;
+}
+.pill-gf {
+  background: var(--color-brown);
+}
+.pill-vegetarian,
+.pill-vegan {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  padding: 0;
+  border-radius: 50%;
+}
+.pill-vegetarian { background: var(--color-brown); }
+.pill-vegan { background: var(--color-green); }
+.legend-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.menu-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.32rem;
+  margin-right: 0;
+  vertical-align: middle;
+  line-height: 1;
+  position: relative;
+  top: -2px;
+  padding-top: 1px;
+}
+.menu-tag + .menu-tag {
+  margin-left: 0.26rem;
+}
+.menu-text h3.wrap-price {
+  position: relative;
+  display: block;
+  padding-right: 4.5rem;
+}
+.menu-text h3.wrap-price .title-group {
+  display: inline;
+  white-space: normal;
+}
+.menu-text h3.wrap-price .price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+}
 
 .food-header .section-dropdown.closing .section-dropdown-list {
   opacity: 0;
@@ -491,6 +577,18 @@ body {
   margin: 1.2rem 0 0.3rem;
   position: relative;
   color: var(--color-brown);
+}
+.menu-text h3.wrap-price {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.menu-text h3.wrap-price .title {
+  flex: 1;
+}
+.menu-text h3.wrap-price .price {
+  float: none;
+  flex-shrink: 0;
 }
 .menu-text h3::after {
   content: "";

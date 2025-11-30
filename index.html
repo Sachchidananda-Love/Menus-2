@@ -6,7 +6,7 @@
     <title>Palmier</title>
     <!-- Import the Metropolis font and link the stylesheet -->
     <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20241126b" />
+    <link rel="stylesheet" href="style.css?v=20241126z" />
   </head>
   <body>
     <!-- Language toggle -->
@@ -92,22 +92,38 @@
       <!-- Food menu page -->
       <div id="foodPage" class="menu-page food-page" style="display:none;">
         <div class="page-header food-header">
-          <button id="backHome" class="back-button compact">
-            <span class="back-arrow" aria-hidden="true"></span>
-            <span class="sr-only">Back</span>
-          </button>
-          <div class="section-dropdown">
-            <button id="foodSectionToggle" type="button" class="section-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              <span id="foodSectionLabel">Toast</span>
-              <span class="chevron" aria-hidden="true"></span>
+          <div class="food-header-top">
+            <button id="backHome" class="back-button compact">
+              <span class="back-arrow" aria-hidden="true"></span>
+              <span class="sr-only">Back</span>
             </button>
-            <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
+            <div class="section-dropdown">
+              <button id="foodSectionToggle" type="button" class="section-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                <span id="foodSectionLabel">Toast</span>
+                <span class="chevron" aria-hidden="true"></span>
+              </button>
+              <div id="foodSectionList" class="section-dropdown-list" aria-hidden="true"></div>
+            </div>
+            <div class="food-header-lang">
+              <div id="foodLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
+                <div class="toggle"></div>
+                <span class="eng">ENG</span>
+                <span class="fra">FRA</span>
+              </div>
+            </div>
           </div>
-          <div class="food-header-lang">
-            <div id="foodLangSwitcher" class="language-switcher inline-switcher eng-active" data-lang-switcher>
-              <div class="toggle"></div>
-              <span class="eng">ENG</span>
-              <span class="fra">FRA</span>
+          <div class="food-legend" aria-label="Menu legend">
+            <div class="legend-item">
+              <span id="legendGfPill" class="legend-pill pill-gf">GF</span>
+              <span id="legendGfText" class="legend-label">Gluten Free</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-pill pill-vegetarian">V</span>
+              <span id="legendVegetarianText" class="legend-label">Vegetarian</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-pill pill-vegan">V</span>
+              <span id="legendVeganText" class="legend-label">Vegan</span>
             </div>
           </div>
         </div>
@@ -247,6 +263,6 @@
     </div><!-- end of container -->
 
     <!-- JavaScript -->
-    <script src="script.js?v=20241126b"></script>
+    <script src="script.js?v=20241126z"></script>
   </body>
 </html>

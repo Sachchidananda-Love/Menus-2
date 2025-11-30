@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     review:    { en: 'Leave us a review',         fr: 'Laissez-nous un avis' }
   };
 
+  const legendTranslations = {
+    glutenPill: { en: 'GF', fr: 'SG' },
+    glutenText: { en: 'Gluten Free', fr: 'Sans gluten' },
+    vegetarianText: { en: 'Vegetarian', fr: 'Végétarien' },
+    veganText: { en: 'Vegan', fr: 'Végétalien' }
+  };
+
   function updateLabels() {
     document.querySelectorAll('.label').forEach(el => {
       const key = el.getAttribute('data-key');
@@ -42,27 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
         en: `
       <section id="food-toast-en" class="menu-section" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <h3>MUSHROOMS ON TOAST <span class="price">$22</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">MUSHROOMS ON TOAST</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$22</span></h3>
         <p>country bread, whipped herby cream cheese, sautéed Le Coprin mushrooms, micro greens, shaved parmesan, poached egg.</p>
 
         <h3>SALMON GRAVLAX <span class="price">$22</span></h3>
         <p>country bread, herby cream cheese, beet mash, micro-greens, salmon gravlax, pickled cucumber, pickled onion, dill</p>
 
-        <h3>AVOCADO <span class="price">$17</span></h3>
+        <h3>AVOCADO <span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$17</span></h3>
         <p>country bread, vegan garlic mayo, avocado, cherry tomatoes, flaky salt, pepper, and basil oil. Add bacon and/or an egg! ($)</p>
       </section>
 
       <section id="food-french-en" class="menu-section" data-section-key="french_toast">
         <h2 class="sr-only">French Toast &amp; More</h2>
-        <h3>CRÈME BRULÉE <span class="price">$16</span></h3>
+        <h3>CRÈME BRULÉE <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$16</span></h3>
         <p>french toast with vanilla bean crème anglaise, brûléed sugar and berries</p>
+        <p><strong>$1.50</strong> side of maple syrup.</p>
 
         <h3>CHEZ EDGAR <span class="price">$21</span></h3>
         <p>french toast with brown butter apple compote, Balderson cheddar, crispy pork belly, one sunny egg, blueberries and maple syrup.</p>
 
-        <h3>PANCAKE STACK <span class="price">$14</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">PANCAKE STACK</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
         <p>three large Henrietta buttermilk pancakes with fresh berries, butter and maple syrup.</p>
-        <p><strong>$1.50</strong> side of maple syrup.</p>
       </section>
 
       <section id="food-bowls-en" class="menu-section" data-section-key="bowls">
@@ -70,38 +77,38 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>THE STAFF MEAL <span class="price">$22</span></h3>
         <p>two eggs sunnyside, seasonal salad, avocado, country bread with herby cream cheese, bacon.</p>
 
-        <h3>PALMIER POKE BOWL <span class="price">$22</span></h3>
+        <h3>PALMIER POKE BOWL <span class="menu-tag legend-pill pill-gf">GF</span><span class="price">$22</span></h3>
         <p>brown rice, tuna, avocado, seasonal salad, spicy mayo, seedy sprinkle. <em>*Available vegan with chickpea salad.</em></p>
 
-        <h3>SHAKSHUKA <span class="price">$18</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">SHAKSHUKA</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$18</span></h3>
         <p>spicy tomato and red pepper sauce, poached eggs, parmesan cheese, greens, country bread toasted with butter.</p>
 
-        <h3>BROWN RICE PORRIDGE <span class="price">$14</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">BROWN RICE PORRIDGE</span><span class="menu-tag legend-pill pill-gf">GF</span><span class="menu-tag legend-pill pill-vegan">V</span></span><span class="price">$14</span></h3>
         <p>brown rice and coconut milk porridge, almond butter, jam, toasted almonds, brûléed banana, cacao nibs, berries, seedy sprinkle</p>
 
-        <h3>YOGURT &amp; GRANOLA <span class="price">$14</span></h3>
+        <h3>YOGURT &amp; GRANOLA <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$14</span></h3>
         <p>yogurt, granola, fresh fruit, seasonal compote, brûléed banana, maple syrup and a seedy sprinkle</p>
 
-        <h3>BROWN RICE CONGEE <span class="price">$18</span></h3>
+        <h3>BROWN RICE CONGEE <span class="menu-tag legend-pill pill-gf">GF</span><span class="price">$18</span></h3>
         <p>brown rice miso congee, shiitake mushrooms, poached egg, chili crisp, sesame oil, nori, cured egg yolk, pork belly</p>
       </section>
 
       <section id="food-soup-en" class="menu-section" data-section-key="soup">
         <h2 class="sr-only">Seasonal Soup</h2>
-        <h3>Seasonal Soup <span class="price">$10</span></h3>
+        <h3>Seasonal Soup <span class="menu-tag legend-pill pill-gf">GF</span><span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$10</span></h3>
         <p>Ask about our seasonal soup.</p>
       </section>
 
       <section id="food-sandwich-en" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>BREAKFAST SANDWICH <span class="price">$12</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">BREAKFAST SANDWICH</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$12</span></h3>
         <p>brioche bun, smoked cheddar cheese, vegan garlic mayo, avocado, sunny egg, pickled onion, micro-greens</p>
         <p>Add bacon or sausage!($)</p>
 
-        <h3>DELI SANDWICH <span class="price">$16</span></h3>
+        <h3 class="wrap-price"><span class="title">DELI SANDWICH</span><span class="price">$16</span></h3>
         <p>ciabatta, smoked turkey, salami, capocollo ham, provolone, vegan garlic mayo, dijon mustard, banana pepper, micro-greens</p>
 
-        <h3>VEGGIE SANDWICH <span class="price">$14</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">VEGGIE SANDWICH</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
         <p>ciabatta, smoked cheddar cheese, vegan garlic mayo, avocado, chickpea salad, pickled onion, micro-greens</p>
       </section>
 
@@ -130,27 +137,27 @@ document.addEventListener('DOMContentLoaded', () => {
         fr: `
       <section id="food-toast-fr" class="menu-section" data-section-key="toast">
         <h2 class="sr-only">Toast</h2>
-        <h3>"TOAST" AUX CHAMPIGNONS <span class="price">$22</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">"TOAST" AUX CHAMPIGNONS</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$22</span></h3>
         <p>pain de campagne, fromage à la crème aux fines herbes, champignons Le Coprin sautés au beurre, micro-pousses, parmesan râpé, oeuf poché.</p>
 
         <h3>GRAVLAX DE SAUMON <span class="price">$22</span></h3>
         <p>pain de campagne, fromage à la crème aux herbes, purée de betterave, micro-pousses, saumon gravlax, concombre mariné, oignon mariné, aneth.</p>
 
-        <h3>AVOCAT <span class="price">$17</span></h3>
+        <h3>AVOCAT <span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$17</span></h3>
         <p>pain de campagne, mayo à l'ail végétalienne, avocat, tomates cerises, sel, poivre et huile de basilic. Ajouter bacon et/ou un oeuf! ($)</p>
       </section>
 
       <section id="food-french-fr" class="menu-section" data-section-key="french_toast">
         <h2 class="sr-only">Pain Doré &amp; Plus</h2>
-        <h3>CRÈME BRULÉE <span class="price">$16</span></h3>
+        <h3>CRÈME BRULÉE <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$16</span></h3>
         <p>pain doré avec crème anglaise à la vanille, sucre brûlé et baies.</p>
+        <p><strong>$1.50</strong> accompagnement de sirop d'érable.</p>
 
         <h3>CHEZ EDGAR <span class="price">$21</span></h3>
         <p>pain doré avec compote de pommes au beurre noisette, cheddar Balderson, poitrine de porc croustillante, oeuf miroir, bleuets et sirop d'érable.</p>
 
-        <h3>PANCAKES EN PILE <span class="price">$14</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">PANCAKES EN PILE</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$14</span></h3>
         <p>trois grands pancakes au babeurre Henrietta, servis avec petits fruits frais, beurre et sirop d'érable.</p>
-        <p><strong>$1.50</strong> accompagnement de sirop d'érable.</p>
       </section>
 
       <section id="food-bowls-fr" class="menu-section" data-section-key="bowls">
@@ -158,38 +165,38 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>LE "STAFF MEAL" <span class="price">$22</span></h3>
         <p>deux oeufs miroirs, salade saisonnière, avocat, pain de campagne avec fromage à la crème aux herbes, bacon.</p>
 
-        <h3>BOL POKE PALMIER <span class="price">$22</span></h3>
+        <h3>BOL POKE PALMIER <span class="menu-tag legend-pill pill-gf">SG</span><span class="price">$22</span></h3>
         <p>riz brun, thon, avocat, salade saisonnière, mayo épicé, mélange de grains. <em>Option végétalienne avec salade de pois chiches.</em></p>
 
-        <h3>SHAKSHUKA <span class="price">$18</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">SHAKSHUKA</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$18</span></h3>
         <p>sauce piquante aux tomates et poivrons rouges, oeufs pochés, fromage parmesan, micro-pousses, pain de campagne au beurre.</p>
 
-        <h3>GRUAU AU RIZ BRUN <span class="price">$14</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">GRUAU AU RIZ BRUN</span><span class="menu-tag legend-pill pill-gf">SG</span><span class="menu-tag legend-pill pill-vegan">V</span></span><span class="price">$14</span></h3>
         <p>gruau au riz brun et lait de noix de coco, beurre d'amandes, confiture, amandes grillées, banane brûlée, cacao, baies, mélange de grains.</p>
 
-        <h3>YOGOURT &amp; GRANOLA <span class="price">$14</span></h3>
+        <h3>YOGOURT &amp; GRANOLA <span class="menu-tag legend-pill pill-vegetarian">V</span><span class="price">$14</span></h3>
         <p>yogourt, granola, fruits frais, compote de saison, banane brûlée, sirop d'érable, mélange de grains.</p>
 
-        <h3>CONGEE DE RIZ BRUN <span class="price">$18</span></h3>
+        <h3>CONGEE DE RIZ BRUN <span class="menu-tag legend-pill pill-gf">SG</span><span class="price">$18</span></h3>
         <p>congee miso au riz brun, champignons shiitake, oeuf poché, chili croustillant, huile de sésame, nori, jaune d'oeuf salé, poitrine de porc.</p>
       </section>
 
       <section id="food-soup-fr" class="menu-section" data-section-key="soup">
         <h2 class="sr-only">Soupe de saison</h2>
-        <h3>Soupe de saison <span class="price">$10</span></h3>
+        <h3>Soupe de saison <span class="menu-tag legend-pill pill-gf">SG</span><span class="menu-tag legend-pill pill-vegan">V</span><span class="price">$10</span></h3>
         <p>Demandez-nous quelle est notre soupe de saison.</p>
       </section>
 
       <section id="food-sandwich-fr" class="menu-section" data-section-key="sandwich">
         <h2 class="sr-only">Sandwich</h2>
-        <h3>SANDWICH PETIT DÉJEUNER <span class="price">$12</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">SANDWICH PETIT DÉJEUNER</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$12</span></h3>
         <p>petit pain brioche, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, oeuf miroir, oignons marinés, micro-pousses</p>
         <p>Ajouter bacon ou saucisse!($)</p>
 
-        <h3>SANDWICH À LA DINDE FUMÉE <span class="price">$16</span></h3>
+        <h3 class="wrap-price"><span class="title">SANDWICH DELI</span><span class="price">$16</span></h3>
         <p>ciabatta, dinde fumée, oignons croustillants, dijonnaise, cornichons à l'aneth, cheddar Balderson, moutarde sucrée-épicée.</p>
 
-        <h3>SANDWICH VÉGÉ <span class="price">$15</span></h3>
+        <h3 class="wrap-price"><span class="title-group"><span class="title">SANDWICH VÉGÉ</span><span class="menu-tag legend-pill pill-vegetarian">V</span></span><span class="price">$15</span></h3>
         <p>ciabatta, fromage cheddar fumé, mayo à l'ail végétalienne, avocat, salade de pois chiches, oignons marinés, micro-pousses.</p>
       </section>
 
@@ -352,6 +359,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const coffeeImage = document.getElementById('coffeeImage');
   const foodMenuEn = document.getElementById('foodMenuEn');
   const foodMenuFr = document.getElementById('foodMenuFr');
+  const legendGfPill = document.getElementById('legendGfPill');
+  const legendGfText = document.getElementById('legendGfText');
+  const legendVegetarianText = document.getElementById('legendVegetarianText');
+  const legendVeganText = document.getElementById('legendVeganText');
   let currentFoodSectionKey = getDefaultFoodSectionKey();
 
   const teaImages = {
@@ -538,6 +549,21 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFoodSectionFromScroll();
   }
 
+  function setLegendLanguage() {
+    if (legendGfPill) {
+      legendGfPill.textContent = legendTranslations.glutenPill[currentLang] || legendTranslations.glutenPill.en;
+    }
+    if (legendGfText) {
+      legendGfText.textContent = legendTranslations.glutenText[currentLang] || legendTranslations.glutenText.en;
+    }
+    if (legendVegetarianText) {
+      legendVegetarianText.textContent = legendTranslations.vegetarianText[currentLang] || legendTranslations.vegetarianText.en;
+    }
+    if (legendVeganText) {
+      legendVeganText.textContent = legendTranslations.veganText[currentLang] || legendTranslations.veganText.en;
+    }
+  }
+
   function setLanguage(lang) {
     currentLang = lang;
     syncLanguageSwitchers();
@@ -545,6 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTeaImage();
     setCoffeeImage();
     setFoodMenu();
+    setLegendLanguage();
     renderFoodSectionList();
     updateFoodSectionLabel();
     updateFoodSectionFromScroll();
