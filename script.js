@@ -864,6 +864,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const backCoffeeBtn = document.getElementById('backCoffee');
   const backCocktailsBtn = document.getElementById('backCocktails');
   const backShelfBtn = document.getElementById('backShelf');
+  const pageOpeners = {
+    food: openFoodPage,
+    tea: openTeaPage,
+    coffee: openCoffeePage,
+    cocktails: openCocktailsPage,
+    shelf: openShelfPage
+  };
+  const pageClosers = {
+    food: closeFoodPage,
+    tea: closeTeaPage,
+    coffee: closeCoffeePage,
+    cocktails: closeCocktailsPage,
+    shelf: closeShelfPage
+  };
+  const HOME_STATE = { page: 'home' };
+  history.replaceState(HOME_STATE, '', window.location.href);
+  let currentPage = HOME_STATE.page;
 
   function clearPressed() {
     pressReleaseTimers.forEach(timer => clearTimeout(timer));
@@ -1058,20 +1075,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  attachTapHandler(foodBtn, openFoodPage);
-  attachTapHandler(backFoodBtn, closeFoodPage);
+  function navigateToPage(page, event) {
+    if (!page || currentPage === page) return;
+    const opener = pageOpeners[page];
+    if (!opener) return;
+    currentPage = page;
+    history.pushState({ page }, '', window.location.href);
+    opener(event);
+  }
 
-  attachTapHandler(teaBtn, openTeaPage);
-  attachTapHandler(backTeaBtn, closeTeaPage);
+  function navigateHome() {
+    if (currentPage === 'home') return;
+    history.back();
+  }
 
-  attachTapHandler(coffeeBtn, openCoffeePage);
-  attachTapHandler(backCoffeeBtn, closeCoffeePage);
+  function handlePopState(event) {
+    const nextPage = event.state?.page || 'home';
+    if (nextPage === currentPage) return;
+    const previousPage = currentPage;
+    currentPage = nextPage;
 
-  attachTapHandler(cocktailsBtn, openCocktailsPage);
-  attachTapHandler(backCocktailsBtn, closeCocktailsPage);
+    if (nextPage === 'home') {
+      const closer = pageClosers[previousPage];
+      if (closer) {
+        closer();
+      } else {
+        hideAllPages();
+        homePage.style.display = 'block';
+        if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+      }
+      return;
+    }
 
-  attachTapHandler(shelfBtn, openShelfPage);
-  attachTapHandler(backShelfBtn, closeShelfPage);
+    const opener = pageOpeners[nextPage];
+    if (opener) {
+      opener();
+      return;
+    }
+
+    currentPage = 'home';
+    history.replaceState(HOME_STATE, '', window.location.href);
+    hideAllPages();
+    homePage.style.display = 'block';
+    if (mainLangSwitcher) mainLangSwitcher.style.display = '';
+  }
+  window.addEventListener('popstate', handlePopState);
+
+  attachTapHandler(foodBtn, (event) => navigateToPage('food', event));
+  attachTapHandler(backFoodBtn, navigateHome);
+
+  attachTapHandler(teaBtn, (event) => navigateToPage('tea', event));
+  attachTapHandler(backTeaBtn, navigateHome);
+
+  attachTapHandler(coffeeBtn, (event) => navigateToPage('coffee', event));
+  attachTapHandler(backCoffeeBtn, navigateHome);
+
+  attachTapHandler(cocktailsBtn, (event) => navigateToPage('cocktails', event));
+  attachTapHandler(backCocktailsBtn, navigateHome);
+
+  attachTapHandler(shelfBtn, (event) => navigateToPage('shelf', event));
+  attachTapHandler(backShelfBtn, navigateHome);
 
   if (foodSectionToggle) {
     foodSectionToggle.addEventListener('click', (event) => {
