@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cocktails: { en: 'Cocktails',    fr: 'Cocktails' },
     coffee:    { en: 'Coffee',       fr: 'Café' },
     shelf:     { en: 'Discover our Coffee Shelf', fr: 'Découvrez notre étagère à café' },
-    review:    { en: 'Leave us a review',         fr: 'Laissez-nous un avis' }
+    review:    { en: 'Leave us a review',         fr: 'Laissez-nous un avis' },
+    thermoshock: { en: 'View Thermoshock demo', fr: 'Voir la démo Thermoshock' }
   };
 
   const legendTranslations = {
